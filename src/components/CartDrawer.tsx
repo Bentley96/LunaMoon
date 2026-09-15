@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Minus, Plus, ShoppingBag, Trash2, X } from 'lucide-react';
 import { useCart } from '../store/CartContext';
 import { formatPrice } from '../lib/format';
+import { checkoutUrl } from '../lib/bootstrap';
 import ImageFrame from './ui/ImageFrame';
 
 /** Slide-over mini basket, opened from the header or after adding an item. */
@@ -134,9 +135,11 @@ export default function CartDrawer() {
                 Shipping and taxes are calculated at checkout.
               </p>
               <div className="mt-4 grid gap-2">
-                <Link to="/checkout" onClick={closeDrawer} className="btn-primary w-full">
+                {/* A real link, not a router push: WooCommerce renders
+                    checkout, and it reads the same cart from the session. */}
+                <a href={checkoutUrl()} className="btn-primary w-full">
                   Checkout
-                </Link>
+                </a>
                 <Link to="/cart" onClick={closeDrawer} className="btn-ghost justify-center">
                   View full basket
                 </Link>

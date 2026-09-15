@@ -3,18 +3,19 @@
  * WooCommerce integration.
  *
  * URL ownership is the thing to understand here. The React app owns browsing
- * and the basket; WooCommerce keeps the pages where money and accounts are
- * actually handled, because those need its own rendering (gateway card fields,
- * 3-D Secure returns, order-pay links in emails, account pages):
+ * and the basket; WooCommerce keeps everything from checkout onwards, because
+ * that is where gateway card fields, 3-D Secure returns, order-pay links and
+ * account pages all live:
  *
- *   /shop, /shop/<slug>, /cart, /checkout   -> React (Store API)
- *   /secure-checkout/...                    -> WooCommerce (native checkout)
- *   /my-account/...                         -> WooCommerce (native)
+ *   /shop, /shop/<slug>, /cart   -> React (Store API)
+ *   /checkout/...                -> WooCommerce (native)
+ *   /my-account/...              -> WooCommerce (native)
  *
- * Moving Woo's checkout page to /secure-checkout is what keeps /checkout free
- * for the app. The React checkout posts to the Store API and handles gateways
- * that redirect; anything needing on-page card fields is sent to
- * /secure-checkout, which is why that page still exists.
+ * The hand-off works because both sides read the SAME cart. The Store API
+ * writes to the visitor's WooCommerce session, so as long as the app's fetches
+ * are same-origin and send credentials (they are, and they do), the basket the
+ * visitor filled in React is the basket WooCommerce's checkout loads. The
+ * Cart-Token header is only a fallback for browsers that drop the cookie.
  *
  * @package LunaMoon
  */
@@ -41,27 +42,21 @@ function lunamoon_woo_support() {
 }
 
 /**
- * Slug of the page that renders WooCommerce's native checkout.
- *
- * @return string
- */
-function lunamoon_secure_checkout_slug() {
-	return (string) apply_filters( 'lunamoon_secure_checkout_slug', 'secure-checkout' );
-}
-
-/**
  * Front-end paths WooCommerce renders itself, rather than the React app.
+ *
+ * Read from WooCommerce's own page settings rather than hard-coded, so a site
+ * that renamed its checkout or account page still resolves correctly.
  *
  * @return string[]
  */
 function lunamoon_woo_owned_paths() {
-	$paths = array( lunamoon_secure_checkout_slug() );
+	$paths = array();
 
 	if ( lunamoon_has_woo() ) {
-		$account = get_option( 'woocommerce_myaccount_page_id' );
-		$account = $account ? get_post_field( 'post_name', $account ) : 'my-account';
-		if ( $account ) {
-			$paths[] = $account;
+		foreach ( array( 'woocommerce_checkout_page_id' => 'checkout', 'woocommerce_myaccount_page_id' => 'my-account' ) as $option => $fallback ) {
+			$page_id = (int) get_option( $option );
+			$slug    = $page_id ? get_post_field( 'post_name', $page_id ) : '';
+			$paths[] = $slug ? $slug : $fallback;
 		}
 	}
 
@@ -72,7 +67,7 @@ function lunamoon_woo_owned_paths() {
  * Does the current request belong to WooCommerce rather than the app?
  *
  * Matches the path prefix so Woo's endpoint URLs
- * (/secure-checkout/order-received/123/, /my-account/orders/) are included.
+ * (/checkout/order-received/123/, /my-account/orders/) are included.
  *
  * @return bool
  */
@@ -139,125 +134,5 @@ function lunamoon_dequeue_woo_styles() {
 
 	foreach ( array( 'woocommerce-general', 'woocommerce-layout', 'woocommerce-smallscreen', 'wc-blocks-style' ) as $handle ) {
 		wp_dequeue_style( $handle );
-	}
-}
-
-/**
- * GET /lunamoon/v1/payment-methods
- *
- * The Store API doesn't expose the enabled gateway list (WooCommerce Blocks
- * reads it from a PHP-registered JS data store), so the checkout reads it here.
- */
-add_action( 'rest_api_init', 'lunamoon_register_commerce_routes' );
-function lunamoon_register_commerce_routes() {
-	register_rest_route(
-		'lunamoon/v1',
-		'/payment-methods',
-		array(
-			'methods'             => WP_REST_Server::READABLE,
-			'permission_callback' => '__return_true',
-			'callback'            => 'lunamoon_rest_payment_methods',
-		)
-	);
-}
-
-/**
- * Gateways that capture card details on the page and therefore can't be driven
- * by a plain Store API POST — the checkout sends these to /secure-checkout.
- *
- * @return string[]
- */
-function lunamoon_hosted_field_gateways() {
-	return (array) apply_filters(
-		'lunamoon_hosted_field_gateways',
-		array( 'stripe', 'stripe_cc', 'square_credit_card', 'braintree_credit_card', 'authorize_net_cim_credit_card' )
-	);
-}
-
-/**
- * Build the enabled-gateway list for the checkout.
- *
- * @return WP_REST_Response
- */
-function lunamoon_rest_payment_methods() {
-	if ( ! lunamoon_has_woo() ) {
-		return rest_ensure_response( array() );
-	}
-
-	$gateways = WC()->payment_gateways() ? WC()->payment_gateways()->get_available_payment_gateways() : array();
-	$hosted   = lunamoon_hosted_field_gateways();
-	$out      = array();
-
-	foreach ( $gateways as $gateway ) {
-		$out[] = array(
-			'id'                => $gateway->id,
-			'title'             => wp_strip_all_tags( $gateway->get_title() ),
-			'description'       => wp_strip_all_tags( $gateway->get_description() ),
-			'needsHostedFields' => in_array( $gateway->id, $hosted, true ),
-		);
-	}
-
-	return rest_ensure_response( $out );
-}
-
-/**
- * Point WooCommerce's checkout page at /secure-checkout, leaving /checkout for
- * the app. Runs on theme activation and whenever WooCommerce is first detected.
- */
-add_action( 'after_switch_theme', 'lunamoon_setup_checkout_page', 20 );
-add_action( 'woocommerce_init', 'lunamoon_maybe_setup_checkout_page' );
-
-/**
- * Run the checkout-page setup once, the first time WooCommerce is available.
- */
-function lunamoon_maybe_setup_checkout_page() {
-	if ( get_option( 'lunamoon_checkout_page_ready' ) ) {
-		return;
-	}
-	lunamoon_setup_checkout_page();
-}
-
-/**
- * Create (or move) WooCommerce's checkout page to the secure-checkout slug.
- */
-function lunamoon_setup_checkout_page() {
-	if ( ! lunamoon_has_woo() ) {
-		return;
-	}
-
-	$slug     = lunamoon_secure_checkout_slug();
-	$existing = get_page_by_path( $slug );
-
-	if ( $existing ) {
-		$page_id = $existing->ID;
-	} else {
-		// Reuse Woo's existing checkout page if it has one, so saved orders and
-		// gateway return URLs keep resolving; otherwise create a new page.
-		$current = (int) get_option( 'woocommerce_checkout_page_id' );
-		if ( $current && get_post( $current ) ) {
-			wp_update_post(
-				array(
-					'ID'        => $current,
-					'post_name' => $slug,
-				)
-			);
-			$page_id = $current;
-		} else {
-			$page_id = wp_insert_post(
-				array(
-					'post_type'    => 'page',
-					'post_status'  => 'publish',
-					'post_title'   => __( 'Secure Checkout', 'lunamoon' ),
-					'post_name'    => $slug,
-					'post_content' => '<!-- wp:shortcode -->[woocommerce_checkout]<!-- /wp:shortcode -->',
-				)
-			);
-		}
-	}
-
-	if ( $page_id && ! is_wp_error( $page_id ) ) {
-		update_option( 'woocommerce_checkout_page_id', $page_id );
-		update_option( 'lunamoon_checkout_page_ready', 1 );
-		flush_rewrite_rules();
 	}
 }

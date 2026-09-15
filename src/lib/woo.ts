@@ -1,9 +1,12 @@
 // WooCommerce Store API client — the commerce half of the hybrid.
 //
 // The Store API (/wp-json/wc/store/v1) is WooCommerce's public, front-end API:
-// it needs no consumer key, works for logged-out visitors, and owns the cart
-// and checkout. That lets the React app run a real shop while WooCommerce keeps
-// doing what it's good at — stock, tax, shipping, coupons, payments, orders.
+// it needs no consumer key, works for logged-out visitors, and owns the cart.
+// That lets the React app run a real shop while WooCommerce keeps doing what
+// it's good at — stock, tax, shipping, coupons, payments, orders.
+//
+// Checkout is deliberately NOT here: the visitor is handed to WooCommerce's own
+// checkout page, which reads the same cart from the WooCommerce session.
 //
 // Two pieces of state have to be carried between requests:
 //   Nonce       — rotated by the server on every response; required on writes.
@@ -188,31 +191,6 @@ export interface WooCart {
   errors: { code: string; message: string }[];
 }
 
-export interface CheckoutAddress {
-  first_name: string;
-  last_name: string;
-  address_1: string;
-  address_2: string;
-  city: string;
-  state: string;
-  postcode: string;
-  country: string;
-  email?: string;
-  phone?: string;
-}
-
-export interface CheckoutDraft {
-  order_id: number;
-  status: string;
-  order_key: string;
-  /** Where to send the browser once the order is placed. */
-  payment_result: {
-    payment_status: string;
-    payment_details: { key: string; value: string }[];
-    redirect_url: string;
-  };
-}
-
 export interface ProductQuery {
   page?: number;
   per_page?: number;
@@ -272,18 +250,4 @@ export const removeCoupon = (code: string) =>
   request<WooCart>('cart/remove-coupon', {
     method: 'POST',
     body: JSON.stringify({ code }),
-  });
-
-export interface PlaceOrderInput {
-  billing_address: CheckoutAddress;
-  shipping_address?: CheckoutAddress;
-  customer_note?: string;
-  payment_method: string;
-  payment_data?: { key: string; value: string }[];
-}
-
-export const placeOrder = (input: PlaceOrderInput) =>
-  request<CheckoutDraft>('checkout', {
-    method: 'POST',
-    body: JSON.stringify(input),
   });

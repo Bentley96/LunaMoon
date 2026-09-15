@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Minus, Plus, ShoppingBag, Trash2 } from 'lucide-react';
 import { useCart } from '../store/CartContext';
 import { formatPrice } from '../lib/format';
+import { checkoutUrl } from '../lib/bootstrap';
 import PageHero from '../components/PageHero';
 import ImageFrame from '../components/ui/ImageFrame';
 import Spinner from '../components/ui/Spinner';
@@ -195,9 +196,11 @@ export default function CartPage() {
                 </ul>
               )}
 
-              <Link to="/checkout" className="btn-primary mt-6 w-full">
+              {/* A real link, not a router push: WooCommerce renders
+                  checkout, and it reads the same cart from the session. */}
+              <a href={checkoutUrl()} className="btn-primary mt-6 w-full">
                 Proceed to checkout
-              </Link>
+              </a>
               <Link to="/shop" className="btn-ghost mt-3 w-full justify-center">
                 Continue shopping
               </Link>

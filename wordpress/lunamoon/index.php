@@ -8,7 +8,7 @@
  * and inc/commerce.php forces it back for WooCommerce's product and shop URLs —
  * so one template serves the whole app.
  *
- * WooCommerce keeps its own templates for /secure-checkout and /my-account.
+ * WooCommerce keeps its own templates for /checkout and /my-account.
  *
  * @package LunaMoon
  */

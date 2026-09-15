@@ -14,8 +14,6 @@ const TreatmentPage = lazy(() => import('./pages/TreatmentPage'));
 const ShopPage = lazy(() => import('./pages/ShopPage'));
 const ProductPage = lazy(() => import('./pages/ProductPage'));
 const CartPage = lazy(() => import('./pages/CartPage'));
-const CheckoutPage = lazy(() => import('./pages/CheckoutPage'));
-const OrderConfirmationPage = lazy(() => import('./pages/OrderConfirmationPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 const FaqsPage = lazy(() => import('./pages/FaqsPage'));
@@ -38,8 +36,8 @@ export default function App() {
             <Route path="/shop" element={<ShopPage />} />
             <Route path="/shop/:slug" element={<ProductPage />} />
             <Route path="/cart" element={<CartPage />} />
-            <Route path="/checkout" element={<CheckoutPage />} />
-            <Route path="/order-received" element={<OrderConfirmationPage />} />
+            {/* /checkout, /checkout/order-received and /my-account are served by
+                WooCommerce, not React — see inc/commerce.php. */}
 
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />

@@ -32,6 +32,12 @@ export interface SiteInfo {
   bookingUrl: string;
 }
 
+/** Permalinks of the pages WooCommerce renders itself. */
+export interface WooUrls {
+  checkout: string;
+  myAccount: string;
+}
+
 export interface Bootstrap {
   /** Absolute REST root, always ending in a slash. */
   restUrl: string;
@@ -42,6 +48,7 @@ export interface Bootstrap {
   basename: string;
   /** True when WooCommerce is active and the Store API is available. */
   hasWoo: boolean;
+  wooUrls: WooUrls;
   currency: CurrencyInfo;
   site: SiteInfo;
 }
@@ -62,6 +69,7 @@ const FALLBACK: Bootstrap = {
   siteUrl: '',
   basename: '',
   hasWoo: true,
+  wooUrls: { checkout: '/checkout/', myAccount: '/my-account/' },
   currency: {
     code: 'GBP',
     symbol: '£',
@@ -89,12 +97,24 @@ function read(): Bootstrap {
   return {
     ...FALLBACK,
     ...injected,
+    wooUrls: { ...FALLBACK.wooUrls, ...injected.wooUrls },
     currency: { ...FALLBACK.currency, ...injected.currency },
     site: { ...FALLBACK.site, ...injected.site },
   };
 }
 
 export const bootstrap: Bootstrap = read();
+
+/**
+ * Where the "Checkout" buttons send the visitor.
+ *
+ * WooCommerce renders checkout itself, so this is a full page navigation out of
+ * the app rather than a router link. The basket carries over because the Store
+ * API writes to the same WooCommerce session the checkout page reads.
+ */
+export function checkoutUrl(): string {
+  return bootstrap.wooUrls.checkout || '/checkout/';
+}
 
 /** Absolute URL for a REST route, e.g. restUrl('wc/store/v1/cart'). */
 export function restUrl(route: string): string {

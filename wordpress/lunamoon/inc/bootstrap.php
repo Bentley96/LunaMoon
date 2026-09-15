@@ -116,6 +116,25 @@ function lunamoon_currency() {
 }
 
 /**
+ * Permalinks of the pages WooCommerce renders itself.
+ *
+ * @return array<string,string>
+ */
+function lunamoon_woo_urls() {
+	if ( ! lunamoon_has_woo() ) {
+		return array(
+			'checkout'  => '',
+			'myAccount' => '',
+		);
+	}
+
+	return array(
+		'checkout'  => esc_url_raw( wc_get_checkout_url() ),
+		'myAccount' => esc_url_raw( wc_get_page_permalink( 'myaccount' ) ),
+	);
+}
+
+/**
  * Router basename — non-empty only when WordPress lives in a subdirectory.
  *
  * @return string
@@ -161,6 +180,9 @@ function lunamoon_print_bootstrap() {
 		'siteUrl'  => esc_url_raw( home_url( '/' ) ),
 		'basename' => lunamoon_basename(),
 		'hasWoo'   => lunamoon_has_woo(),
+		// WooCommerce renders checkout and account pages itself, so the app
+		// needs their real permalinks to hand off to.
+		'wooUrls'  => lunamoon_woo_urls(),
 		'currency' => lunamoon_currency(),
 		'site'     => array(
 			'name'         => get_bloginfo( 'name' ),

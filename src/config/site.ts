@@ -51,7 +51,6 @@ export const footerLinks: { heading: string; links: NavLink[] }[] = [
     links: [
       { label: 'All products', to: '/shop' },
       { label: 'Basket', to: '/cart' },
-      { label: 'Checkout', to: '/checkout' },
     ],
   },
   {

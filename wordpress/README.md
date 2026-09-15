@@ -1,8 +1,8 @@
 # Luna Moon Aesthetics — hybrid headless WordPress theme
 
 The front end is a React app (Vite + TypeScript + Tailwind). WordPress and
-WooCommerce own the **data** — treatments, products, cart, checkout, orders,
-policy copy — and serve it over REST. React owns the **rendering**.
+WooCommerce own the **data** — treatments, products, cart, orders, policy copy —
+and serve it over REST. React owns the **rendering**, up to the checkout.
 
 This is "hybrid" rather than fully headless: there's one origin, one deploy, and
 no separate Node host. WordPress serves the app shell, so cookies, the REST
@@ -17,7 +17,7 @@ wordpress/
     index.php              ← universal shell: renders <div id="root">
     inc/bootstrap.php      ← injects window.__LUNAMOON__; Customizer fields
     inc/content.php        ← treatment/testimonial/FAQ post types + REST routes
-    inc/commerce.php       ← WooCommerce support, URL ownership, payment methods
+    inc/commerce.php       ← WooCommerce support and URL ownership
     inc/enquiry.php        ← booking-enquiry endpoint, lead storage, wp_mail()
     inc/admin.php          ← editor meta boxes
     dist/                  ← build output (committed, so the theme deploys
@@ -54,36 +54,41 @@ already in minor units, category names inline):
 | `GET /lunamoon/v1/testimonials`         | Reviews                                   |
 | `GET /lunamoon/v1/faqs`                 | FAQs                                      |
 | `GET /lunamoon/v1/page/<slug>`          | A WordPress page (policy copy)            |
-| `GET /lunamoon/v1/payment-methods`      | Enabled WooCommerce gateways              |
 | `POST /lunamoon/v1/enquiry`             | Booking enquiry (honeypot + reCAPTCHA)    |
 
-**Commerce comes from WooCommerce.** Products, cart and checkout use the
-**Store API** (`/wp-json/wc/store/v1`) — WooCommerce's public front-end API. It
-needs no consumer key, works logged-out, and keeps stock, tax, shipping, coupons
-and orders in WooCommerce where they belong. The client carries the rotating
-`Nonce` header and persists the guest `Cart-Token`.
+**Commerce comes from WooCommerce.** Products and the basket use the **Store
+API** (`/wp-json/wc/store/v1`) — WooCommerce's public front-end API. It needs no
+consumer key, works logged-out, and keeps stock, tax, shipping, coupons and
+orders in WooCommerce where they belong. The client carries the rotating `Nonce`
+header and persists the guest `Cart-Token`.
 
 ### Who owns which URL
 
 This is the one thing to keep straight:
 
-| URL                                           | Rendered by              |
-| --------------------------------------------- | ------------------------ |
-| `/`, `/treatments/…`, `/about`, `/faqs`       | React                    |
-| `/shop`, `/shop/<slug>`, `/cart`, `/checkout` | React (Store API)        |
-| `/secure-checkout/…`                          | **WooCommerce** (native) |
-| `/my-account/…`                               | **WooCommerce** (native) |
+| URL                                     | Rendered by              |
+| --------------------------------------- | ------------------------ |
+| `/`, `/treatments/…`, `/about`, `/faqs` | React                    |
+| `/shop`, `/shop/<slug>`, `/cart`        | React (Store API)        |
+| `/checkout/…`                           | **WooCommerce** (native) |
+| `/my-account/…`                         | **WooCommerce** (native) |
 
-`inc/commerce.php` moves WooCommerce's checkout page to `/secure-checkout` so
-`/checkout` stays free for the app, and forces `index.php` back for shop and
-product URLs that WooCommerce would otherwise template itself.
+React owns browsing and the basket. From the Checkout button onwards it's
+WooCommerce — which means every gateway, plugin and tax/shipping rule works out
+of the box, with no gateway-specific code to maintain.
 
-The React checkout posts to the Store API and handles gateways that **redirect**
-(PayPal, hosted Stripe, offline methods). Gateways that capture card details
-**on the page** (Stripe's card element, Square, Braintree) can't be driven that
-way, so the checkout offers a link to `/secure-checkout`, where WooCommerce
-renders its own form. Adjust the list with the `lunamoon_hosted_field_gateways`
-filter.
+`inc/commerce.php` forces `index.php` back for the shop and product URLs that
+WooCommerce would otherwise template itself, and leaves checkout and account
+URLs alone. The owned paths are read from WooCommerce's own page settings, so
+renaming the checkout page in wp-admin is picked up automatically.
+
+**The hand-off works because both sides read the same cart.** The Store API
+writes to the visitor's WooCommerce session, and the app's fetches are
+same-origin with `credentials: 'same-origin'`, so the session cookie is set and
+sent. The basket filled in React is the basket WooCommerce's checkout loads. The
+`Cart-Token` header is only a fallback for browsers that drop the cookie — if
+you ever move the app to a different origin, that hand-off breaks and checkout
+would need the Store API's own checkout endpoint instead.
 
 ---
 
@@ -115,7 +120,8 @@ Install → Activate.
    permalinks were still "Plain", but confirm it.)
 3. **Appearance → Customize → Clinic details** — phone, email, address, opening
    hours, social links. These feed the header, footer and contact page.
-4. **WooCommerce → Settings → Payments** — enable at least one gateway.
+4. **WooCommerce → Settings → Payments** — enable at least one gateway. Style
+   the checkout page to match if you want the transition to feel seamless.
 5. Add content: **Treatments**, **Testimonials**, **FAQs**, and **Products**.
 6. Fill in the `privacy-policy`, `terms-conditions` and `cancellation-policy`
    pages (activation creates them empty).

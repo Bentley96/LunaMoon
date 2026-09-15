@@ -63,6 +63,23 @@ export const footerLinks: { heading: string; links: NavLink[] }[] = [
  */
 export const BOOKING_URL = 'https://www.that-time.co.uk/luna-moon-aesthetics';
 
+/**
+ * Opening hours, as shown on the existing site's footer.
+ *
+ * Insertion order is the display order, so Monday..Sunday is preserved. The
+ * Customizer stores these one per line as "Label|Value"; whatever is set there
+ * replaces this whole map.
+ */
+const DEFAULT_HOURS: Record<string, string> = {
+  Monday: '10am - 6pm',
+  Tuesday: '10am - 6pm',
+  Wednesday: '10am - 5pm',
+  Thursday: '10am - 7pm',
+  Friday: '10am - 7pm',
+  Saturday: '10am - 3pm',
+  Sunday: 'Closed',
+};
+
 /** Business details, with the theme's injected values taking precedence. */
 export const business = {
   name: bootstrap.site.name || 'Luna Moon Aesthetics',
@@ -76,7 +93,10 @@ export const business = {
   addressLines: bootstrap.site.addressLines.length
     ? bootstrap.site.addressLines
     : ['55-56 Friargate', 'Preston', 'PR1 2AT'],
-  hours: bootstrap.site.hours,
+  hours: Object.keys(bootstrap.site.hours).length ? bootstrap.site.hours : DEFAULT_HOURS,
+  /** Footer blurb — what the clinic is, rather than how to pay for it. */
+  about:
+    'Luna Moon LTD provides a range of high-quality aesthetic treatments in Preston. We are fully trained, qualified and insured to guarantee peace of mind. For more information or to make a booking please get in touch.',
   social: bootstrap.site.social,
   bookingUrl: bootstrap.site.bookingUrl || BOOKING_URL,
   /** Shown beneath the contact details on the homepage and contact page. */

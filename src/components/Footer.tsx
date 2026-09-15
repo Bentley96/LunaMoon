@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Mail, MapPin, Phone } from 'lucide-react';
+import { Clock, Facebook, Instagram, Mail, MapPin, Phone } from 'lucide-react';
 import { business, footerLinks } from '../config/site';
 import Logo from './Logo';
 
@@ -10,13 +10,15 @@ export default function Footer() {
   return (
     <footer className="bg-ink-950 text-ink-200">
       <div className="container-xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-6">
+        {/* 7 columns: logo 2 + three link columns + hours 2. The hours need the
+            extra width so "Wednesday: 10am - 5pm" stays on one line. */}
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-7">
           <div className="lg:col-span-2">
             <Link to="/" className="inline-block">
               <Logo tone="light" className="h-24" />
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink-300">{business.tagline}</p>
-            <p className="mt-3 max-w-sm text-sm leading-relaxed text-ink-400">{business.finance}</p>
+            <p className="mt-3 max-w-sm text-sm leading-relaxed text-ink-400">{business.about}</p>
 
             <div className="mt-6 space-y-2.5 text-sm">
               {business.addressLines.length > 0 && (
@@ -87,12 +89,15 @@ export default function Footer() {
           ))}
 
           {hours.length > 0 && (
-            <div>
-              <h3 className="font-display text-lg text-white">Opening hours</h3>
-              <dl className="mt-4 space-y-2 text-sm">
-                {hours.map(([days, time]) => (
-                  <div key={days} className="flex justify-between gap-4">
-                    <dt className="text-ink-300">{days}</dt>
+            <div className="lg:col-span-2">
+              <h3 className="font-display text-lg uppercase tracking-wide text-white">
+                Opening hours
+              </h3>
+              <dl className="mt-4 space-y-2.5 text-sm">
+                {hours.map(([day, time]) => (
+                  <div key={day} className="flex items-center gap-2.5">
+                    <Clock className="h-4 w-4 shrink-0 text-blush-300" aria-hidden="true" />
+                    <dt className="text-ink-200">{day}:</dt>
                     <dd className="text-white">{time}</dd>
                   </div>
                 ))}

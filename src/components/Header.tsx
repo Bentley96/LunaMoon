@@ -41,34 +41,34 @@ export default function Header() {
     <header className={`fixed inset-x-0 top-0 z-50 transition-shadow duration-300 ${scrolled ? 'shadow-lg' : ''}`}>
       <div data-header-bars>
       {/* Utility bar — phone, email, socials */}
-      <div className="bg-blush-400 text-ink-800">
+      <div className="bg-ink-850 text-white">
         <div className="container-xl flex items-center justify-between gap-4 px-4 py-2 text-sm sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
             <a
               href={`tel:${business.phoneHref}`}
-              className="flex items-center gap-1.5 transition-colors hover:text-blush-900"
+              className="flex items-center gap-1.5 transition-colors hover:text-blush-300"
             >
-              <Phone className="h-3.5 w-3.5 text-ink-700" aria-hidden="true" />
+              <Phone className="h-3.5 w-3.5 text-blush-300" aria-hidden="true" />
               <span className="font-medium">{business.phone}</span>
             </a>
             <a
               href={`mailto:${business.email}`}
-              className="hidden items-center gap-1.5 transition-colors hover:text-blush-900 sm:flex"
+              className="hidden items-center gap-1.5 transition-colors hover:text-blush-300 sm:flex"
             >
-              <Mail className="h-3.5 w-3.5 text-ink-700" aria-hidden="true" />
+              <Mail className="h-3.5 w-3.5 text-blush-300" aria-hidden="true" />
               <span>{business.email}</span>
             </a>
           </div>
           <div className="flex items-center gap-3">
             {business.social.facebook && (
               <a href={business.social.facebook} target="_blank" rel="noreferrer" aria-label="Facebook"
-                 className="text-ink-700 transition-colors hover:text-ink-900">
+                 className="text-ink-300 transition-colors hover:text-white">
                 <Facebook className="h-4 w-4" />
               </a>
             )}
             {business.social.instagram && (
               <a href={business.social.instagram} target="_blank" rel="noreferrer" aria-label="Instagram"
-                 className="text-ink-700 transition-colors hover:text-ink-900">
+                 className="text-ink-300 transition-colors hover:text-white">
                 <Instagram className="h-4 w-4" />
               </a>
             )}
@@ -76,7 +76,7 @@ export default function Header() {
         </div>
       </div>
 
-      <div className="border-t border-ink-900/10 bg-blush-400">
+      <div className="bg-blush-400">
         <div className="container-xl flex items-center justify-between gap-6 px-4 py-3 sm:px-6 lg:px-8">
           <Link to="/" className="shrink-0" aria-label={`${business.name} — home`}>
             <Logo className="h-14 sm:h-20" />

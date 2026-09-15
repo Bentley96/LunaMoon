@@ -17,6 +17,9 @@ export default {
         ink: {
           950: '#110e0d',
           900: '#1c1817',
+          // The header's contact bar. Visually near-identical to ink-900, but
+          // it's a brand-specified value so it keeps its own slot.
+          850: '#201d1c',
           800: '#2b2422',
           700: '#3f3431',
           600: '#524440',

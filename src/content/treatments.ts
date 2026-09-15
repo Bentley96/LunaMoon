@@ -37,6 +37,11 @@ const SERVICES_BLURB =
 
 export const treatmentPages: TreatmentPageData[] = [
   {
+    // NOT in the "Our Treatments" menu — see MENU_SLUGS in src/config/site.ts.
+    // The route still resolves so existing links keep working, but nothing
+    // links here any more. Skin Boosters, Lumie Eye and B Complex appear only
+    // on this page, so deleting it would lose that copy; the IPL section is
+    // also covered on the Advanced Facial Treatments page.
     slug: 'aesthetics-treatments',
     navLabel: 'Aesthetics Treatments',
     title: 'AESTHETICS TREATMENTS',

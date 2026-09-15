@@ -20,10 +20,34 @@ export interface NavLink {
   external?: boolean;
 }
 
-const treatmentLinks: NavLink[] = treatmentPages.map((t) => ({
-  label: t.navLabel,
-  to: `/${t.slug}`,
-}));
+/**
+ * The "Our Treatments" menu.
+ *
+ * Listed explicitly rather than derived from treatmentPages, because the menu
+ * and the page set are no longer the same thing:
+ *
+ *   - IPL Laser Hair Removal has no page of its own. It's booked, so the menu
+ *     item goes straight to /book-online.
+ *   - Aesthetics Treatments is off the menu. Its page still resolves, so
+ *     existing links and search results keep working, but nothing links to it
+ *     any more — see the note in src/content/treatments.ts.
+ *
+ * Labels still come from the page data so they can't drift; a slug that no
+ * longer exists drops out of the menu rather than rendering a dead link.
+ */
+const MENU_SLUGS = [
+  'advanced-facial-treatments',
+  'laser-cosmetic-teeth-whitening',
+  'skin-tightening-weight-loss',
+] as const;
+
+const treatmentLinks: NavLink[] = [
+  ...MENU_SLUGS.flatMap((slug) => {
+    const page = treatmentPages.find((p) => p.slug === slug);
+    return page ? [{ label: page.navLabel, to: `/${page.slug}` }] : [];
+  }),
+  { label: 'IPL Laser Hair Removal', to: '/book-online' },
+];
 
 export const navLinks: NavLink[] = [
   { label: 'Home', to: '/' },

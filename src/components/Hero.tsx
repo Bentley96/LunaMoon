@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { hero } from '../content/home';
+import Logo from './Logo';
 
 /**
  * Homepage hero — the existing site's full-bleed clinic photo with the wordmark
@@ -21,13 +22,15 @@ export default function Hero() {
 
       <div className="container-xl relative px-4 py-24 sm:px-6 lg:px-8 lg:py-36">
         <div className="max-w-2xl animate-fade-up">
-          <h1 className="font-display leading-[0.9] text-white">
-            <span className="block text-6xl font-bold uppercase tracking-[0.25em] sm:text-7xl lg:text-8xl">
-              {hero.titleTop}
+          {/* The lockup is artwork, so it's hidden from assistive tech and the
+              heading's actual text is the business name — otherwise the h1
+              would read as the logo's strapline rather than "Luna Moon
+              Aesthetics", which is what the business is called in copy. */}
+          <h1>
+            <span aria-hidden="true">
+              <Logo tone="light" className="text-[2.6rem] sm:text-[3.4rem] lg:text-[4.2rem]" />
             </span>
-            <span className="mt-2 block text-3xl italic text-blush-300 sm:text-4xl lg:text-5xl">
-              {hero.titleBottom}
-            </span>
+            <span className="sr-only">Luna Moon Aesthetics</span>
           </h1>
 
           <p className="mt-8 max-w-xl text-lg leading-relaxed text-ink-100">{hero.blurb}</p>

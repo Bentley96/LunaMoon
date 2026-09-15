@@ -33,6 +33,13 @@
     @apply inline-flex items-center justify-center gap-2 border border-white/70 text-white hover:bg-white hover:text-ink-900 font-semibold px-6 py-3 rounded-full transition-all duration-200;
   }
 
+  /* For use on the brand band (#E4C3BA): the rose primary only reaches 2.99:1
+     against it, short of the 3:1 WCAG 1.4.11 needs for a UI component. This
+     also echoes the black strapline in the logo. */
+  .btn-dark {
+    @apply inline-flex items-center justify-center gap-2 bg-ink-900 hover:bg-ink-800 text-white font-semibold px-6 py-3 rounded-full transition-all duration-200 shadow-sm hover:shadow-md active:scale-95;
+  }
+
   .btn-outline-ink {
     @apply inline-flex items-center justify-center gap-2 border border-ink-900 text-ink-900 hover:bg-ink-900 hover:text-white font-semibold px-6 py-3 rounded-full transition-all duration-200;
   }

@@ -68,6 +68,8 @@ export const business = {
   name: bootstrap.site.name || 'Luna Moon Aesthetics',
   tagline:
     bootstrap.site.description || 'Professional Aesthetic Beauty Treatments In Preston',
+  /** Registered company name, for the footer's copyright line. */
+  legalName: 'Luna Moon LTD',
   phone: bootstrap.site.phone || '07592 608 064',
   phoneHref: bootstrap.site.phoneHref || '07592608064',
   email: bootstrap.site.email || 'info@aestheticspreston.co.uk',

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Mail, MapPin, Phone } from 'lucide-react';
 import { business, footerLinks } from '../config/site';
+import Logo from './Logo';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -12,12 +13,7 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-6">
           <div className="lg:col-span-2">
             <Link to="/" className="inline-block">
-              <span className="block font-display text-2xl font-bold uppercase leading-none tracking-[0.3em] text-white">
-                Luna
-              </span>
-              <span className="block font-display text-sm italic leading-tight text-blush-300">
-                Moon Aesthetics
-              </span>
+              <Logo tone="light" className="text-[1.6rem]" />
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink-300">{business.tagline}</p>
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-ink-400">{business.finance}</p>
@@ -109,7 +105,7 @@ export default function Footer() {
       <div className="border-t border-ink-800">
         <div className="container-xl flex flex-col items-center justify-between gap-3 px-4 py-6 text-xs text-ink-400 sm:flex-row sm:px-6 lg:px-8">
           <p>
-            © {year} {business.name}. All rights reserved.
+            © {year} {business.legalName}. All rights reserved.
           </p>
           <p>
             <Link to="/clinic-policy" className="hover:text-white">

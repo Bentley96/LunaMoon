@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink as RouterNavLink, useLocation } from 'react-router-dom';
 import { ChevronDown, Facebook, Instagram, Mail, Menu, Phone, ShoppingBag, X } from 'lucide-react';
 import { business, navLinks } from '../config/site';
+import Logo from './Logo';
 import { bootstrap } from '../lib/bootstrap';
 import { useCart } from '../store/CartContext';
 
@@ -77,12 +78,7 @@ export default function Header() {
       <div className="bg-white/95 backdrop-blur">
         <div className="container-xl flex items-center justify-between gap-6 px-4 py-3 sm:px-6 lg:px-8">
           <Link to="/" className="shrink-0" aria-label={`${business.name} — home`}>
-            <span className="block font-display text-2xl font-bold uppercase leading-none tracking-[0.3em] text-ink-900">
-              Luna
-            </span>
-            <span className="block font-display text-sm italic leading-tight text-blush-600">
-              Moon Aesthetics
-            </span>
+            <Logo showTagline={false} className="text-[1.5rem] sm:text-[1.7rem]" />
           </Link>
 
           <nav className="hidden items-center gap-1 lg:flex" ref={navRef}>

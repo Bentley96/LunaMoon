@@ -61,8 +61,9 @@ declare global {
 }
 
 // Used in `npm run dev` and as a safety net if the theme ever fails to print
-// the blob. Keeping real-looking defaults here means the app renders standalone
-// (Vite dev server, Storybook, tests) without a WordPress install behind it.
+// the blob, so the app renders standalone (Vite dev server, tests) without a
+// WordPress install behind it. Only infrastructure defaults belong here —
+// business details live in src/config/site.ts.
 const FALLBACK: Bootstrap = {
   restUrl: '/wp-json/',
   nonce: '',
@@ -79,13 +80,17 @@ const FALLBACK: Bootstrap = {
     prefix: '£',
     suffix: '',
   },
+  // Deliberately empty. The business details have exactly one default, in
+  // src/config/site.ts, which reads these and falls back when they're blank —
+  // so anything set here would silently shadow that and become a second source
+  // of truth for the same values.
   site: {
-    name: 'Luna Moon Aesthetics',
-    description: 'Aesthetics, beauty and skincare treatments in Preston.',
+    name: '',
+    description: '',
     phone: '',
     phoneHref: '',
     email: '',
-    addressLines: ['55–56 Friargate', 'Preston', 'PR1 2AT'],
+    addressLines: [],
     hours: {},
     social: {},
     bookingUrl: '',

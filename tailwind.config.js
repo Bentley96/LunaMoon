@@ -12,41 +12,50 @@ export default {
   theme: {
     extend: {
       colors: {
+        // ink — warm near-black, taken from the logo's tagline lettering.
+        // Used for body copy, headings and the dark bands.
         ink: {
-          950: '#14101c',
-          900: '#1e1729',
-          800: '#2c2039',
-          700: '#3d2d4f',
-          600: '#523d68',
-          500: '#6b5185',
-          400: '#8a6ea5',
-          300: '#ad96c2',
-          200: '#cfc1dc',
-          100: '#e8e0ef',
-          50: '#f5f1f8',
+          950: '#110e0d',
+          900: '#1c1817',
+          800: '#2b2422',
+          700: '#3f3431',
+          600: '#524440',
+          500: '#6b5a53',
+          400: '#8f7e77',
+          300: '#b9aba5',
+          200: '#d9cfcb',
+          100: '#ede7e5',
+          50: '#f7f4f3',
         },
+        // blush — the brand rose. blush-400 is #E4C3BA exactly, the colour the
+        // logo sits on; the darker steps exist so text and buttons drawn from
+        // the same family still clear WCAG AA.
         blush: {
-          900: '#6d2435',
-          800: '#8c2f44',
-          700: '#ab3a54',
-          600: '#c74e69',
-          500: '#dd6f87',
-          400: '#e895a7',
-          300: '#f0b6c3',
-          200: '#f6d3db',
-          100: '#fae8ed',
-          50: '#fdf4f6',
+          950: '#38241f',
+          900: '#5a3a31',
+          800: '#7a4e42',
+          700: '#9a6354',
+          600: '#b87f6e',
+          500: '#d2a294',
+          400: '#e4c3ba',
+          300: '#edd3cb',
+          200: '#f4e2dc',
+          100: '#faf0ed',
+          50: '#fdf8f7',
         },
+        // gold — the metallic lettering from the logo, flattened into a usable
+        // scale. gold-400/500 read as the metal; gold-700 is the darkest step
+        // that still passes on a light background.
         gold: {
-          800: '#7d6231',
-          700: '#9a7b3f',
-          600: '#b8934c',
-          500: '#d0ab63',
-          400: '#ddc088',
-          300: '#e8d3ab',
-          200: '#f1e4cc',
-          100: '#f8f1e4',
-          50: '#fdfaf4',
+          800: '#5f512a',
+          700: '#7d6b36',
+          600: '#9c8642',
+          500: '#b8a051',
+          400: '#cdb667',
+          300: '#decc8a',
+          200: '#ebdfb4',
+          100: '#f5efd8',
+          50: '#fbf8ee',
         },
       },
       fontFamily: {

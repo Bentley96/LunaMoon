@@ -78,7 +78,7 @@ export default function Header() {
       <div className="bg-white/95 backdrop-blur">
         <div className="container-xl flex items-center justify-between gap-6 px-4 py-3 sm:px-6 lg:px-8">
           <Link to="/" className="shrink-0" aria-label={`${business.name} — home`}>
-            <Logo showTagline={false} className="text-[1.5rem] sm:text-[1.7rem]" />
+            <Logo variant="mark" className="h-11 sm:h-14" />
           </Link>
 
           <nav className="hidden items-center gap-1 lg:flex" ref={navRef}>

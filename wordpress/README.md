@@ -187,6 +187,54 @@ npm run lint
 
 ---
 
+## Logo
+
+The master artwork is `luna-moon-logo-transparent.svg` at the repo root. It is
+**not served** — files outside `public/` never reach the build — and exists only
+as the source the three served variants are generated from:
+
+| File (in `public/images/`)  | Used by        | Notes                              |
+| --------------------------- | -------------- | ---------------------------------- |
+| `luna-moon-logo.svg`        | light grounds  | The lockup as supplied             |
+| `luna-moon-logo-light.svg`  | hero, footer   | Strapline recoloured for dark      |
+| `luna-moon-mark.svg`        | header         | Crescent + wordmark, cropped tight |
+
+Three things drove that split:
+
+- **The strapline is near-black** (`#171012`) and disappears on the dark hero
+  and footer, so those need a recoloured copy.
+- **The full lockup is nearly square** (1.19:1). At header height the wordmark
+  is tiny and the strapline sub-pixel, so the header uses a 1.94:1 crop of the
+  gold artwork only.
+- **The master is 732KB.** It's an auto-trace: the metallic gradient is ~30
+  stacked contour bands rather than a real gradient. Run through SVGO at integer
+  precision it drops to ~132KB (43KB gzipped) with no visible difference at any
+  size the site uses. They're served as `<img>` so they stay out of the JS
+  bundle and cache separately.
+
+To regenerate after replacing the master:
+
+```bash
+npx svgo --precision=0 --multipass \
+  -i luna-moon-logo-transparent.svg -o /tmp/logo.svg
+```
+
+then from `/tmp/logo.svg`: copy it to `public/images/luna-moon-logo.svg`; for
+the light variant replace `#171012` with `#f2ece9`; for the mark drop the
+flourish group (`fill="#f3d7d0"`) and the strapline paths (`fill="#171012"`) and
+set `viewBox="47 160 737 380"` with matching `width`/`height`.
+
+> Those coordinates come from the supplied artwork. If the master changes,
+> re-measure with `getBBox()` in a browser rather than assuming they still hold.
+
+**A better long-term fix**, if a designer is available: re-export the logo with
+the gold as a real `<linearGradient>` clipped by the existing `gold-outline`
+path, instead of ~30 traced bands. That would take it from 43KB gzipped to under
+5KB. It isn't something to do by hand — the bands encode a bevel, not a simple
+directional wash, so flattening them to one gradient loses the metallic edges.
+
+---
+
 ## Day-to-day content changes
 
 Treatments, prices, products, reviews, FAQs, policy copy and the clinic's

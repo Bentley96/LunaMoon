@@ -1,4 +1,14 @@
+<!-- Crescent mark in the brand gold on ink. The full logo is ~130KB (it's an
+     auto-trace), far too heavy for a favicon, so this is a simplified stand-in
+     that matches the palette in tailwind.config.js. -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="8" fill="#1e1729"/>
-  <path d="M20.5 21.5a7 7 0 1 1-4.2-12.9 8 8 0 1 0 8.2 11 7 7 0 0 1-4 1.9z" fill="#dd6f87"/>
+  <rect width="32" height="32" rx="7" fill="#110e0d"/>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#decc8a"/>
+      <stop offset="45%" stop-color="#b8a051"/>
+      <stop offset="100%" stop-color="#8a7538"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#g)" fill-rule="evenodd" d="M16 4a12 12 0 1 0 0 24 12 12 0 0 0 0-24Zm4.5 2.2a10 10 0 1 1 0 19.6 10 10 0 0 1 0-19.6Z"/>
 </svg>

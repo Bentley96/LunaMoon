@@ -13,7 +13,7 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-6">
           <div className="lg:col-span-2">
             <Link to="/" className="inline-block">
-              <Logo tone="light" className="text-[1.6rem]" />
+              <Logo tone="light" className="h-24" />
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink-300">{business.tagline}</p>
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-ink-400">{business.finance}</p>

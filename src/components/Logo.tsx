@@ -1,103 +1,56 @@
 /**
- * Luna Moon wordmark: crescent + stacked "LUNA / MOON" + tagline.
+ * The Luna Moon logo.
  *
- * Drawn rather than bitmapped so it stays crisp at every size and can be
- * recoloured for light and dark backgrounds. The crescent is two overlapping
- * circles knocked out with `evenodd`; the metallic look comes from a gradient
- * shared by the moon and the lettering.
+ * Three variants are generated from the supplied artwork
+ * (luna-moon-logo-transparent.svg at the repo root, which is the master and is
+ * never served). See the "Logo" section of wordpress/README.md for how to
+ * regenerate them if the master changes.
  *
- * TODO(brand): if a vector original of the logo exists, drop it in as
- * public/images/logo.svg and render that instead — this is a faithful rebuild,
- * not the artwork itself.
+ *   full  + gold   the lockup as supplied — crescent, wordmark, strapline.
+ *   full  + light  the same with the strapline recoloured. The supplied
+ *                  strapline is near-black (#171012) and disappears on the dark
+ *                  hero and footer, so those use this instead.
+ *   mark           crescent and wordmark only, cropped tight. The full lockup
+ *                  is nearly square (1.19:1), so at header height the wordmark
+ *                  is tiny and the strapline sub-pixel; the crop is 1.94:1 and
+ *                  stays legible.
+ *
+ * Served as files rather than inlined: the artwork is ~42KB gzipped each (it's
+ * an auto-trace, where the metallic gradient is ~30 stacked contour bands), so
+ * inlining would put more weight in the JS bundle than the rest of the app.
+ * As <img> they are cached separately and never block rendering.
  */
+
+const FULL_GOLD = '/images/luna-moon-logo.svg';
+const FULL_LIGHT = '/images/luna-moon-logo-light.svg';
+const MARK = '/images/luna-moon-mark.svg';
+
 export default function Logo({
   tone = 'gold',
+  variant = 'full',
   className = '',
-  showTagline = true,
 }: {
-  /** "gold" for light backgrounds, "light" for the dark footer/hero. */
+  /** "light" recolours the strapline for dark backgrounds. Ignored by "mark",
+   *  which has no strapline and reads on both. */
   tone?: 'gold' | 'light';
+  variant?: 'full' | 'mark';
+  /** Set the height here (e.g. "h-12"); width follows the aspect ratio. */
   className?: string;
-  /**
-   * Show the artwork's strapline ("Body Contouring & Aesthetics").
-   *
-   * That line belongs to the logo only — it is NOT the business name, which is
-   * "Luna Moon Aesthetics" everywhere in copy. Turn it off wherever the mark is
-   * small enough that the strapline would be illegible.
-   */
-  showTagline?: boolean;
 }) {
-  // Unique per instance so two logos on one page don't share gradient ids.
-  const id = `luna-${tone}`;
+  const isMark = variant === 'mark';
+  const src = isMark ? MARK : tone === 'light' ? FULL_LIGHT : FULL_GOLD;
 
   return (
-    <span className={`inline-flex items-center gap-3 ${className}`}>
-      <svg
-        viewBox="0 0 100 100"
-        className="h-[1.9em] w-[1.9em] shrink-0"
-        role="img"
-        aria-label="Luna Moon Aesthetics"
-      >
-        <defs>
-          <linearGradient id={`${id}-grad`} x1="0" y1="0" x2="1" y2="1">
-            {tone === 'gold' ? (
-              <>
-                <stop offset="0%" stopColor="#decc8a" />
-                <stop offset="38%" stopColor="#b8a051" />
-                <stop offset="62%" stopColor="#8a7538" />
-                <stop offset="100%" stopColor="#cdb667" />
-              </>
-            ) : (
-              <>
-                <stop offset="0%" stopColor="#f5efd8" />
-                <stop offset="50%" stopColor="#decc8a" />
-                <stop offset="100%" stopColor="#b8a051" />
-              </>
-            )}
-          </linearGradient>
-        </defs>
-        {/* Outer disc minus a disc offset to the right leaves the crescent. */}
-        <path
-          fill={`url(#${id}-grad)`}
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M50 2a48 48 0 1 0 0 96 48 48 0 0 0 0-96Zm19 7.5a40 40 0 1 1 0 81 40 40 0 0 1 0-81Z"
-        />
-      </svg>
-
-      <span className="flex flex-col leading-[0.82]">
-        <span
-          className="bg-clip-text font-display font-semibold uppercase tracking-[0.12em] text-transparent"
-          style={{
-            backgroundImage:
-              tone === 'gold'
-                ? 'linear-gradient(135deg,#decc8a 0%,#b8a051 38%,#8a7538 62%,#cdb667 100%)'
-                : 'linear-gradient(135deg,#f5efd8 0%,#decc8a 50%,#b8a051 100%)',
-          }}
-        >
-          Luna
-        </span>
-        <span
-          className="bg-clip-text font-display font-semibold uppercase tracking-[0.12em] text-transparent"
-          style={{
-            backgroundImage:
-              tone === 'gold'
-                ? 'linear-gradient(135deg,#decc8a 0%,#b8a051 38%,#8a7538 62%,#cdb667 100%)'
-                : 'linear-gradient(135deg,#f5efd8 0%,#decc8a 50%,#b8a051 100%)',
-          }}
-        >
-          Moon
-        </span>
-        {showTagline && (
-          <span
-            className={`mt-[0.35em] text-[0.26em] font-medium uppercase tracking-[0.22em] ${
-              tone === 'gold' ? 'text-ink-800' : 'text-ink-100'
-            }`}
-          >
-            Body Contouring &amp; Aesthetics
-          </span>
-        )}
-      </span>
-    </span>
+    <img
+      src={src}
+      // The strapline is part of the artwork, not the business name — the
+      // business is "Luna Moon Aesthetics" everywhere in copy.
+      alt="Luna Moon Aesthetics"
+      // Intrinsic size reserves the right box before the file loads, so the
+      // header and hero don't shift.
+      width={isMark ? 737 : 830}
+      height={isMark ? 380 : 700}
+      className={`w-auto ${className}`}
+    />
   );
 }

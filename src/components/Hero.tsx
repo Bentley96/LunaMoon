@@ -28,7 +28,7 @@ export default function Hero() {
               Aesthetics", which is what the business is called in copy. */}
           <h1>
             <span aria-hidden="true">
-              <Logo tone="light" className="text-[2.6rem] sm:text-[3.4rem] lg:text-[4.2rem]" />
+              <Logo tone="light" className="h-40 sm:h-52 lg:h-60" />
             </span>
             <span className="sr-only">Luna Moon Aesthetics</span>
           </h1>

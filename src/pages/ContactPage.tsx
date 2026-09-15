@@ -1,5 +1,6 @@
 import { Clock, ExternalLink, Mail, MapPin, Phone } from 'lucide-react';
 import PageHero from '../components/PageHero';
+import { banners } from '../config/banners';
 import BookingForm from '../components/BookingForm';
 import { business, BOOKING_URL } from '../config/site';
 
@@ -12,7 +13,7 @@ export default function ContactPage() {
         eyebrow="Get in touch"
         title="CONTACT LUNA MOON PRESTON"
         intro="For more information about our services and products, or to book an appointment, don’t hesitate to get in touch with Dee today."
-        image="/images/clinic-product-display.jpg"
+        banner={banners['contact']}
       />
 
       <section className="section-padding">

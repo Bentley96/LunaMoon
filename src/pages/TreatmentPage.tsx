@@ -4,6 +4,7 @@ import ContactStrip from '../components/ContactStrip';
 import BookOnlineCTA from '../components/BookOnlineCTA';
 import SectionHeading from '../components/ui/SectionHeading';
 import { treatmentBySlug, type TreatmentSection } from '../content/treatments';
+import { bannerFor } from '../config/banners';
 
 /**
  * One template for all four treatment pages.
@@ -22,8 +23,15 @@ export default function TreatmentPage({ slug }: { slug: string }) {
 
   return (
     <>
-      <PageHero eyebrow="Luna Moon Aesthetics" title={page.title} intro={page.heroBlurb}
-                image={page.heroImage} />
+      {/* Treatment pages with supplied banner artwork use it; the rest fall
+          back to the single hero image in src/content/treatments.ts. */}
+      <PageHero
+        eyebrow="Luna Moon Aesthetics"
+        title={page.title}
+        intro={page.heroBlurb}
+        banner={bannerFor(slug)}
+        image={page.heroImage}
+      />
 
       <section className="section-padding">
         <div className="container-lg grid items-center gap-12 lg:grid-cols-2">

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { banners } from '../config/banners';
 import { hero } from '../content/home';
 import Logo from './Logo';
 
@@ -9,14 +10,20 @@ import Logo from './Logo';
 export default function Hero() {
   return (
     <section className="relative isolate overflow-hidden bg-ink-950">
-      <img
-        src={hero.image}
-        alt="Inside the Luna Moon Aesthetics clinic in Preston"
-        className="absolute inset-0 h-full w-full object-cover opacity-45"
-      />
-      {/* Darkened toward the left so the wordmark stays legible over any photo. */}
+      {/* Two crops, framed differently — see src/config/banners.ts. */}
+      <picture>
+        <source media="(max-width: 639px)" srcSet={banners.home.mobile} />
+        <img
+          src={banners.home.desktop}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      </picture>
+      {/* Darkens only the side the lockup sits on, so the subject keeps its
+          exposure. Vertical on mobile, where the crop is portrait. */}
       <div
-        className="absolute inset-0 bg-gradient-to-r from-ink-950/90 via-ink-950/70 to-ink-900/40"
+        className="absolute inset-0 bg-gradient-to-t from-ink-950/95 via-ink-950/86 to-ink-950/40 sm:bg-gradient-to-r sm:from-ink-950/95 sm:via-ink-950/82 sm:to-transparent"
         aria-hidden="true"
       />
 

@@ -3,6 +3,7 @@ import { ChevronDown } from 'lucide-react';
 import { getFaqs } from '../lib/wp';
 import { useAsync } from '../hooks/useAsync';
 import PageHero from '../components/PageHero';
+import { banners } from '../config/banners';
 import RichText from '../components/ui/RichText';
 import ContactStrip from '../components/ContactStrip';
 import BookOnlineCTA from '../components/BookOnlineCTA';
@@ -19,7 +20,7 @@ export default function FaqsPage() {
         eyebrow="Luna Moon Aesthetics"
         title="FREQUENTLY ASKED QUESTIONS"
         intro={faqTeaser.body}
-        image="/images/facial-relaxing.webp"
+        banner={banners['faqs']}
       />
 
       <section className="section-padding">

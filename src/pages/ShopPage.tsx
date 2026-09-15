@@ -5,6 +5,7 @@ import { useAsync } from '../hooks/useAsync';
 import { formatPrice } from '../lib/format';
 import { fallbackProducts } from '../content/products';
 import PageHero from '../components/PageHero';
+import { banners } from '../config/banners';
 import ProductCard from '../components/ProductCard';
 import ContactStrip from '../components/ContactStrip';
 import Spinner from '../components/ui/Spinner';
@@ -26,7 +27,7 @@ export default function ShopPage() {
         eyebrow="Luna Moon Aesthetics"
         title="PRODUCTS"
         intro="View our range of beauty products. For more information, or to make a booking, get in touch now!"
-        image="/images/liquid-lipo-brand.webp"
+        banner={banners['products']}
       />
 
       <section className="section-padding">

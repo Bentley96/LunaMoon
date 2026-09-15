@@ -1,5 +1,6 @@
 import { CalendarCheck, CreditCard, ExternalLink, Phone } from 'lucide-react';
 import PageHero from '../components/PageHero';
+import { banners } from '../config/banners';
 import ContactStrip from '../components/ContactStrip';
 import { business, BOOKING_URL } from '../config/site';
 import { bookOnlineCta } from '../content/home';
@@ -19,7 +20,7 @@ export default function BookOnlinePage() {
         eyebrow="Luna Moon Aesthetics"
         title="BOOK NOW"
         intro="Check availability and book your appointment online, any time."
-        image="/images/clinic-robes.jpg"
+        banner={banners['book-online']}
       >
         <a href={BOOKING_URL} target="_blank" rel="noreferrer" className="btn-primary-lg">
           Open the booking system

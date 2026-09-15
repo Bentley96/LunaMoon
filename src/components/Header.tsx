@@ -40,34 +40,34 @@ export default function Header() {
   return (
     <header className={`fixed inset-x-0 top-0 z-50 transition-shadow duration-300 ${scrolled ? 'shadow-lg' : ''}`}>
       {/* Utility bar — phone, email, socials */}
-      <div className="bg-ink-950 text-white">
+      <div className="bg-blush-400 text-ink-800">
         <div className="container-xl flex items-center justify-between gap-4 px-4 py-2 text-sm sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
             <a
               href={`tel:${business.phoneHref}`}
-              className="flex items-center gap-1.5 transition-colors hover:text-blush-300"
+              className="flex items-center gap-1.5 transition-colors hover:text-blush-900"
             >
-              <Phone className="h-3.5 w-3.5 text-blush-400" aria-hidden="true" />
+              <Phone className="h-3.5 w-3.5 text-ink-700" aria-hidden="true" />
               <span className="font-medium">{business.phone}</span>
             </a>
             <a
               href={`mailto:${business.email}`}
-              className="hidden items-center gap-1.5 transition-colors hover:text-blush-300 sm:flex"
+              className="hidden items-center gap-1.5 transition-colors hover:text-blush-900 sm:flex"
             >
-              <Mail className="h-3.5 w-3.5 text-blush-400" aria-hidden="true" />
+              <Mail className="h-3.5 w-3.5 text-ink-700" aria-hidden="true" />
               <span>{business.email}</span>
             </a>
           </div>
           <div className="flex items-center gap-3">
             {business.social.facebook && (
               <a href={business.social.facebook} target="_blank" rel="noreferrer" aria-label="Facebook"
-                 className="text-ink-300 transition-colors hover:text-blush-300">
+                 className="text-ink-700 transition-colors hover:text-ink-900">
                 <Facebook className="h-4 w-4" />
               </a>
             )}
             {business.social.instagram && (
               <a href={business.social.instagram} target="_blank" rel="noreferrer" aria-label="Instagram"
-                 className="text-ink-300 transition-colors hover:text-blush-300">
+                 className="text-ink-700 transition-colors hover:text-ink-900">
                 <Instagram className="h-4 w-4" />
               </a>
             )}
@@ -75,7 +75,7 @@ export default function Header() {
         </div>
       </div>
 
-      <div className="bg-white/95 backdrop-blur">
+      <div className="border-t border-ink-900/10 bg-blush-400">
         <div className="container-xl flex items-center justify-between gap-6 px-4 py-3 sm:px-6 lg:px-8">
           <Link to="/" className="shrink-0" aria-label={`${business.name} — home`}>
             <Logo variant="mark" className="h-11 sm:h-14" />
@@ -89,7 +89,7 @@ export default function Header() {
                     type="button"
                     onClick={() => setOpenMenu((p) => (p === link.label ? null : link.label))}
                     aria-expanded={openMenu === link.label}
-                    className="flex items-center gap-1 rounded-full px-3 py-2 text-sm font-semibold uppercase tracking-wide text-ink-800 transition-colors hover:text-blush-700"
+                    className="flex items-center gap-1 rounded-full px-3 py-2 text-sm font-semibold uppercase tracking-wide text-ink-800 transition-colors hover:text-blush-900"
                   >
                     {link.label}
                     <ChevronDown
@@ -115,7 +115,7 @@ export default function Header() {
                   end={link.to === '/'}
                   className={({ isActive }) =>
                     `rounded-full px-3 py-2 text-sm font-semibold uppercase tracking-wide transition-colors ${
-                      isActive ? 'text-blush-700' : 'text-ink-800 hover:text-blush-700'
+                      isActive ? 'text-blush-900' : 'text-ink-800 hover:text-blush-900'
                     }`
                   }
                 >
@@ -130,26 +130,26 @@ export default function Header() {
               <button
                 type="button"
                 onClick={openDrawer}
-                className="relative rounded-full p-2.5 text-ink-800 transition-colors hover:bg-blush-50 hover:text-blush-700"
+                className="relative rounded-full p-2.5 text-ink-800 transition-colors hover:bg-white/60 hover:text-blush-900"
                 aria-label={`Basket${count ? ` — ${count} item${count === 1 ? '' : 's'}` : ' — empty'}`}
               >
                 <ShoppingBag className="h-5 w-5" aria-hidden="true" />
                 {count > 0 && (
-                  <span className="absolute -right-0.5 -top-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-blush-600 px-1 text-[11px] font-bold text-white">
+                  <span className="absolute -right-0.5 -top-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-ink-900 px-1 text-[11px] font-bold text-white">
                     {count}
                   </span>
                 )}
               </button>
             )}
 
-            <Link to="/book-online" className="btn-primary hidden sm:inline-flex">
+            <Link to="/book-online" className="btn-dark hidden sm:inline-flex">
               Book now
             </Link>
 
             <button
               type="button"
               onClick={() => setMobileOpen((p) => !p)}
-              className="rounded-full p-2.5 text-ink-800 transition-colors hover:bg-blush-50 lg:hidden"
+              className="rounded-full p-2.5 text-ink-800 transition-colors hover:bg-white/60 lg:hidden"
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileOpen}
             >
@@ -195,7 +195,7 @@ export default function Header() {
                 </Link>
               ),
             )}
-            <Link to="/book-online" className="btn-primary mt-4">
+            <Link to="/book-online" className="btn-dark mt-4">
               Book now
             </Link>
           </nav>

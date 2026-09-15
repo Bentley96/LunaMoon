@@ -31,7 +31,7 @@ export default function PageHero({
           {eyebrow && (
             <span className="eyebrow text-blush-300">{eyebrow}</span>
           )}
-          <h1 className="mt-3 text-4xl uppercase leading-tight sm:text-5xl lg:text-6xl">{title}</h1>
+          <h1 className="mt-3 text-white text-4xl uppercase leading-tight sm:text-5xl lg:text-6xl">{title}</h1>
           {intro && <div className="mt-5 text-lg leading-relaxed text-ink-100">{intro}</div>}
           {children && <div className="mt-8">{children}</div>}
         </div>

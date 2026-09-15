@@ -21,12 +21,16 @@
 }
 
 @layer components {
+  /* The brand rose (#E4C3BA) is light: white text on it is 1.6:1, so the label
+     is ink instead. The button itself is only 1.64:1 against a white page, well
+     under the 3:1 WCAG 1.4.11 asks of a UI component, so the border carries the
+     boundary (blush-600 on white is 3.33:1). */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 bg-blush-600 hover:bg-blush-700 text-white font-semibold px-6 py-3 rounded-full transition-all duration-200 shadow-sm hover:shadow-md active:scale-95 disabled:opacity-60 disabled:pointer-events-none;
+    @apply inline-flex items-center justify-center gap-2 bg-blush-400 hover:bg-blush-500 text-ink-900 border border-blush-600 font-semibold px-6 py-3 rounded-full transition-all duration-200 shadow-sm hover:shadow-md active:scale-95 disabled:opacity-60 disabled:pointer-events-none;
   }
 
   .btn-primary-lg {
-    @apply inline-flex items-center justify-center gap-2 bg-blush-600 hover:bg-blush-700 text-white font-semibold px-8 py-4 rounded-full transition-all duration-200 shadow-sm hover:shadow-md active:scale-95 text-lg disabled:opacity-60 disabled:pointer-events-none;
+    @apply inline-flex items-center justify-center gap-2 bg-blush-400 hover:bg-blush-500 text-ink-900 border border-blush-600 font-semibold px-8 py-4 rounded-full transition-all duration-200 shadow-sm hover:shadow-md active:scale-95 text-lg disabled:opacity-60 disabled:pointer-events-none;
   }
 
   .btn-outline {

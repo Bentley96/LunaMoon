@@ -1,289 +1,105 @@
-import { useState } from 'react';
-import { Phone, Mail, MapPin, Clock, Facebook, Instagram, Linkedin, Megaphone, Loader2, CheckCircle } from 'lucide-react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import Honeypot from '../components/Honeypot';
-import { submitQuoteRequest } from '../lib/quote';
-
-const installationTypes = [
-  'Residential Solar',
-  'Commercial Solar',
-  'Air Source Heat Pump',
-  'Battery Storage',
-  'Residential Roofing',
-  'Not Sure — Advise Me',
-];
+import { Clock, Mail, MapPin, Phone } from 'lucide-react';
+import { business } from '../config/site';
+import PageHero from '../components/PageHero';
+import BookingForm from '../components/BookingForm';
 
 export default function ContactPage() {
-  const [form, setForm] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    postcode: '',
-    installation_type: '',
-    message: '',
-    website: '',
-  });
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-
-  const set = (field: string) => (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
-  ) => setForm((p) => ({ ...p, [field]: e.target.value }));
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus('loading');
-    try {
-      await submitQuoteRequest({
-        name: form.name,
-        phone: form.phone,
-        email: form.email,
-        postcode: form.postcode,
-        installation_type: form.installation_type,
-        message: form.message || undefined,
-        website: form.website,
-      });
-      setStatus('success');
-    } catch {
-      setStatus('error');
-    }
-  };
+  const hours = Object.entries(business.hours);
 
   return (
     <>
-      <Header />
-      <main>
-        {/* Hero */}
-        <section className="bg-[#68c0b8] pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-          <div className="container-xl text-center">
-            <p className="text-navy-900/80 font-semibold text-sm uppercase tracking-widest mb-3">Get In Touch</p>
-            <h1 className="text-4xl sm:text-5xl font-extrabold text-navy-900 mb-5 leading-tight">
-              Make an Enquiry
-            </h1>
-            <p className="text-lg text-navy-800 max-w-2xl mx-auto">
-              Contact Solar 365 for tailored energy-saving solutions designed to ensure cost
-              efficiency and sustainability.
-            </p>
-          </div>
-        </section>
+      <PageHero
+        eyebrow="Contact"
+        title="Get in touch"
+        intro="Questions about a treatment, or ready to book? Drop us a message and we'll come back to you."
+      />
 
-        {/* Contact content */}
-        <section className="section-padding bg-white">
-          <div className="container-xl">
-            <div className="grid lg:grid-cols-2 gap-12">
-              {/* Contact details */}
-              <div>
-                <h2 className="text-2xl font-bold text-navy-900 mb-8">Contact Details</h2>
+      <section className="section-padding">
+        <div className="container-lg grid gap-12 lg:grid-cols-2">
+          <div>
+            <h2 className="text-3xl">Find us</h2>
 
-                <div className="space-y-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-solar-50 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <Phone className="w-6 h-6 text-solar-500" />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-navy-900 mb-1">Phone</p>
-                      <a href="tel:01302456613" className="text-gray-600 hover:text-solar-600 transition-colors block">
-                        01302 456 613
-                      </a>
-                      <a href="tel:07432476663" className="text-gray-600 hover:text-solar-600 transition-colors block">
-                        07432 476 663
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-solar-50 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <Mail className="w-6 h-6 text-solar-500" />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-navy-900 mb-1">Email</p>
-                      <a
-                        href="mailto:customerservices@solar-365.co.uk"
-                        className="text-gray-600 hover:text-solar-600 transition-colors"
-                      >
-                        customerservices@solar-365.co.uk
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-solar-50 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <Clock className="w-6 h-6 text-solar-500" />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-navy-900 mb-1">Hours</p>
-                      <p className="text-gray-600">Mon–Fri 9am–5pm</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-solar-50 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <MapPin className="w-6 h-6 text-solar-500" />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-navy-900 mb-1">Location</p>
-                      <p className="text-gray-600">Doncaster &amp; Yorkshire</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Social links */}
-                <div className="mt-10">
-                  <p className="font-semibold text-navy-900 mb-4">Follow Us</p>
-                  <div className="flex gap-4">
-                    {[
-                      { href: 'https://facebook.com/people/Solar-365-Ltd/61567868732789/', Icon: Facebook, label: 'Facebook' },
-                      { href: 'https://instagram.com/solar365_/', Icon: Instagram, label: 'Instagram' },
-                      { href: 'https://uk.linkedin.com/company/solar365uk', Icon: Linkedin, label: 'LinkedIn' },
-                      { href: 'https://www.bark.com/en/gb/company/solar-365-ltd/LJ1eM/', Icon: Megaphone, label: 'Bark' },
-                    ].map(({ href, Icon, label }) => (
-                      <a
-                        key={label}
-                        href={href}
-                        target="_blank"
-                        rel="noreferrer"
-                        aria-label={label}
-                        className="w-11 h-11 bg-navy-900 rounded-xl flex items-center justify-center text-white hover:bg-solar-500 hover:text-navy-900 transition-colors"
-                      >
-                        <Icon className="w-5 h-5" />
-                      </a>
+            <dl className="mt-6 space-y-5">
+              {business.addressLines.length > 0 && (
+                <div className="flex gap-4">
+                  <dt>
+                    <MapPin className="h-5 w-5 text-blush-600" aria-hidden="true" />
+                    <span className="sr-only">Address</span>
+                  </dt>
+                  <dd className="leading-relaxed text-ink-700">
+                    {business.addressLines.map((line) => (
+                      <span key={line} className="block">
+                        {line}
+                      </span>
                     ))}
-                  </div>
+                  </dd>
                 </div>
-              </div>
+              )}
 
-              {/* Enquiry Form */}
-              <div className="bg-gray-50 rounded-2xl p-8 border border-gray-200">
-                <h2 className="text-2xl font-bold text-navy-900 mb-6">Send an Enquiry</h2>
-
-                {status === 'success' ? (
-                  <div className="text-center py-10">
-                    <CheckCircle className="w-14 h-14 text-green-500 mx-auto mb-4" />
-                    <h3 className="text-xl font-bold text-navy-900 mb-2">Message Received!</h3>
-                    <p className="text-gray-600">
-                      Thank you for getting in touch. We'll be in contact within 1 business day.
-                    </p>
-                  </div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    <Honeypot value={form.website} onChange={(v) => setForm((p) => ({ ...p, website: v }))} />
-                    <div className="grid sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-navy-900 mb-1">
-                          Full Name *
-                        </label>
-                        <input
-                          required
-                          type="text"
-                          value={form.name}
-                          onChange={set('name')}
-                          placeholder="Your name"
-                          className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-navy-900 mb-1">
-                          Phone *
-                        </label>
-                        <input
-                          required
-                          type="tel"
-                          value={form.phone}
-                          onChange={set('phone')}
-                          placeholder="Your phone number"
-                          className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-navy-900 mb-1">
-                        Email *
-                      </label>
-                      <input
-                        required
-                        type="email"
-                        value={form.email}
-                        onChange={set('email')}
-                        placeholder="your@email.com"
-                        className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent"
-                      />
-                    </div>
-
-                    <div className="grid sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-navy-900 mb-1">
-                          Postcode *
-                        </label>
-                        <input
-                          required
-                          type="text"
-                          value={form.postcode}
-                          onChange={set('postcode')}
-                          placeholder="e.g. DN1 1AA"
-                          className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-navy-900 mb-1">
-                          Installation Type
-                        </label>
-                        <select
-                          value={form.installation_type}
-                          onChange={set('installation_type')}
-                          className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent bg-white"
-                        >
-                          <option value="">Select type…</option>
-                          {installationTypes.map((t) => (
-                            <option key={t} value={t}>
-                              {t}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-navy-900 mb-1">
-                        Message (optional)
-                      </label>
-                      <textarea
-                        rows={4}
-                        value={form.message}
-                        onChange={set('message')}
-                        placeholder="Tell us about your project…"
-                        className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent resize-none"
-                      />
-                    </div>
-
-                    {status === 'error' && (
-                      <p className="text-red-600 text-sm">
-                        Something went wrong. Please try again or call us directly.
-                      </p>
-                    )}
-
-                    <button
-                      type="submit"
-                      disabled={status === 'loading'}
-                      className="btn-primary w-full justify-center text-base py-3"
+              {business.phone && (
+                <div className="flex gap-4">
+                  <dt>
+                    <Phone className="h-5 w-5 text-blush-600" aria-hidden="true" />
+                    <span className="sr-only">Phone</span>
+                  </dt>
+                  <dd>
+                    <a
+                      href={`tel:${business.phoneHref || business.phone}`}
+                      className="text-ink-700 hover:text-blush-700"
                     >
-                      {status === 'loading' ? (
-                        <>
-                          <Loader2 className="w-5 h-5 animate-spin" />
-                          Sending…
-                        </>
-                      ) : (
-                        'Send Enquiry'
-                      )}
-                    </button>
-                  </form>
-                )}
-              </div>
+                      {business.phone}
+                    </a>
+                  </dd>
+                </div>
+              )}
+
+              {business.email && (
+                <div className="flex gap-4">
+                  <dt>
+                    <Mail className="h-5 w-5 text-blush-600" aria-hidden="true" />
+                    <span className="sr-only">Email</span>
+                  </dt>
+                  <dd>
+                    <a href={`mailto:${business.email}`} className="text-ink-700 hover:text-blush-700">
+                      {business.email}
+                    </a>
+                  </dd>
+                </div>
+              )}
+
+              {hours.length > 0 && (
+                <div className="flex gap-4">
+                  <dt>
+                    <Clock className="h-5 w-5 text-blush-600" aria-hidden="true" />
+                    <span className="sr-only">Opening hours</span>
+                  </dt>
+                  <dd className="space-y-1">
+                    {hours.map(([days, time]) => (
+                      <div key={days} className="flex gap-4 text-ink-700">
+                        <span className="min-w-28">{days}</span>
+                        <span>{time}</span>
+                      </div>
+                    ))}
+                  </dd>
+                </div>
+              )}
+            </dl>
+
+            {/* TODO(content): drop in the clinic's Google Maps embed here. */}
+            <div className="img-placeholder mt-8 aspect-[4/3] rounded-2xl">
+              <span>Map embed</span>
             </div>
           </div>
-        </section>
-      </main>
-      <Footer />
+
+          <div className="card p-8">
+            <h2 className="text-3xl">Send a message</h2>
+            <p className="mt-2 text-ink-500">We usually reply the same day.</p>
+            <div className="mt-6">
+              <BookingForm />
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

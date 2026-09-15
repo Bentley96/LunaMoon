@@ -1,6 +1,6 @@
 node_modules/
 # Only ignore a root-level dist. The theme's built assets
-# (wordpress/solar365/dist) are committed so the theme is deployable without a
+# (wordpress/lunamoon/dist) are committed so the theme is deployable without a
 # local build step.
 /dist/
 .env
@@ -12,4 +12,4 @@ npm-debug.log*
 .claude/
 
 # WordPress theme zip artifact
-wordpress/solar365-theme.zip
+wordpress/lunamoon-theme.zip

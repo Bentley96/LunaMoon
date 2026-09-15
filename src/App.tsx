@@ -1,76 +1,67 @@
 import { lazy, Suspense } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Header from './components/Header';
-import Hero from './components/Hero';
-import OctopusSection from './components/OctopusSection';
-import PremiumInstaller from './components/PremiumInstaller';
-import OctopusHeatPumps from './components/OctopusHeatPumps';
-import FinanceOptions from './components/FinanceOptions';
-import Testimonials from './components/Testimonials';
-import FinalCTA from './components/FinalCTA';
-import Footer from './components/Footer';
+import { Route, Routes } from 'react-router-dom';
+import Layout from './components/Layout';
 import ScrollToTop from './components/ScrollToTop';
+import HomePage from './pages/HomePage';
+import Spinner from './components/ui/Spinner';
 
-const AboutSolarPage = lazy(() => import('./pages/AboutSolarPage'));
-const ResidentialSolarPage = lazy(() => import('./pages/ResidentialSolarPage'));
-const CommercialSolarPage = lazy(() => import('./pages/CommercialSolarPage'));
-const AirSourceHeatPumpsPage = lazy(() => import('./pages/AirSourceHeatPumpsPage'));
-const SolarMaintenancePage = lazy(() => import('./pages/SolarMaintenancePage'));
-const ResidentialRoofingPage = lazy(() => import('./pages/ResidentialRoofingPage'));
-const SupportingCommunityPage = lazy(() => import('./pages/SupportingCommunityPage'));
-const CaseStudiesPage = lazy(() => import('./pages/CaseStudiesPage'));
-const CaseStudyPage = lazy(() => import('./pages/CaseStudyPage'));
-const GalleryPage = lazy(() => import('./pages/GalleryPage'));
+// Everything past the homepage is code-split, so a first visit only downloads
+// the landing page. The chunks resolve relative to the entry script's URL (see
+// the `base` note in vite.config.ts), which is what lets them load from inside
+// a WordPress theme folder.
+const TreatmentsPage = lazy(() => import('./pages/TreatmentsPage'));
+const TreatmentPage = lazy(() => import('./pages/TreatmentPage'));
+const ShopPage = lazy(() => import('./pages/ShopPage'));
+const ProductPage = lazy(() => import('./pages/ProductPage'));
+const CartPage = lazy(() => import('./pages/CartPage'));
+const CheckoutPage = lazy(() => import('./pages/CheckoutPage'));
+const OrderConfirmationPage = lazy(() => import('./pages/OrderConfirmationPage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 const FaqsPage = lazy(() => import('./pages/FaqsPage'));
-const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage'));
-const ComplaintsPage = lazy(() => import('./pages/ComplaintsPage'));
-
-function HomePage() {
-  return (
-    <>
-      <Header />
-      <main>
-        <Hero />
-        <OctopusSection />
-        <PremiumInstaller />
-        <OctopusHeatPumps />
-        <FinanceOptions />
-        <Testimonials />
-        <FinalCTA />
-      </main>
-      <Footer />
-    </>
-  );
-}
+const PolicyPage = lazy(() => import('./pages/PolicyPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 export default function App() {
   return (
-    <Suspense
-      fallback={
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="text-navy-900 text-lg font-semibold">Loading…</div>
-        </div>
-      }
-    >
+    <>
       <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about-solar" element={<AboutSolarPage />} />
-        <Route path="/residential-solar" element={<ResidentialSolarPage />} />
-        <Route path="/commercial-solar" element={<CommercialSolarPage />} />
-        <Route path="/air-source-heat-pumps" element={<AirSourceHeatPumpsPage />} />
-        <Route path="/solar-maintenance" element={<SolarMaintenancePage />} />
-        <Route path="/residential-roofing" element={<ResidentialRoofingPage />} />
-        <Route path="/supporting-our-community" element={<SupportingCommunityPage />} />
-        <Route path="/case-studies" element={<CaseStudiesPage />} />
-        <Route path="/case-studies/:slug" element={<CaseStudyPage />} />
-        <Route path="/gallery" element={<GalleryPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/faqs" element={<FaqsPage />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-        <Route path="/complaints-feedback" element={<ComplaintsPage />} />
-      </Routes>
-    </Suspense>
+      <Layout>
+        <Suspense fallback={<Spinner />}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+
+            <Route path="/treatments" element={<TreatmentsPage />} />
+            <Route path="/treatments/category/:category" element={<TreatmentsPage />} />
+            <Route path="/treatments/:slug" element={<TreatmentPage />} />
+
+            <Route path="/shop" element={<ShopPage />} />
+            <Route path="/shop/:slug" element={<ProductPage />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/order-received" element={<OrderConfirmationPage />} />
+
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/faqs" element={<FaqsPage />} />
+
+            <Route
+              path="/privacy-policy"
+              element={<PolicyPage slug="privacy-policy" fallbackTitle="Privacy policy" />}
+            />
+            <Route
+              path="/terms-conditions"
+              element={<PolicyPage slug="terms-conditions" fallbackTitle="Terms & conditions" />}
+            />
+            <Route
+              path="/cancellation-policy"
+              element={<PolicyPage slug="cancellation-policy" fallbackTitle="Cancellation policy" />}
+            />
+
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </Suspense>
+      </Layout>
+    </>
   );
 }

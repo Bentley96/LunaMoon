@@ -1,0 +1,21 @@
+/*
+Theme Name: Luna Moon Aesthetics
+Theme URI: https://aestheticspreston.co.uk
+Author: Luna Moon Aesthetics
+Description: Hybrid headless theme for Luna Moon Aesthetics. The front end is a React app (built with Vite); WordPress and WooCommerce own the data — treatments, products, cart, checkout and orders — and serve it over the REST API.
+Version: 1.0.0
+Requires at least: 6.0
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: lunamoon
+*/
+
+/*
+ * The visual styling lives in the compiled Tailwind CSS that the React build
+ * emits (loaded from /dist). This file exists so WordPress recognises the theme
+ * and to hold any small WordPress-specific tweaks below.
+ *
+ * Note: the WordPress admin bar (only visible to logged-in admins) can overlap
+ * the app's fixed header. Real visitors never see it, so no offset is applied.
+ */

@@ -1,43 +1,71 @@
 /** @type {import('tailwindcss').Config} */
+
+// Luna Moon Aesthetics brand tokens.
+//
+// Three families drive the whole site, so a rebrand is a change here and
+// nowhere else:
+//   ink    — the deep aubergine "night" used for headers, footers and type.
+//   blush  — the rose primary; buttons, links and active states.
+//   gold   — the champagne secondary; accents, rules and price/offer badges.
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
-        navy: {
-          950: '#040e1f',
-          900: '#0a1f3d',
-          800: '#0e2c55',
-          700: '#14396d',
-          600: '#1b4a8a',
-          500: '#235fa8',
-          400: '#3578c4',
-          300: '#5e9ad8',
-          200: '#9ec2ea',
-          100: '#d0e4f6',
-          50:  '#eaf3fc',
+        ink: {
+          950: '#14101c',
+          900: '#1e1729',
+          800: '#2c2039',
+          700: '#3d2d4f',
+          600: '#523d68',
+          500: '#6b5185',
+          400: '#8a6ea5',
+          300: '#ad96c2',
+          200: '#cfc1dc',
+          100: '#e8e0ef',
+          50: '#f5f1f8',
         },
-        solar: {
-          700: '#c49100',
-          600: '#d9a200',
-          500: '#faba20',
-          400: '#fbc740',
-          300: '#fcd468',
-          200: '#fde49e',
-          100: '#fef3d0',
-          50:  '#fffaec',
+        blush: {
+          900: '#6d2435',
+          800: '#8c2f44',
+          700: '#ab3a54',
+          600: '#c74e69',
+          500: '#dd6f87',
+          400: '#e895a7',
+          300: '#f0b6c3',
+          200: '#f6d3db',
+          100: '#fae8ed',
+          50: '#fdf4f6',
+        },
+        gold: {
+          800: '#7d6231',
+          700: '#9a7b3f',
+          600: '#b8934c',
+          500: '#d0ab63',
+          400: '#ddc088',
+          300: '#e8d3ab',
+          200: '#f1e4cc',
+          100: '#f8f1e4',
+          50: '#fdfaf4',
         },
       },
       fontFamily: {
+        // Display serif for headings, clean sans for everything else.
+        display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
       },
       animation: {
-        'marquee': 'marquee 35s linear infinite',
+        marquee: 'marquee 35s linear infinite',
+        'fade-up': 'fade-up 0.5s ease-out both',
       },
       keyframes: {
         marquee: {
           '0%': { transform: 'translateX(0%)' },
           '100%': { transform: 'translateX(-50%)' },
+        },
+        'fade-up': {
+          '0%': { opacity: '0', transform: 'translateY(12px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
       },
     },

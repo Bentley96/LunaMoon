@@ -1,8 +1,11 @@
 // reCAPTCHA v3 helper. Loads Google's script on demand and returns a token for
-// a given action, which the server verifies. The site key is public by design.
+// a given action, which the server verifies.
+//
+// The site key is public by design, but it is site-specific: set
+// VITE_RECAPTCHA_SITE_KEY at build time (or leave it unset to disable
+// reCAPTCHA entirely — the honeypot still guards the forms).
 export const RECAPTCHA_SITE_KEY =
-  (import.meta.env.VITE_RECAPTCHA_SITE_KEY as string | undefined) ??
-  '6LfvT1gtAAAAAOMhZ8c9ad1U4fRgZfvig5gG0L9f';
+  (import.meta.env.VITE_RECAPTCHA_SITE_KEY as string | undefined) ?? '';
 
 declare global {
   interface Window {
@@ -38,7 +41,7 @@ export function preloadRecaptcha(): void {
   if (RECAPTCHA_SITE_KEY) void loadScript().catch(() => {});
 }
 
-/** Returns a fresh reCAPTCHA v3 token for the given action (e.g. "quote"). */
+/** Returns a fresh reCAPTCHA v3 token for the given action (e.g. "enquiry"). */
 export async function getRecaptchaToken(action: string): Promise<string> {
   if (!RECAPTCHA_SITE_KEY) return '';
   await loadScript();

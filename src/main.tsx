@@ -2,8 +2,11 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App.tsx';
-import { QuoteProvider } from './components/QuoteContext';
-import QuoteFlyout from './components/QuoteFlyout';
+import { bootstrap } from './lib/bootstrap';
+import { BookingProvider } from './store/BookingContext';
+import { CartProvider } from './store/CartContext';
+import BookingFlyout from './components/BookingFlyout';
+import CartDrawer from './components/CartDrawer';
 import './index.css';
 
 // Mount once, even if this module is evaluated twice. Some WordPress caching /
@@ -11,18 +14,22 @@ import './index.css';
 // otherwise create two React roots on the same #root element and corrupt the
 // DOM (React error #321, "removeChild/insertBefore is not a child of this node").
 const container = document.getElementById('root') as
-  | (HTMLElement & { _solar365Root?: boolean })
+  | (HTMLElement & { _lunamoonRoot?: boolean })
   | null;
 
-if (container && !container._solar365Root) {
-  container._solar365Root = true;
+if (container && !container._lunamoonRoot) {
+  container._lunamoonRoot = true;
   createRoot(container).render(
     <StrictMode>
-      <BrowserRouter>
-        <QuoteProvider>
-          <App />
-          <QuoteFlyout />
-        </QuoteProvider>
+      {/* basename is non-empty only when WordPress lives in a subdirectory. */}
+      <BrowserRouter basename={bootstrap.basename || undefined}>
+        <BookingProvider>
+          <CartProvider>
+            <App />
+            <BookingFlyout />
+            <CartDrawer />
+          </CartProvider>
+        </BookingProvider>
       </BrowserRouter>
     </StrictMode>
   );

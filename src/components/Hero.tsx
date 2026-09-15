@@ -1,125 +1,71 @@
-import { useState } from 'react';
-import { Phone, ArrowRight, Play } from 'lucide-react';
-import { useQuote } from './QuoteContext';
-import PricePromise from './PricePromise';
+import { Link } from 'react-router-dom';
+import { ArrowRight, ShieldCheck, Sparkles, Star } from 'lucide-react';
+import { business } from '../config/site';
+import { useBooking } from '../store/BookingContext';
+import ImageFrame from './ui/ImageFrame';
+
+// TODO(content): replace the headline, sub-headline and trust pills with the
+// copy from the live site once it's available.
+const trustPills = [
+  { icon: ShieldCheck, label: 'Fully insured & qualified' },
+  { icon: Star, label: 'Five-star rated' },
+  { icon: Sparkles, label: 'Inclusive, judgement-free care' },
+];
 
 export default function Hero() {
-  const { openQuote } = useQuote();
-  const [playing, setPlaying] = useState(false);
+  const { openBooking } = useBooking();
 
   return (
-    <section id="quote">
-      {/* ── Banner with background image ── */}
+    <section className="relative overflow-hidden bg-ink-950 text-white">
+      {/* Soft radial wash so the section reads as "night" without a photo. */}
       <div
-        className="relative"
+        className="pointer-events-none absolute inset-0 opacity-60"
         style={{
-          paddingTop: '112px',
-          backgroundImage: 'url(/images/homepage/commercial-solar-panels.jpg)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center 40%',
+          background:
+            'radial-gradient(60% 60% at 20% 20%, rgba(221,111,135,0.28) 0%, transparent 60%), radial-gradient(50% 50% at 85% 30%, rgba(208,171,99,0.18) 0%, transparent 55%)',
         }}
-      >
-        <div className="absolute inset-0 bg-white/85 lg:bg-gradient-to-r lg:from-white/95 lg:via-white/80 lg:to-white/30" />
+        aria-hidden="true"
+      />
+      <div className="container-xl relative grid items-center gap-12 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:px-8 lg:py-28">
+        <div className="animate-fade-up">
+          <span className="eyebrow text-gold-400">
+            {business.addressLines.length ? business.addressLines.slice(-2).join(', ') : 'Preston'}
+          </span>
+          <h1 className="mt-4 text-4xl leading-[1.1] sm:text-5xl lg:text-6xl">
+            Beautiful, natural results from a clinic that listens
+          </h1>
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-200">
+            Affordable, professional aesthetics, beauty and skincare treatments — delivered in a
+            safe, welcoming space where everyone is looked after properly.
+          </p>
 
-        <div className="relative container-xl section-padding py-14 lg:py-20">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left — Copy */}
-            <div>
-              <p className="section-label mb-3">Yorkshire's Solar Specialists</p>
-
-              <h1 className="text-4xl sm:text-5xl font-extrabold text-navy-900 leading-tight mb-5">
-                Solar Energy &amp;<br />
-                <span className="text-solar-500">Battery Storage</span><br />
-                <span className="whitespace-nowrap">for Yorkshire Homes</span>
-              </h1>
-
-              <p className="text-lg text-gray-700 mb-7 max-w-xl leading-relaxed">
-                We specialise in solar panel installation for homes and businesses across Yorkshire and the UK.
-                Over 15 years combined experience. MCS accredited. Octopus Energy Trusted Installer.
-                The only Cosy Heat Pump accredited installer based in Doncaster.
-              </p>
-
-              {/* Octopus + price promise */}
-              <div className="max-w-xl">
-                <PricePromise />
-              </div>
-            </div>
-
-            {/* Right — Video */}
-            <div>
-              <div className="mb-4">
-                <p className="section-label mb-2">See How We Work</p>
-                <h2 className="text-2xl sm:text-3xl font-bold text-navy-900">
-                  Watch a Real Yorkshire Installation
-                </h2>
-                <p className="text-gray-600 text-base mt-2 max-w-md">
-                  Jules walks you through a full solar installation from first fix to commissioning —
-                  the Solar 365 way.
-                </p>
-              </div>
-
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200">
-                {!playing ? (
-                  <div className="relative aspect-video cursor-pointer group" onClick={() => setPlaying(true)}>
-                    <video
-                      src="/images/Latest/jules-install.mp4"
-                      muted
-                      playsInline
-                      preload="metadata"
-                      className="w-full h-full object-cover object-center"
-                    />
-                    <div className="absolute inset-0 bg-navy-900/50 flex flex-col items-center justify-center gap-4 group-hover:bg-navy-900/40 transition-colors">
-                      <div className="w-20 h-20 rounded-full bg-solar-500 flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300">
-                        <Play className="w-9 h-9 text-white fill-white ml-1" />
-                      </div>
-                      <p className="text-white font-semibold text-lg">Watch Jules on a Live Install</p>
-                    </div>
-                  </div>
-                ) : (
-                  <video
-                    src="/images/Latest/jules-install.mp4"
-                    autoPlay
-                    controls
-                    playsInline
-                    className="w-full aspect-video object-cover object-center bg-navy-950"
-                  />
-                )}
-              </div>
-
-              <div className="mt-5">
-                <div className="flex flex-wrap gap-4">
-                  <button onClick={openQuote} className="btn-primary-lg">
-                    Get a Free Quote
-                    <ArrowRight className="w-5 h-5" />
-                  </button>
-                  <a href="tel:01302456613" className="btn-outline-navy text-lg px-8 py-4">
-                    <Phone className="w-5 h-5" />
-                    01302 456 613
-                  </a>
-                </div>
-                <p className="mt-4 text-gray-500 text-sm">
-                  FREE initial energy survey. No obligation. No hard sell. Just honest advice.
-                </p>
-              </div>
-            </div>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <button type="button" onClick={() => openBooking()} className="btn-primary-lg">
+              Book a treatment
+              <ArrowRight className="h-5 w-5" aria-hidden="true" />
+            </button>
+            <Link to="/treatments" className="btn-outline">
+              View treatments
+            </Link>
           </div>
-        </div>
-      </div>
 
-      {/* ── Stats strip ── */}
-      <div className="bg-gray-50 border-y border-gray-200">
-        <div className="container-xl px-4 sm:px-6 lg:px-8 py-6 grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
-          {[
-            { value: '500+', label: 'Installations Completed' },
-            { value: '15+', label: 'Years Combined Experience' },
-            { value: '4.9★', label: 'Google Rating (60+ Reviews)' },
-            { value: 'Up to 70%', label: 'Bill Reduction Possible' },
-          ].map(({ value, label }) => (
-            <div key={label}>
-              <p className="text-2xl font-extrabold text-solar-500">{value}</p>
-              <p className="text-sm text-gray-600 mt-0.5 font-medium">{label}</p>
-            </div>
-          ))}
+          <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-3">
+            {trustPills.map(({ icon: Icon, label }) => (
+              <li key={label} className="flex items-center gap-2 text-sm text-ink-200">
+                <Icon className="h-4 w-4 text-gold-400" aria-hidden="true" />
+                {label}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="relative">
+          <ImageFrame
+            label="Hero image — clinic / treatment photography"
+            alt="Luna Moon Aesthetics clinic"
+            ratio="aspect-[4/5]"
+            className="rounded-3xl"
+          />
         </div>
       </div>
     </section>

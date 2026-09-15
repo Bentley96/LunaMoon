@@ -39,6 +39,7 @@ export default function Header() {
 
   return (
     <header className={`fixed inset-x-0 top-0 z-50 transition-shadow duration-300 ${scrolled ? 'shadow-lg' : ''}`}>
+      <div data-header-bars>
       {/* Utility bar — phone, email, socials */}
       <div className="bg-blush-400 text-ink-800">
         <div className="container-xl flex items-center justify-between gap-4 px-4 py-2 text-sm sm:px-6 lg:px-8">
@@ -78,7 +79,7 @@ export default function Header() {
       <div className="border-t border-ink-900/10 bg-blush-400">
         <div className="container-xl flex items-center justify-between gap-6 px-4 py-3 sm:px-6 lg:px-8">
           <Link to="/" className="shrink-0" aria-label={`${business.name} — home`}>
-            <Logo variant="mark" className="h-11 sm:h-14" />
+            <Logo className="h-14 sm:h-20" />
           </Link>
 
           <nav className="hidden items-center gap-1 lg:flex" ref={navRef}>
@@ -157,6 +158,8 @@ export default function Header() {
             </button>
           </div>
         </div>
+      </div>
+
       </div>
 
       {mobileOpen && (

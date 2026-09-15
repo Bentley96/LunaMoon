@@ -23,7 +23,7 @@ export default function BookOnlinePage() {
         banner={banners['book-online']}
       >
         <a href={BOOKING_URL} target="_blank" rel="noreferrer" className="btn-primary-lg">
-          Open the booking system
+          Make a booking
           <ExternalLink className="h-4 w-4" aria-hidden="true" />
         </a>
       </PageHero>
@@ -35,7 +35,7 @@ export default function BookOnlinePage() {
               {
                 icon: CalendarCheck,
                 title: 'Packages & treatments',
-                body: 'Browse our full list of treatments and package offers, with live availability and instant confirmation.',
+                body: 'Browse our full list of treatments and package offers, pick a time that suits you and confirm your appointment there and then.',
               },
               {
                 icon: CreditCard,
@@ -66,12 +66,10 @@ export default function BookOnlinePage() {
               ))}
             </div>
             <a href={BOOKING_URL} target="_blank" rel="noreferrer" className="btn-primary-lg mt-8">
-              Book now
+              Book your sessions
               <ExternalLink className="h-4 w-4" aria-hidden="true" />
             </a>
-            <p className="mt-4 text-sm text-ink-400">
-              Opens our booking system in a new tab.
-            </p>
+            <p className="mt-4 text-sm text-ink-400">Opens in a new tab.</p>
           </div>
         </div>
       </section>

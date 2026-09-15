@@ -26,7 +26,7 @@ export default function ProductCard({ product }: { product: WooProduct }) {
 
   return (
     <article className="card card-hover flex flex-col">
-      <Link to={`/shop/${product.slug}`} className="block">
+      <Link to={`/product/${product.slug}`} className="block">
         <ImageFrame
           src={product.images[0]?.src}
           alt={product.images[0]?.alt || product.name}
@@ -43,7 +43,7 @@ export default function ProductCard({ product }: { product: WooProduct }) {
         )}
 
         <h3 className="text-xl leading-snug">
-          <Link to={`/shop/${product.slug}`} className="text-ink-900 transition-colors hover:text-blush-700">
+          <Link to={`/product/${product.slug}`} className="text-ink-900 transition-colors hover:text-blush-700">
             {product.name}
           </Link>
         </h3>
@@ -69,7 +69,7 @@ export default function ProductCard({ product }: { product: WooProduct }) {
           {!product.is_in_stock ? (
             <p className="text-sm font-medium text-ink-400">Out of stock</p>
           ) : needsOptions ? (
-            <Link to={`/shop/${product.slug}`} className="btn-outline-ink w-full">
+            <Link to={`/product/${product.slug}`} className="btn-outline-ink w-full">
               Choose options
             </Link>
           ) : (

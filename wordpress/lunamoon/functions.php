@@ -43,15 +43,17 @@ require get_template_directory() . '/inc/admin.php';
  */
 function lunamoon_routes() {
 	return array(
-		'home'                => __( 'Home', 'lunamoon' ),
-		'treatments'          => __( 'Treatments', 'lunamoon' ),
-		'shop'                => __( 'Shop', 'lunamoon' ),
-		'about'               => __( 'About', 'lunamoon' ),
-		'contact'             => __( 'Contact', 'lunamoon' ),
-		'faqs'                => __( 'FAQs', 'lunamoon' ),
-		'privacy-policy'      => __( 'Privacy Policy', 'lunamoon' ),
-		'terms-conditions'    => __( 'Terms & Conditions', 'lunamoon' ),
-		'cancellation-policy' => __( 'Cancellation Policy', 'lunamoon' ),
+		'home'                            => __( 'Home', 'lunamoon' ),
+		'book-online'                     => __( 'Book Online', 'lunamoon' ),
+		'products'                        => __( 'Products', 'lunamoon' ),
+		'aesthetics-treatments'           => __( 'Aesthetics Treatments', 'lunamoon' ),
+		'advanced-facial-treatments'      => __( 'Advanced Facial Treatments', 'lunamoon' ),
+		'laser-cosmetic-teeth-whitening'  => __( 'Laser Cosmetic Teeth Whitening', 'lunamoon' ),
+		'skin-tightening-weight-loss'     => __( 'Skin Tightening & Weight Loss', 'lunamoon' ),
+		'faqs'                            => __( 'FAQs', 'lunamoon' ),
+		'contact'                         => __( 'Contact', 'lunamoon' ),
+		'clinic-policy'                   => __( 'Clinic Policy', 'lunamoon' ),
+		'privacy-policy'                  => __( 'Privacy Policy', 'lunamoon' ),
 	);
 }
 

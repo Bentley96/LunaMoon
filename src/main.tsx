@@ -3,9 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App.tsx';
 import { bootstrap } from './lib/bootstrap';
-import { BookingProvider } from './store/BookingContext';
 import { CartProvider } from './store/CartContext';
-import BookingFlyout from './components/BookingFlyout';
 import CartDrawer from './components/CartDrawer';
 import './index.css';
 
@@ -23,13 +21,10 @@ if (container && !container._lunamoonRoot) {
     <StrictMode>
       {/* basename is non-empty only when WordPress lives in a subdirectory. */}
       <BrowserRouter basename={bootstrap.basename || undefined}>
-        <BookingProvider>
-          <CartProvider>
-            <App />
-            <BookingFlyout />
-            <CartDrawer />
-          </CartProvider>
-        </BookingProvider>
+        <CartProvider>
+          <App />
+          <CartDrawer />
+        </CartProvider>
       </BrowserRouter>
     </StrictMode>
   );

@@ -11,10 +11,16 @@ export default function Footer() {
       <div className="container-xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-6">
           <div className="lg:col-span-2">
-            <Link to="/" className="font-display text-2xl font-semibold text-white">
-              {business.name}
+            <Link to="/" className="inline-block">
+              <span className="block font-display text-2xl font-bold uppercase leading-none tracking-[0.3em] text-white">
+                Luna
+              </span>
+              <span className="block font-display text-sm italic leading-tight text-blush-300">
+                Moon Aesthetics
+              </span>
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink-300">{business.tagline}</p>
+            <p className="mt-3 max-w-sm text-sm leading-relaxed text-ink-400">{business.finance}</p>
 
             <div className="mt-6 space-y-2.5 text-sm">
               {business.addressLines.length > 0 && (
@@ -106,12 +112,12 @@ export default function Footer() {
             © {year} {business.name}. All rights reserved.
           </p>
           <p>
-            <Link to="/privacy-policy" className="hover:text-white">
-              Privacy
+            <Link to="/clinic-policy" className="hover:text-white">
+              Clinic Policy
             </Link>
             <span className="mx-2">·</span>
-            <Link to="/terms-conditions" className="hover:text-white">
-              Terms
+            <Link to="/privacy-policy" className="hover:text-white">
+              Privacy
             </Link>
           </p>
         </div>

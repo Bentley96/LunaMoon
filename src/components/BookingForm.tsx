@@ -4,13 +4,14 @@ import Honeypot from './Honeypot';
 import { getRecaptchaToken } from '../lib/recaptcha';
 import { submitEnquiry } from '../lib/wp';
 
-// TODO(content): replace with the treatment list from the live site (or switch
-// the <select> to options loaded from /lunamoon/v1/treatment-categories).
+// Mirrors the "Our Treatments" menu on the existing site, plus a catch-all.
 const TREATMENT_OPTIONS = [
-  'Anti-wrinkle injections',
-  'Dermal fillers',
-  'Skin treatments',
-  'Hair removal',
+  'Aesthetics Treatments',
+  'Advanced Facial Treatments',
+  'Laser Cosmetic Teeth Whitening',
+  'Skin Tightening & Weight Loss',
+  'IPL Laser Hair Removal',
+  'Products',
   'Something else',
 ];
 

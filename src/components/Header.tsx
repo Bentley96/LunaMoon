@@ -1,19 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink as RouterNavLink, useLocation } from 'react-router-dom';
-import {
-  ChevronDown,
-  Clock,
-  Facebook,
-  Instagram,
-  MapPin,
-  Menu,
-  Phone,
-  ShoppingBag,
-  X,
-} from 'lucide-react';
+import { ChevronDown, Facebook, Instagram, Mail, Menu, Phone, ShoppingBag, X } from 'lucide-react';
 import { business, navLinks } from '../config/site';
 import { bootstrap } from '../lib/bootstrap';
-import { useBooking } from '../store/BookingContext';
 import { useCart } from '../store/CartContext';
 
 export default function Header() {
@@ -21,8 +10,7 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [mobileSubmenu, setMobileSubmenu] = useState<string | null>(null);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const { openBooking } = useBooking();
+  const navRef = useRef<HTMLElement>(null);
   const { count, openDrawer } = useCart();
   const { pathname } = useLocation();
 
@@ -33,12 +21,9 @@ export default function Header() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Close the desktop dropdown on an outside click.
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setOpenMenu(null);
-      }
+      if (navRef.current && !navRef.current.contains(e.target as Node)) setOpenMenu(null);
     };
     document.addEventListener('mousedown', handler);
     return () => document.removeEventListener('mousedown', handler);
@@ -51,81 +36,64 @@ export default function Header() {
     setMobileSubmenu(null);
   }, [pathname]);
 
-  const hasContactBar = Boolean(business.phone || business.addressLines.length);
-
   return (
     <header className={`fixed inset-x-0 top-0 z-50 transition-shadow duration-300 ${scrolled ? 'shadow-lg' : ''}`}>
-      {hasContactBar && (
-        <div className="bg-ink-950 text-white text-sm">
-          <div className="container-xl flex items-center justify-between gap-4 px-4 py-2 sm:px-6 lg:px-8">
-            <div className="flex flex-wrap items-center gap-5">
-              {business.phone && (
-                <a
-                  href={`tel:${business.phoneHref || business.phone}`}
-                  className="flex items-center gap-1.5 transition-colors hover:text-gold-400"
-                >
-                  <Phone className="h-3.5 w-3.5 text-blush-400" aria-hidden="true" />
-                  <span className="font-medium">{business.phone}</span>
-                </a>
-              )}
-              {Object.entries(business.hours)[0] && (
-                <span className="hidden items-center gap-1.5 text-ink-200 md:flex">
-                  <Clock className="h-3.5 w-3.5" aria-hidden="true" />
-                  {Object.entries(business.hours)[0][0]} {Object.entries(business.hours)[0][1]}
-                </span>
-              )}
-              {business.addressLines.length > 0 && (
-                <span className="hidden items-center gap-1.5 text-ink-200 md:flex">
-                  <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
-                  {business.addressLines.slice(0, 2).join(', ')}
-                </span>
-              )}
-            </div>
-            <div className="flex items-center gap-3">
-              {business.social.facebook && (
-                <a
-                  href={business.social.facebook}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="Facebook"
-                  className="text-ink-300 transition-colors hover:text-gold-400"
-                >
-                  <Facebook className="h-4 w-4" />
-                </a>
-              )}
-              {business.social.instagram && (
-                <a
-                  href={business.social.instagram}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="Instagram"
-                  className="text-ink-300 transition-colors hover:text-gold-400"
-                >
-                  <Instagram className="h-4 w-4" />
-                </a>
-              )}
-            </div>
+      {/* Utility bar — phone, email, socials */}
+      <div className="bg-ink-950 text-white">
+        <div className="container-xl flex items-center justify-between gap-4 px-4 py-2 text-sm sm:px-6 lg:px-8">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
+            <a
+              href={`tel:${business.phoneHref}`}
+              className="flex items-center gap-1.5 transition-colors hover:text-blush-300"
+            >
+              <Phone className="h-3.5 w-3.5 text-blush-400" aria-hidden="true" />
+              <span className="font-medium">{business.phone}</span>
+            </a>
+            <a
+              href={`mailto:${business.email}`}
+              className="hidden items-center gap-1.5 transition-colors hover:text-blush-300 sm:flex"
+            >
+              <Mail className="h-3.5 w-3.5 text-blush-400" aria-hidden="true" />
+              <span>{business.email}</span>
+            </a>
+          </div>
+          <div className="flex items-center gap-3">
+            {business.social.facebook && (
+              <a href={business.social.facebook} target="_blank" rel="noreferrer" aria-label="Facebook"
+                 className="text-ink-300 transition-colors hover:text-blush-300">
+                <Facebook className="h-4 w-4" />
+              </a>
+            )}
+            {business.social.instagram && (
+              <a href={business.social.instagram} target="_blank" rel="noreferrer" aria-label="Instagram"
+                 className="text-ink-300 transition-colors hover:text-blush-300">
+                <Instagram className="h-4 w-4" />
+              </a>
+            )}
           </div>
         </div>
-      )}
+      </div>
 
-      <div className={`transition-colors duration-300 ${scrolled ? 'bg-white' : 'bg-white/95 backdrop-blur'}`}>
+      <div className="bg-white/95 backdrop-blur">
         <div className="container-xl flex items-center justify-between gap-6 px-4 py-3 sm:px-6 lg:px-8">
-          <Link to="/" className="flex items-center gap-3" aria-label={`${business.name} — home`}>
-            <span className="font-display text-2xl font-semibold leading-none text-ink-900 sm:text-3xl">
-              {business.name}
+          <Link to="/" className="shrink-0" aria-label={`${business.name} — home`}>
+            <span className="block font-display text-2xl font-bold uppercase leading-none tracking-[0.3em] text-ink-900">
+              Luna
+            </span>
+            <span className="block font-display text-sm italic leading-tight text-blush-600">
+              Moon Aesthetics
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-1 lg:flex" ref={dropdownRef}>
+          <nav className="hidden items-center gap-1 lg:flex" ref={navRef}>
             {navLinks.map((link) =>
               link.children ? (
                 <div key={link.label} className="relative">
                   <button
                     type="button"
-                    onClick={() => setOpenMenu((prev) => (prev === link.label ? null : link.label))}
+                    onClick={() => setOpenMenu((p) => (p === link.label ? null : link.label))}
                     aria-expanded={openMenu === link.label}
-                    className="flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium text-ink-800 transition-colors hover:text-blush-700"
+                    className="flex items-center gap-1 rounded-full px-3 py-2 text-sm font-semibold uppercase tracking-wide text-ink-800 transition-colors hover:text-blush-700"
                   >
                     {link.label}
                     <ChevronDown
@@ -134,13 +102,10 @@ export default function Header() {
                     />
                   </button>
                   {openMenu === link.label && (
-                    <div className="absolute left-0 top-full w-64 overflow-hidden rounded-xl border border-ink-100 bg-white py-2 shadow-xl">
+                    <div className="absolute left-0 top-full w-72 overflow-hidden rounded-xl border border-ink-100 bg-white py-2 shadow-xl">
                       {link.children.map((child) => (
-                        <Link
-                          key={child.to}
-                          to={child.to}
-                          className="block px-4 py-2.5 text-sm text-ink-700 transition-colors hover:bg-blush-50 hover:text-blush-700"
-                        >
+                        <Link key={child.to} to={child.to}
+                              className="block px-4 py-2.5 text-sm text-ink-700 transition-colors hover:bg-blush-50 hover:text-blush-700">
                           {child.label}
                         </Link>
                       ))}
@@ -153,7 +118,7 @@ export default function Header() {
                   to={link.to}
                   end={link.to === '/'}
                   className={({ isActive }) =>
-                    `rounded-full px-3 py-2 text-sm font-medium transition-colors ${
+                    `rounded-full px-3 py-2 text-sm font-semibold uppercase tracking-wide transition-colors ${
                       isActive ? 'text-blush-700' : 'text-ink-800 hover:text-blush-700'
                     }`
                   }
@@ -181,13 +146,13 @@ export default function Header() {
               </button>
             )}
 
-            <button type="button" onClick={() => openBooking()} className="btn-primary hidden sm:inline-flex">
+            <Link to="/book-online" className="btn-primary hidden sm:inline-flex">
               Book now
-            </button>
+            </Link>
 
             <button
               type="button"
-              onClick={() => setMobileOpen((prev) => !prev)}
+              onClick={() => setMobileOpen((p) => !p)}
               className="rounded-full p-2.5 text-ink-800 transition-colors hover:bg-blush-50 lg:hidden"
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileOpen}
@@ -206,11 +171,9 @@ export default function Header() {
                 <div key={link.label} className="border-b border-ink-50">
                   <button
                     type="button"
-                    onClick={() =>
-                      setMobileSubmenu((prev) => (prev === link.label ? null : link.label))
-                    }
+                    onClick={() => setMobileSubmenu((p) => (p === link.label ? null : link.label))}
                     aria-expanded={mobileSubmenu === link.label}
-                    className="flex w-full items-center justify-between py-3 text-left font-medium text-ink-900"
+                    className="flex w-full items-center justify-between py-3 text-left font-semibold uppercase tracking-wide text-ink-900"
                   >
                     {link.label}
                     <ChevronDown
@@ -221,11 +184,8 @@ export default function Header() {
                   {mobileSubmenu === link.label && (
                     <div className="pb-2 pl-4">
                       {link.children.map((child) => (
-                        <Link
-                          key={child.to}
-                          to={child.to}
-                          className="block py-2 text-sm text-ink-600 hover:text-blush-700"
-                        >
+                        <Link key={child.to} to={child.to}
+                              className="block py-2 text-sm text-ink-600 hover:text-blush-700">
                           {child.label}
                         </Link>
                       ))}
@@ -233,18 +193,15 @@ export default function Header() {
                   )}
                 </div>
               ) : (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  className="border-b border-ink-50 py-3 font-medium text-ink-900 hover:text-blush-700"
-                >
+                <Link key={link.to} to={link.to}
+                      className="border-b border-ink-50 py-3 font-semibold uppercase tracking-wide text-ink-900 hover:text-blush-700">
                   {link.label}
                 </Link>
               ),
             )}
-            <button type="button" onClick={() => openBooking()} className="btn-primary mt-4">
+            <Link to="/book-online" className="btn-primary mt-4">
               Book now
-            </button>
+            </Link>
           </nav>
         </div>
       )}

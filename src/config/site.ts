@@ -1,85 +1,82 @@
-// Site structure and fallback business details.
+// Site structure and business details.
 //
-// Navigation lives here rather than in a WordPress menu so routes and code stay
-// in sync (a menu item pointing at a route React doesn't know about would 404).
-// Business details are *fallbacks*: whatever the theme injects via
-// window.__LUNAMOON__ wins, so the clinic can correct a phone number or the
-// opening hours in wp-admin without a rebuild.
+// Navigation mirrors the existing site's main menu, and lives here rather than
+// in a WordPress menu so routes and code stay in sync (a menu item pointing at
+// a route React doesn't know about would 404).
 //
-// TODO(content): confirm every value below against the live site before launch.
+// Business details are fallbacks taken from the existing site: whatever the
+// theme injects via window.__LUNAMOON__ wins, so the clinic can correct a phone
+// number or the opening hours in wp-admin without a rebuild.
 
 import { bootstrap } from '../lib/bootstrap';
+import { treatmentPages } from '../content/treatments';
 
 export interface NavLink {
   label: string;
   to: string;
+  /** Rendered as a dropdown parent; `to` is ignored when children exist. */
   children?: NavLink[];
+  /** Opens in a new tab — used for the external booking system. */
+  external?: boolean;
 }
+
+const treatmentLinks: NavLink[] = treatmentPages.map((t) => ({
+  label: t.navLabel,
+  to: `/${t.slug}`,
+}));
 
 export const navLinks: NavLink[] = [
   { label: 'Home', to: '/' },
-  {
-    label: 'Treatments',
-    to: '/treatments',
-    children: [
-      { label: 'All treatments', to: '/treatments' },
-      { label: 'Anti-wrinkle injections', to: '/treatments/category/anti-wrinkle' },
-      { label: 'Dermal fillers', to: '/treatments/category/dermal-fillers' },
-      { label: 'Skin treatments', to: '/treatments/category/skin' },
-      { label: 'Hair removal', to: '/treatments/category/hair-removal' },
-    ],
-  },
-  { label: 'Shop', to: '/shop' },
-  { label: 'About', to: '/about' },
-  { label: 'FAQs', to: '/faqs' },
+  { label: 'Book Online', to: '/book-online' },
+  { label: 'Products', to: '/products' },
+  { label: 'Our Treatments', to: '#', children: treatmentLinks },
+  { label: 'FAQ’s', to: '/faqs' },
   { label: 'Contact', to: '/contact' },
 ];
 
 export const footerLinks: { heading: string; links: NavLink[] }[] = [
-  {
-    heading: 'Treatments',
-    links: [
-      { label: 'Anti-wrinkle injections', to: '/treatments/category/anti-wrinkle' },
-      { label: 'Dermal fillers', to: '/treatments/category/dermal-fillers' },
-      { label: 'Skin treatments', to: '/treatments/category/skin' },
-      { label: 'Hair removal', to: '/treatments/category/hair-removal' },
-      { label: 'All treatments', to: '/treatments' },
-    ],
-  },
+  { heading: 'Our Treatments', links: treatmentLinks },
   {
     heading: 'Shop',
     links: [
-      { label: 'All products', to: '/shop' },
+      { label: 'All products', to: '/products' },
       { label: 'Basket', to: '/cart' },
     ],
   },
   {
     heading: 'Clinic',
     links: [
-      { label: 'About us', to: '/about' },
-      { label: 'FAQs', to: '/faqs' },
+      { label: 'Book Online', to: '/book-online' },
+      { label: 'FAQ’s', to: '/faqs' },
       { label: 'Contact', to: '/contact' },
-    ],
-  },
-  {
-    heading: 'Legal',
-    links: [
-      { label: 'Privacy policy', to: '/privacy-policy' },
-      { label: 'Terms & conditions', to: '/terms-conditions' },
-      { label: 'Cancellation policy', to: '/cancellation-policy' },
+      { label: 'Clinic Policy', to: '/clinic-policy' },
     ],
   },
 ];
 
+/**
+ * External booking system.
+ *
+ * The clinic takes bookings through that-time.co.uk, not through WooCommerce —
+ * the shop sells products, the booking system sells appointments. Every "Book
+ * now" control links out to it.
+ */
+export const BOOKING_URL = 'https://www.that-time.co.uk/luna-moon-aesthetics';
+
 /** Business details, with the theme's injected values taking precedence. */
 export const business = {
   name: bootstrap.site.name || 'Luna Moon Aesthetics',
-  tagline: bootstrap.site.description || 'Aesthetics, beauty and skincare in Preston',
-  phone: bootstrap.site.phone,
-  phoneHref: bootstrap.site.phoneHref,
-  email: bootstrap.site.email,
-  addressLines: bootstrap.site.addressLines,
+  tagline:
+    bootstrap.site.description || 'Professional Aesthetic Beauty Treatments In Preston',
+  phone: bootstrap.site.phone || '07592 608 064',
+  phoneHref: bootstrap.site.phoneHref || '07592608064',
+  email: bootstrap.site.email || 'info@aestheticspreston.co.uk',
+  addressLines: bootstrap.site.addressLines.length
+    ? bootstrap.site.addressLines
+    : ['55-56 Friargate', 'Preston', 'PR1 2AT'],
   hours: bootstrap.site.hours,
   social: bootstrap.site.social,
-  bookingUrl: bootstrap.site.bookingUrl,
+  bookingUrl: bootstrap.site.bookingUrl || BOOKING_URL,
+  /** Shown beneath the contact details on the homepage and contact page. */
+  finance: 'We accept pay monthly payment options as well as Klarna finance options.',
 };

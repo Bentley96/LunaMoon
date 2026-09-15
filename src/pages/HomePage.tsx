@@ -1,36 +1,12 @@
-import { Heart, ShieldCheck, Sparkles, Users } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 import Hero from '../components/Hero';
-import FeaturedTreatments from '../components/FeaturedTreatments';
+import ServiceCards from '../components/ServiceCards';
+import ContactStrip from '../components/ContactStrip';
+import BookOnlineCTA from '../components/BookOnlineCTA';
 import Testimonials from '../components/Testimonials';
-import FinalCTA from '../components/FinalCTA';
 import FeaturedProducts from '../components/FeaturedProducts';
-import SectionHeading from '../components/ui/SectionHeading';
-import ImageFrame from '../components/ui/ImageFrame';
-
-// TODO(content): all copy below is placeholder written around what the clinic
-// is known to offer. Replace against the live site.
-const values = [
-  {
-    icon: ShieldCheck,
-    title: 'Qualified and insured',
-    body: 'Every treatment is carried out by a trained, insured practitioner — with a consultation first, always.',
-  },
-  {
-    icon: Heart,
-    title: 'Honest advice',
-    body: "If a treatment isn't right for you, we'll say so. Natural results beat overdone ones every time.",
-  },
-  {
-    icon: Users,
-    title: 'Everyone welcome',
-    body: 'A safe, inclusive space. We proudly support our LGBTQ+ clients, including gender-affirming treatments.',
-  },
-  {
-    icon: Sparkles,
-    title: 'Affordable luxury',
-    body: 'Professional results at prices that make sense, with finance and package options available.',
-  },
-];
+import { about, aboutDee, faqTeaser } from '../content/home';
 
 export default function HomePage() {
   return (
@@ -38,54 +14,55 @@ export default function HomePage() {
       <Hero />
 
       <section className="section-padding">
-        <div className="container-xl">
-          <SectionHeading
-            eyebrow="Why Luna Moon"
-            title="Looked after, not sold to"
-            intro="We're a small Preston clinic built on repeat clients and word of mouth."
-          />
-          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {values.map(({ icon: Icon, title, body }) => (
-              <div key={title}>
-                <span className="inline-flex rounded-2xl bg-blush-50 p-3 text-blush-600">
-                  <Icon className="h-6 w-6" aria-hidden="true" />
-                </span>
-                <h3 className="mt-4 text-xl text-ink-900">{title}</h3>
-                <p className="mt-2 leading-relaxed text-ink-600">{body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <FeaturedTreatments />
-
-      <section className="section-padding bg-ink-50">
-        <div className="container-xl grid items-center gap-12 lg:grid-cols-2">
-          <ImageFrame
-            label="Clinic interior / practitioner portrait"
-            alt="Inside the Luna Moon Aesthetics clinic"
-            ratio="aspect-[4/3]"
-            className="rounded-3xl"
-          />
+        <div className="container-lg grid items-center gap-12 lg:grid-cols-2">
           <div>
-            <SectionHeading
-              eyebrow="Our clinic"
-              align="left"
-              title="A calm space on Friargate"
-              intro="Luna Moon Aesthetics is a Preston clinic offering affordable, professional beauty, aesthetics and skincare treatments — with time taken to understand what you actually want."
-            />
-            <p className="mt-6 leading-relaxed text-ink-600">
-              Every appointment starts with a consultation so you know exactly what's involved,
-              what it costs, and what to expect afterwards. No pressure, no upselling.
-            </p>
+            <span className="eyebrow">Luna Moon Aesthetics Preston</span>
+            <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl">{about.heading}</h2>
+            <div className="mt-6 space-y-4 leading-relaxed text-ink-600">
+              {about.body.map((p) => (
+                <p key={p}>{p}</p>
+              ))}
+            </div>
+          </div>
+          <img src={about.image} alt="Treatment room at Luna Moon Aesthetics" loading="lazy"
+               className="aspect-[4/3] w-full rounded-3xl object-cover" />
+        </div>
+      </section>
+
+      <section className="section-padding bg-blush-50">
+        <div className="container-lg grid items-center gap-12 lg:grid-cols-[minmax(0,22rem)_1fr]">
+          <img src={aboutDee.image} alt="Dee, owner of Luna Moon Aesthetics" loading="lazy"
+               className="aspect-[4/5] w-full rounded-3xl object-cover" />
+          <div>
+            <span className="eyebrow">Meet the owner</span>
+            <h2 className="mt-3 text-3xl sm:text-4xl">{aboutDee.heading}</h2>
+            <div className="mt-6 space-y-4 text-lg leading-relaxed text-ink-700">
+              {aboutDee.body.map((p) => (
+                <p key={p}>{p}</p>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
+      <ContactStrip />
+      <ServiceCards />
       <FeaturedProducts />
       <Testimonials />
-      <FinalCTA />
+
+      <section className="section-padding">
+        <div className="container-prose text-center">
+          <span className="eyebrow">FAQs</span>
+          <h2 className="mt-3 text-3xl sm:text-4xl">{faqTeaser.heading}</h2>
+          <p className="mt-5 leading-relaxed text-ink-600">{faqTeaser.body}</p>
+          <Link to="/faqs" className="btn-outline-ink mt-8">
+            Find out more
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
+        </div>
+      </section>
+
+      <BookOnlineCTA />
     </>
   );
 }

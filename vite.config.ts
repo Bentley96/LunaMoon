@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { defineConfig, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 
@@ -29,6 +31,25 @@ function rewriteImagePaths(): Plugin {
   };
 }
 
+// The page titles and meta descriptions are written once, in src/config/seo.json,
+// and needed in two places: the app (which sets them on a client-side route
+// change) and the WordPress theme (which prints them server-side, where a
+// crawler actually reads them). Copying the file into the build output is what
+// lets inc/seo.php read the same wording instead of keeping a second copy.
+function emitSeoJson(): Plugin {
+  return {
+    name: 'lunamoon-emit-seo-json',
+    apply: 'build',
+    generateBundle() {
+      this.emitFile({
+        type: 'asset',
+        fileName: 'seo.json',
+        source: readFileSync(resolve(__dirname, 'src/config/seo.json'), 'utf8'),
+      });
+    },
+  };
+}
+
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => {
   const isBuild = command === 'build';
@@ -38,7 +59,7 @@ export default defineConfig(({ command }) => {
     // correctly no matter what the theme folder is named or where WordPress is
     // installed. Dev keeps a root base so `npm run dev` behaves normally.
     base: isBuild ? './' : '/',
-    plugins: [react(), rewriteImagePaths()],
+    plugins: [react(), rewriteImagePaths(), emitSeoJson()],
     optimizeDeps: {
       exclude: ['lucide-react'],
     },

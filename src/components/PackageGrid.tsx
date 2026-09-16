@@ -26,8 +26,9 @@ export default function PackageGrid() {
           <span className="eyebrow">Packages</span>
           <h2 className="mt-3 text-3xl sm:text-4xl">Our packages &amp; prices</h2>
           <p className="mt-5 leading-relaxed text-ink-600">
-            {packages.length} packages, from {formatPrice(packages[0].price)}. Pick the one that
-            suits you and book your sessions online, any time.
+            {packages.length} packages, from {formatPrice(packages[0].price)}, across laser
+            treatments, facial treatments and body contouring. Pick the one that suits you and book
+            your sessions online, any time.
           </p>
         </div>
 

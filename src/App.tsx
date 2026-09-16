@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
 import ScrollToTop from './components/ScrollToTop';
+import Seo from './components/Seo';
 import HomePage from './pages/HomePage';
 import Spinner from './components/ui/Spinner';
 import { treatmentPages } from './content/treatments';
@@ -24,6 +25,7 @@ export default function App() {
   return (
     <>
       <ScrollToTop />
+      <Seo />
       <Layout>
         <Suspense fallback={<Spinner />}>
           <Routes>

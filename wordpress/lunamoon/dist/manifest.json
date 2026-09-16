@@ -1,13 +1,13 @@
 {
-  "_PageHero-BJAf0Awx.js": {
-    "file": "assets/PageHero-BJAf0Awx.js",
+  "_PageHero-DOyAi_8o.js": {
+    "file": "assets/PageHero-DOyAi_8o.js",
     "name": "PageHero",
     "imports": [
       "src/main.tsx"
     ]
   },
   "src/main.tsx": {
-    "file": "assets/main-BZEfzoKB.js",
+    "file": "assets/main-Gfgfo4jI.js",
     "name": "main",
     "src": "src/main.tsx",
     "isEntry": true,
@@ -27,57 +27,57 @@
     ]
   },
   "src/pages/BookOnlinePage.tsx": {
-    "file": "assets/BookOnlinePage-DeZ1XhV0.js",
+    "file": "assets/BookOnlinePage-EObcB-s1.js",
     "name": "BookOnlinePage",
     "src": "src/pages/BookOnlinePage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "src/main.tsx",
-      "_PageHero-BJAf0Awx.js"
+      "_PageHero-DOyAi_8o.js"
     ]
   },
   "src/pages/CartPage.tsx": {
-    "file": "assets/CartPage-Pys2GHlQ.js",
+    "file": "assets/CartPage-Dk7hYC3M.js",
     "name": "CartPage",
     "src": "src/pages/CartPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "src/main.tsx",
-      "_PageHero-BJAf0Awx.js"
+      "_PageHero-DOyAi_8o.js"
     ]
   },
   "src/pages/ClinicPolicyPage.tsx": {
-    "file": "assets/ClinicPolicyPage-CMOpoDga.js",
+    "file": "assets/ClinicPolicyPage-C3EKiBA4.js",
     "name": "ClinicPolicyPage",
     "src": "src/pages/ClinicPolicyPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "src/main.tsx",
-      "_PageHero-BJAf0Awx.js"
+      "_PageHero-DOyAi_8o.js"
     ]
   },
   "src/pages/ContactPage.tsx": {
-    "file": "assets/ContactPage-Cu_QTY2x.js",
+    "file": "assets/ContactPage-2SlhETcS.js",
     "name": "ContactPage",
     "src": "src/pages/ContactPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "src/main.tsx",
-      "_PageHero-BJAf0Awx.js"
+      "_PageHero-DOyAi_8o.js"
     ]
   },
   "src/pages/FaqsPage.tsx": {
-    "file": "assets/FaqsPage-gf2Sp717.js",
+    "file": "assets/FaqsPage-C51kev8h.js",
     "name": "FaqsPage",
     "src": "src/pages/FaqsPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "src/main.tsx",
-      "_PageHero-BJAf0Awx.js"
+      "_PageHero-DOyAi_8o.js"
     ]
   },
   "src/pages/NotFoundPage.tsx": {
-    "file": "assets/NotFoundPage-CHYJ-uGx.js",
+    "file": "assets/NotFoundPage-BmNGuBBe.js",
     "name": "NotFoundPage",
     "src": "src/pages/NotFoundPage.tsx",
     "isDynamicEntry": true,
@@ -86,7 +86,7 @@
     ]
   },
   "src/pages/ProductPage.tsx": {
-    "file": "assets/ProductPage-B-R2Pim-.js",
+    "file": "assets/ProductPage-B2iVUwUE.js",
     "name": "ProductPage",
     "src": "src/pages/ProductPage.tsx",
     "isDynamicEntry": true,
@@ -95,23 +95,23 @@
     ]
   },
   "src/pages/ShopPage.tsx": {
-    "file": "assets/ShopPage-BkRCg4aI.js",
+    "file": "assets/ShopPage-BCPA1LMR.js",
     "name": "ShopPage",
     "src": "src/pages/ShopPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "src/main.tsx",
-      "_PageHero-BJAf0Awx.js"
+      "_PageHero-DOyAi_8o.js"
     ]
   },
   "src/pages/TreatmentPage.tsx": {
-    "file": "assets/TreatmentPage-_WmnpK2z.js",
+    "file": "assets/TreatmentPage-9JVox8U3.js",
     "name": "TreatmentPage",
     "src": "src/pages/TreatmentPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "src/main.tsx",
-      "_PageHero-BJAf0Awx.js"
+      "_PageHero-DOyAi_8o.js"
     ]
   }
 }

@@ -8,7 +8,11 @@ export default function ServiceCards() {
   return (
     <section id="more" className="section-padding scroll-mt-28">
       <div className="container-xl">
-        <SectionHeading eyebrow="What we do" title={whatWeDo.heading} intro={whatWeDo.body} />
+        {/* The second paragraph is a child rather than part of `intro` because
+            SectionHeading wraps intro in its own <p>. */}
+        <SectionHeading eyebrow="What we do" title={whatWeDo.heading} intro={whatWeDo.body}>
+          <p className="text-lg leading-relaxed text-ink-600">{whatWeDo.body2}</p>
+        </SectionHeading>
 
         <div className="mt-14 grid gap-8 sm:grid-cols-2">
           {serviceCards.map((card) => (

@@ -28,6 +28,7 @@ require get_template_directory() . '/inc/content.php';
 require get_template_directory() . '/inc/commerce.php';
 require get_template_directory() . '/inc/enquiry.php';
 require get_template_directory() . '/inc/admin.php';
+require get_template_directory() . '/inc/seo.php';
 
 /**
  * Front-end routes handled by React Router.

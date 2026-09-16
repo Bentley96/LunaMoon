@@ -1,0 +1,50 @@
+{
+  "_readme": "Per-route <title> and meta description. JSON rather than TypeScript so the WordPress theme can read the same file (the build copies it to dist/seo.json and inc/seo.php serves it), which keeps one copy of the wording instead of two. See src/config/seo.ts. Titles are written to stay under about 60 characters once ' — Luna Moon Aesthetics' is appended, and descriptions under about 155, so neither is cut off in search results.",
+  "_suffix": "Luna Moon Aesthetics",
+  "routes": {
+    "/": {
+      "title": "Aesthetic & Facial Treatments Preston",
+      "description": "Award-nominated Preston clinic for facial treatments, microneedling, skin boosters, laser treatments, IPL hair removal, skin tightening and weight loss."
+    },
+    "/advanced-facial-treatments": {
+      "title": "Facial Treatments & Microneedling Preston",
+      "description": "Dermaplaning, microneedling and RF microneedling, polynucleotides skin booster, chemical peels, carboxy facials and Blepharonat eye treatments in Preston."
+    },
+    "/laser-cosmetic-teeth-whitening": {
+      "title": "Laser Cosmetic Teeth Whitening Preston",
+      "description": "Laser treatments that brighten your smile by 8-12 shades in one appointment, at Luna Moon Aesthetics on Friargate in Preston. Book online today."
+    },
+    "/skin-tightening-weight-loss": {
+      "title": "Skin Tightening & Weight Loss Preston",
+      "description": "Liquid Lipo, RF skin tightening, body sculpting, Lemon Bottle injections, sauna blanket and cavitation vacuum therapy at our Preston clinic."
+    },
+    "/book-online": {
+      "title": "Book Laser Treatments & Facials Online",
+      "description": "Packages and treatments with prices: laser treatments, IPL hair removal, facial treatments, microneedling, skin boosters and body contouring in Preston."
+    },
+    "/products": {
+      "title": "Shop Skincare & Aesthetics Products",
+      "description": "Professional and home-use skincare from Luna Moon Aesthetics in Preston, including the Liquid Lipo home kit and Blepharonat eye treatments."
+    },
+    "/faqs": {
+      "title": "FAQs — Facial & Laser Treatments",
+      "description": "Answers about facial treatments, microneedling, polynucleotides skin booster, laser treatments, IPL hair removal and booking at our Preston clinic."
+    },
+    "/contact": {
+      "title": "Contact Our Preston Aesthetics Clinic",
+      "description": "Find us on the second floor of House of Hair & Beauty, 55-56 Friargate, Preston PR1 2AT. Call 07592 608 064 or message us on WhatsApp."
+    },
+    "/cart": {
+      "title": "Your Basket",
+      "description": "Review the products in your basket before checkout."
+    },
+    "/clinic-policy": {
+      "title": "Clinic Policy",
+      "description": "Appointment, deposit and cancellation policy for Luna Moon Aesthetics in Preston."
+    },
+    "/privacy-policy": {
+      "title": "Privacy Policy",
+      "description": "How Luna Moon Aesthetics handles the information you send us."
+    }
+  }
+}

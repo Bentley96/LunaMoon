@@ -70,8 +70,17 @@ export const treatmentPages: TreatmentPageData[] = [
         title: 'MICRONEEDLING TREATMENTS',
         body: [
           'Microneedling is otherwise known as collagen induction therapy and uses tiny needles in a pen or a roller to prick the skin. This safe and effective treatment allows new tissue and collagen to develop, it smooths, firms and tones the skin and can reduce the appearance of fine lines, wrinkles and large pores. As one of our most popular cosmetic procedures, this treatment has helped countless clients feel more confident and happier in their own skin.',
+          'We also offer RF microneedling, which combines the same microneedling technique with radiofrequency energy to reach the deeper layers of the skin. Your practitioner will talk through which of the two suits your skin and what you can expect from each.',
         ],
         image: '/images/facial-microneedling.webp',
+      },
+      {
+        title: 'POLYNUCLEOTIDES SKIN BOOSTER',
+        body: [
+          'Polynucleotides are an advanced skin booster treatment designed to support skin quality and regeneration. The gel is placed just beneath the surface of the skin, where it works with your skin\u2019s own renewal processes rather than adding volume, and is normally taken as a short course of treatments spaced a few weeks apart.',
+          'A polynucleotides skin booster is often chosen for skin that looks tired, dehydrated or crepey, including the delicate area around the eyes. As with every treatment here, suitability varies from person to person, so your practitioner will assess your skin and talk you through what to expect before anything goes ahead.',
+        ],
+        image: '/images/injectable-treatment.webp',
       },
       {
         title: 'CHEMICAL PEELS',
@@ -109,7 +118,7 @@ export const treatmentPages: TreatmentPageData[] = [
     navLabel: 'Laser Cosmetic Teeth Whitening',
     title: 'LASER COSMETIC TEETH WHITENING',
     heroBlurb:
-      'We provide professional laser cosmetic teeth whitening services in Preston. For more information, or to make a booking get in touch now!',
+      'Professional laser treatments for a brighter smile, at our clinic in Preston. For more information, or to make a booking get in touch now!',
     heroImage: '/images/teeth-whitening-smile.webp',
     intro: {
       heading: 'LASER COSMETIC TEETH WHITENING',

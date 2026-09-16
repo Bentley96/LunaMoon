@@ -62,7 +62,12 @@ export const serviceCards = [
 
 export const whatWeDo = {
   heading: 'OUR AESTHETICS SERVICES',
+  // `body` is the existing site's wording, left exactly as it was — it's what
+  // the homepage already ranks on. `body2` is added underneath rather than
+  // rewritten into it, so nothing that earned those rankings is disturbed.
   body: 'From laser cosmetic teeth whitening and skin and facial treatments to skin tightening and weight loss, we have something for everyone, all at affordable prices. Luna Moon Aesthetics have won awards for the top 10 regional salons, finalists at the UK Hair and Beauty Awards in 2022 and 2023 and 2nd in the UK Advanced practitioner awards.',
+  body2:
+    'Alongside our laser treatments — cosmetic teeth whitening and IPL laser hair removal — we offer facial treatments including dermaplaning, microneedling, chemical peels and polynucleotides skin booster courses.',
 };
 
 export const bookOnlineCta = {

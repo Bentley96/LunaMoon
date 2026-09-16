@@ -3,6 +3,7 @@ import { Clock, ExternalLink } from 'lucide-react';
 import { packages } from '../content/packages';
 import { formatPrice } from '../lib/format';
 import { BOOKING_URL } from '../config/site';
+import KlarnaBadge from './KlarnaBadge';
 
 const STEP = 12;
 
@@ -83,7 +84,18 @@ export default function PackageGrid() {
           </div>
         )}
 
-        <p className="mt-10 text-center text-sm text-ink-400">
+        {/* Packages run to several hundred pounds, so how to spread the cost
+            belongs with the prices rather than only on the contact page. It
+            says "ask" rather than "pay with", because the clinic arranges it
+            rather than the booking system taking it. */}
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-center">
+          <KlarnaBadge className="h-6" />
+          <p className="text-sm text-ink-600">
+            Pay monthly options available — ask us about Klarna when you book.
+          </p>
+        </div>
+
+        <p className="mt-6 text-center text-sm text-ink-400">
           Prices correct at the time of publishing. Availability and final prices are confirmed when
           you book.
         </p>

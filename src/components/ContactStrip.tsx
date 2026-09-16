@@ -3,6 +3,7 @@ import { Mail, Phone } from 'lucide-react';
 import { business } from '../config/site';
 import { contactBlock } from '../content/home';
 import { WhatsAppIcon } from './ui/BrandIcons';
+import KlarnaBadge from './KlarnaBadge';
 
 /**
  * The "CONTACT AESTHETICS CLINIC IN PRESTON" band that appears on every page of
@@ -23,7 +24,10 @@ export default function ContactStrip() {
                 {p}
               </p>
             ))}
-            <p className="mt-4 text-sm font-medium text-ink-800">{contactBlock.finance}</p>
+            <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2">
+              <KlarnaBadge className="h-6" />
+              <p className="text-sm font-medium text-ink-800">{contactBlock.finance}</p>
+            </div>
           </div>
 
           <div className="flex flex-col gap-3">

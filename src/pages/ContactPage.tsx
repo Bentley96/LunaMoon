@@ -6,6 +6,7 @@ import { business, BOOKING_URL } from '../config/site';
 import SocialLinks from '../components/SocialLinks';
 import PageFaqs from '../components/PageFaqs';
 import { WhatsAppIcon } from '../components/ui/BrandIcons';
+import KlarnaBadge from '../components/KlarnaBadge';
 
 export default function ContactPage() {
   const hours = Object.entries(business.hours);
@@ -67,9 +68,12 @@ export default function ContactPage() {
               )}
             </dl>
 
-            <p className="mt-8 rounded-2xl bg-blush-50 p-5 text-sm leading-relaxed text-ink-700">
-              {business.finance} Get in touch to find out more.
-            </p>
+            <div className="mt-8 rounded-2xl bg-blush-50 p-5">
+              <KlarnaBadge className="h-7" />
+              <p className="mt-3 text-sm leading-relaxed text-ink-700">
+                {business.finance} Get in touch to find out more.
+              </p>
+            </div>
 
             <div className="mt-6 flex flex-wrap gap-3">
               <a href={BOOKING_URL} target="_blank" rel="noreferrer" className="btn-outline-ink">

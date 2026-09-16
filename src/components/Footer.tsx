@@ -3,6 +3,7 @@ import { Clock, Mail, MapPin, Phone } from 'lucide-react';
 import { business, footerLinks } from '../config/site';
 import Logo from './Logo';
 import SocialLinks from './SocialLinks';
+import KlarnaBadge from './KlarnaBadge';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -47,6 +48,14 @@ export default function Footer() {
             </div>
 
             <SocialLinks variant="framed" className="mt-6" />
+
+            {/* The long finance sentence that used to sit here was replaced by
+                the clinic blurb above; the badge keeps the fact that they take
+                Klarna without bringing the paragraph back. */}
+            <div className="mt-6 flex items-center gap-3">
+              <KlarnaBadge className="h-7" />
+              <p className="text-sm text-ink-300">Pay monthly with Klarna</p>
+            </div>
           </div>
 
           {footerLinks.map((column) => (

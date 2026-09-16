@@ -54,9 +54,12 @@ export default function TreatmentPage({ slug }: { slug: string }) {
       {page.secondary && (
         <section className="section-padding bg-blush-50">
           <div className="container-lg grid items-center gap-12 lg:grid-cols-2">
+            {/* order-last at every width: stacked on a phone the heading
+                should come first, and from lg the image belongs in the right
+                column anyway. */}
             {page.secondary.image && (
               <img src={page.secondary.image} alt={page.secondary.heading} loading="lazy"
-                   className="aspect-[4/3] w-full rounded-3xl object-cover lg:order-last" />
+                   className="order-last aspect-[4/3] w-full rounded-3xl object-cover" />
             )}
             <div>
               <h2 className="text-3xl sm:text-4xl">{page.secondary.heading}</h2>

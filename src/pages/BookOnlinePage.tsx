@@ -1,6 +1,7 @@
 import { ExternalLink } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import PackageGrid from '../components/PackageGrid';
+import ServiceAccordion from '../components/ServiceAccordion';
 import { banners } from '../config/banners';
 import ContactStrip from '../components/ContactStrip';
 import { BOOKING_URL } from '../config/site';
@@ -26,7 +27,10 @@ export default function BookOnlinePage() {
       >
         <div className="flex flex-wrap gap-3">
           <a href="#packages" className="btn-primary-lg">
-            See packages &amp; prices
+            Packages &amp; prices
+          </a>
+          <a href="#services" className="btn-outline">
+            Individual treatments
           </a>
           <a href={BOOKING_URL} target="_blank" rel="noreferrer" className="btn-outline">
             Make a booking
@@ -36,6 +40,7 @@ export default function BookOnlinePage() {
       </PageHero>
 
       <PackageGrid />
+      <ServiceAccordion />
 
       <section className="pb-20">
         <div className="container-lg">

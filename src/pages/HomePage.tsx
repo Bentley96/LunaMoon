@@ -1,6 +1,7 @@
 import Hero from '../components/Hero';
 import ServiceCards from '../components/ServiceCards';
 import Awards from '../components/Awards';
+import StudioCarousel from '../components/StudioCarousel';
 import HomeTreatmentDetail from '../components/HomeTreatmentDetail';
 import ContactStrip from '../components/ContactStrip';
 import BookOnlineCTA from '../components/BookOnlineCTA';
@@ -25,8 +26,9 @@ export default function HomePage() {
               ))}
             </div>
           </div>
-          <img src={about.image} alt="Treatment room at Luna Moon Aesthetics" loading="lazy"
-               className="aspect-[4/3] w-full rounded-3xl object-cover" />
+          {/* Was a single photo of one treatment room. People choose a clinic
+              partly on what it looks like inside, so it's the whole studio. */}
+          <StudioCarousel />
         </div>
       </section>
 

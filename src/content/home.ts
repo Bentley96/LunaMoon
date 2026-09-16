@@ -20,6 +20,8 @@ export const about = {
     'Luna Moon Aesthetics is a Preston based clinic offering everything you need to keep you looking and feeling glamorous for that special occasion in your life. Based at 55-56 Friargate, Preston, PR1 2AT.',
     'Please visit our online booking form for services and availability. We hope to see you soon. Get in touch to find out more.',
   ],
+  // Unused since the studio carousel took this section's image slot. Kept
+  // because the photo is still in public/images if the carousel ever moves.
   image: '/images/clinic-treatment-room.jpg',
 };
 

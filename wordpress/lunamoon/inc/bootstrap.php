@@ -26,14 +26,15 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function lunamoon_default_details() {
 	return array(
-		'phone'       => '',
-		'email'       => '',
-		'address'     => "55-56 Friargate\nPreston\nPR1 2AT",
-		'hours'       => '',
-		'facebook'    => '',
-		'instagram'   => '',
-		'tiktok'      => '',
-		'booking_url' => '',
+		'phone'              => '',
+		'email'              => '',
+		'address'            => "55-56 Friargate\nPreston\nPR1 2AT",
+		'hours'              => '',
+		'facebook'           => '',
+		'instagram'          => '',
+		'tiktok'             => '',
+		'booking_url'        => '',
+		'google_reviews_url' => '',
 	);
 }
 
@@ -185,15 +186,17 @@ function lunamoon_print_bootstrap() {
 		'wooUrls'  => lunamoon_woo_urls(),
 		'currency' => lunamoon_currency(),
 		'site'     => array(
-			'name'         => get_bloginfo( 'name' ),
-			'description'  => get_bloginfo( 'description' ),
-			'phone'        => $phone,
-			'phoneHref'    => preg_replace( '/[^0-9+]/', '', $phone ),
-			'email'        => lunamoon_detail( 'email' ),
-			'addressLines' => $address,
-			'hours'        => lunamoon_hours(),
-			'social'       => $social,
-			'bookingUrl'   => lunamoon_detail( 'booking_url' ),
+			'name'             => get_bloginfo( 'name' ),
+			'description'      => get_bloginfo( 'description' ),
+			'phone'            => $phone,
+			'phoneHref'        => preg_replace( '/[^0-9+]/', '', $phone ),
+			'email'            => lunamoon_detail( 'email' ),
+			'addressLines'     => $address,
+			'hours'            => lunamoon_hours(),
+			'social'           => $social,
+			'bookingUrl'       => lunamoon_detail( 'booking_url' ),
+			// Linked from the reviews section so visitors can read the rest.
+			'googleReviewsUrl' => lunamoon_detail( 'google_reviews_url' ),
 		),
 	);
 
@@ -218,14 +221,15 @@ function lunamoon_customize_details( $wp_customize ) {
 	);
 
 	$fields = array(
-		'phone'       => array( __( 'Phone number', 'lunamoon' ), 'text' ),
-		'email'       => array( __( 'Email address', 'lunamoon' ), 'text' ),
-		'address'     => array( __( 'Address (one line per row)', 'lunamoon' ), 'textarea' ),
-		'hours'       => array( __( 'Opening hours — one per row as "Mon-Fri|9am-7pm"', 'lunamoon' ), 'textarea' ),
-		'facebook'    => array( __( 'Facebook URL', 'lunamoon' ), 'url' ),
-		'instagram'   => array( __( 'Instagram URL', 'lunamoon' ), 'url' ),
-		'tiktok'      => array( __( 'TikTok URL', 'lunamoon' ), 'url' ),
-		'booking_url' => array( __( 'External booking URL (optional)', 'lunamoon' ), 'url' ),
+		'phone'              => array( __( 'Phone number', 'lunamoon' ), 'text' ),
+		'email'              => array( __( 'Email address', 'lunamoon' ), 'text' ),
+		'address'            => array( __( 'Address (one line per row)', 'lunamoon' ), 'textarea' ),
+		'hours'              => array( __( 'Opening hours — one per row as "Mon-Fri|9am-7pm"', 'lunamoon' ), 'textarea' ),
+		'facebook'           => array( __( 'Facebook URL', 'lunamoon' ), 'url' ),
+		'instagram'          => array( __( 'Instagram URL', 'lunamoon' ), 'url' ),
+		'tiktok'             => array( __( 'TikTok URL', 'lunamoon' ), 'url' ),
+		'booking_url'        => array( __( 'External booking URL (optional)', 'lunamoon' ), 'url' ),
+		'google_reviews_url' => array( __( 'Google reviews URL (optional) — the listing link from your Google Business Profile', 'lunamoon' ), 'url' ),
 	);
 
 	$defaults = lunamoon_default_details();

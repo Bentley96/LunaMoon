@@ -87,6 +87,19 @@ export const footerLinks: { heading: string; links: NavLink[] }[] = [
 export const BOOKING_URL = 'https://www.that-time.co.uk/luna-moon-aesthetics';
 
 /**
+ * Where "See all our Google reviews" goes.
+ *
+ * The homepage shows six reviews; the clinic has far more, and they carry more
+ * weight read on Google than retyped here. This is Google's documented Maps
+ * URL format, which resolves the business by name and address rather than by a
+ * place ID, so it works without one. If the clinic pastes the exact listing
+ * link from its Google Business Profile into the Customizer, that wins.
+ */
+export const GOOGLE_REVIEWS_URL =
+  'https://www.google.com/maps/search/?api=1&query=' +
+  encodeURIComponent('Luna Moon Aesthetics, 55-56 Friargate, Preston PR1 2AT');
+
+/**
  * Opening hours, as shown on the existing site's footer.
  *
  * Insertion order is the display order, so Monday..Sunday is preserved. The
@@ -122,6 +135,8 @@ export const business = {
     'Luna Moon LTD provides a range of high-quality aesthetic treatments in Preston. We are fully trained, qualified and insured to guarantee peace of mind. For more information or to make a booking please get in touch.',
   social: bootstrap.site.social,
   bookingUrl: bootstrap.site.bookingUrl || BOOKING_URL,
+  /** Google Business Profile listing, linked from the reviews section. */
+  googleReviewsUrl: bootstrap.site.googleReviewsUrl || GOOGLE_REVIEWS_URL,
   /** Shown beneath the contact details on the homepage and contact page. */
   finance: 'We accept pay monthly payment options as well as Klarna finance options.',
 };

@@ -30,6 +30,8 @@ export interface SiteInfo {
   hours: Record<string, string>;
   social: Partial<Record<'facebook' | 'instagram' | 'tiktok' | 'whatsapp', string>>;
   bookingUrl: string;
+  /** Google Business Profile listing, for the "read more reviews" link. */
+  googleReviewsUrl: string;
 }
 
 /** Permalinks of the pages WooCommerce renders itself. */
@@ -94,6 +96,7 @@ const FALLBACK: Bootstrap = {
     hours: {},
     social: {},
     bookingUrl: '',
+    googleReviewsUrl: '',
   },
 };
 

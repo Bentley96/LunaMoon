@@ -1,7 +1,8 @@
-import { Quote, Star } from 'lucide-react';
+import { ExternalLink, Quote, Star } from 'lucide-react';
 import { getTestimonials } from '../lib/wp';
 import { useAsync } from '../hooks/useAsync';
 import { reviews as defaultReviews, reviewSummary } from '../content/home';
+import { business } from '../config/site';
 import SectionHeading from './ui/SectionHeading';
 
 export default function Testimonials() {
@@ -45,6 +46,22 @@ export default function Testimonials() {
             </figure>
           ))}
         </div>
+
+        {/* Only six fit here, and the rest are more persuasive read on Google
+            than retyped by us, so send people to the listing for the full set. */}
+        {business.googleReviewsUrl && (
+          <div className="mt-10 text-center">
+            <a
+              href={business.googleReviewsUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="btn-primary"
+            >
+              See all our Google reviews
+              <ExternalLink className="h-4 w-4" aria-hidden="true" />
+            </a>
+          </div>
+        )}
       </div>
     </section>
   );

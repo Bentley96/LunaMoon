@@ -32,8 +32,10 @@ export default function HomePage() {
 
       <section className="section-padding bg-blush-50">
         <div className="container-lg grid items-center gap-12 lg:grid-cols-[minmax(0,22rem)_1fr]">
+          {/* Stacked on a phone the heading should come first, so the portrait
+              drops below the copy; from lg it goes back to the left column. */}
           <img src={aboutDee.image} alt="Dee, owner of Luna Moon Aesthetics" loading="lazy"
-               className="aspect-[4/5] w-full rounded-3xl object-cover" />
+               className="order-last aspect-[4/5] w-full rounded-3xl object-cover lg:order-none" />
           <div>
             <span className="eyebrow">Meet the owner</span>
             <h2 className="mt-3 text-3xl sm:text-4xl">{aboutDee.heading}</h2>

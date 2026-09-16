@@ -33,6 +33,7 @@ function lunamoon_default_details() {
 		'facebook'           => '',
 		'instagram'          => '',
 		'tiktok'             => '',
+		'whatsapp'           => '',
 		'booking_url'        => '',
 		'google_reviews_url' => '',
 	);
@@ -168,6 +169,7 @@ function lunamoon_print_bootstrap() {
 			'facebook'  => lunamoon_detail( 'facebook' ),
 			'instagram' => lunamoon_detail( 'instagram' ),
 			'tiktok'    => lunamoon_detail( 'tiktok' ),
+			'whatsapp'  => lunamoon_detail( 'whatsapp' ),
 		)
 	);
 
@@ -228,6 +230,7 @@ function lunamoon_customize_details( $wp_customize ) {
 		'facebook'           => array( __( 'Facebook URL', 'lunamoon' ), 'url' ),
 		'instagram'          => array( __( 'Instagram URL', 'lunamoon' ), 'url' ),
 		'tiktok'             => array( __( 'TikTok URL', 'lunamoon' ), 'url' ),
+		'whatsapp'           => array( __( 'WhatsApp URL (e.g. https://wa.me/447592608064)', 'lunamoon' ), 'url' ),
 		'booking_url'        => array( __( 'External booking URL (optional)', 'lunamoon' ), 'url' ),
 		'google_reviews_url' => array( __( 'Google reviews URL (optional) — the listing link from your Google Business Profile', 'lunamoon' ), 'url' ),
 	);

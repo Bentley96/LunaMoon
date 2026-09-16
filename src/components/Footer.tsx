@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
-import { Clock, Facebook, Instagram, Mail, MapPin, Phone } from 'lucide-react';
+import { Clock, Mail, MapPin, Phone } from 'lucide-react';
 import { business, footerLinks } from '../config/site';
 import Logo from './Logo';
+import SocialLinks from './SocialLinks';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -45,32 +46,7 @@ export default function Footer() {
               )}
             </div>
 
-            {(business.social.facebook || business.social.instagram) && (
-              <div className="mt-6 flex gap-3">
-                {business.social.facebook && (
-                  <a
-                    href={business.social.facebook}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="Facebook"
-                    className="rounded-full border border-ink-700 p-2.5 transition-colors hover:border-blush-500 hover:text-blush-400"
-                  >
-                    <Facebook className="h-4 w-4" />
-                  </a>
-                )}
-                {business.social.instagram && (
-                  <a
-                    href={business.social.instagram}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="Instagram"
-                    className="rounded-full border border-ink-700 p-2.5 transition-colors hover:border-blush-500 hover:text-blush-400"
-                  >
-                    <Instagram className="h-4 w-4" />
-                  </a>
-                )}
-              </div>
-            )}
+            <SocialLinks variant="framed" className="mt-6" />
           </div>
 
           {footerLinks.map((column) => (

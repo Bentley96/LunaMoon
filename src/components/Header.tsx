@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink as RouterNavLink, useLocation } from 'react-router-dom';
-import { ChevronDown, Facebook, Instagram, Mail, Menu, Phone, ShoppingBag, X } from 'lucide-react';
+import { ChevronDown, Mail, Menu, Phone, ShoppingBag, X } from 'lucide-react';
 import { business, navLinks } from '../config/site';
 import Logo from './Logo';
+import SocialLinks from './SocialLinks';
 import { bootstrap } from '../lib/bootstrap';
 import { useCart } from '../store/CartContext';
 
@@ -59,20 +60,7 @@ export default function Header() {
               <span>{business.email}</span>
             </a>
           </div>
-          <div className="flex items-center gap-3">
-            {business.social.facebook && (
-              <a href={business.social.facebook} target="_blank" rel="noreferrer" aria-label="Facebook"
-                 className="text-ink-300 transition-colors hover:text-white">
-                <Facebook className="h-4 w-4" />
-              </a>
-            )}
-            {business.social.instagram && (
-              <a href={business.social.instagram} target="_blank" rel="noreferrer" aria-label="Instagram"
-                 className="text-ink-300 transition-colors hover:text-white">
-                <Instagram className="h-4 w-4" />
-              </a>
-            )}
-          </div>
+          <SocialLinks />
         </div>
       </div>
 

@@ -116,6 +116,22 @@ const DEFAULT_HOURS: Record<string, string> = {
   Sunday: 'Closed',
 };
 
+/**
+ * Social profiles.
+ *
+ * Merged per network rather than wholesale, so setting one in the Customizer
+ * doesn't blank the others. A network is shown only where it has a URL, so
+ * clearing one here removes its icon everywhere.
+ */
+const DEFAULT_SOCIAL: Record<string, string> = {
+  facebook: 'https://www.facebook.com/lunamoonaesthetics',
+  instagram: 'https://www.instagram.com/luna_moon_aesthetics__/',
+  tiktok: 'https://www.tiktok.com/@luna_moon_aesthetics',
+  // wa.me opens a chat with the clinic's number, in the app on a phone and in
+  // WhatsApp Web on a desktop.
+  whatsapp: 'https://wa.me/+447592608064',
+};
+
 /** Business details, with the theme's injected values taking precedence. */
 export const business = {
   name: bootstrap.site.name || 'Luna Moon Aesthetics',
@@ -133,7 +149,7 @@ export const business = {
   /** Footer blurb — what the clinic is, rather than how to pay for it. */
   about:
     'Luna Moon LTD provides a range of high-quality aesthetic treatments in Preston. We are fully trained, qualified and insured to guarantee peace of mind. For more information or to make a booking please get in touch.',
-  social: bootstrap.site.social,
+  social: { ...DEFAULT_SOCIAL, ...bootstrap.site.social },
   bookingUrl: bootstrap.site.bookingUrl || BOOKING_URL,
   /** Google Business Profile listing, linked from the reviews section. */
   googleReviewsUrl: bootstrap.site.googleReviewsUrl || GOOGLE_REVIEWS_URL,

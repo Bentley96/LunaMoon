@@ -3,6 +3,8 @@ import PageHero from '../components/PageHero';
 import { banners } from '../config/banners';
 import BookingForm from '../components/BookingForm';
 import { business, BOOKING_URL } from '../config/site';
+import SocialLinks from '../components/SocialLinks';
+import { WhatsAppIcon } from '../components/ui/BrandIcons';
 
 export default function ContactPage() {
   const hours = Object.entries(business.hours);
@@ -68,10 +70,33 @@ export default function ContactPage() {
               {business.finance} Get in touch to find out more.
             </p>
 
-            <a href={BOOKING_URL} target="_blank" rel="noreferrer" className="btn-outline-ink mt-6">
-              Book online
-              <ExternalLink className="h-4 w-4" aria-hidden="true" />
-            </a>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a href={BOOKING_URL} target="_blank" rel="noreferrer" className="btn-outline-ink">
+                Book online
+                <ExternalLink className="h-4 w-4" aria-hidden="true" />
+              </a>
+              {business.social.whatsapp && (
+                <a
+                  href={business.social.whatsapp}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-outline-ink"
+                >
+                  <WhatsAppIcon className="h-4 w-4" />
+                  WhatsApp us
+                </a>
+              )}
+            </div>
+
+            <div className="mt-8">
+              <h3 className="font-display text-lg uppercase tracking-wide text-ink-900">
+                Follow us
+              </h3>
+              <p className="mt-2 text-sm text-ink-600">
+                See our latest work, offers and before-and-afters.
+              </p>
+              <SocialLinks variant="light" className="mt-4" />
+            </div>
 
             {/* TODO(content): replace with the clinic's Google Maps embed. */}
             <div className="img-placeholder mt-8 aspect-[4/3] rounded-2xl">

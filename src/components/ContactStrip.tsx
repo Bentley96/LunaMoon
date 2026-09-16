@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Mail, Phone } from 'lucide-react';
 import { business } from '../config/site';
 import { contactBlock } from '../content/home';
+import { WhatsAppIcon } from './ui/BrandIcons';
 
 /**
  * The "CONTACT AESTHETICS CLINIC IN PRESTON" band that appears on every page of
@@ -34,6 +35,17 @@ export default function ContactStrip() {
               <Mail className="h-4 w-4" aria-hidden="true" />
               Email us
             </a>
+            {business.social.whatsapp && (
+              <a
+                href={business.social.whatsapp}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-outline-ink"
+              >
+                <WhatsAppIcon className="h-4 w-4" />
+                WhatsApp us
+              </a>
+            )}
             <Link to="/book-online" className="btn-ghost justify-center">
               Book online
             </Link>

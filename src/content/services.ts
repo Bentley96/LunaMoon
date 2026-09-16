@@ -13,6 +13,8 @@
 //
 // Captured 16 September 2026.
 
+import { IPL_ANCHOR } from '../config/anchors';
+
 export interface Service {
   name: string;
   /** Price in minor units (pence), so it formats through lib/format.ts. */
@@ -28,6 +30,33 @@ export interface Service {
 export interface ServiceCategory {
   name: string;
   services: Service[];
+}
+
+/** URL-safe id for a category, used as its #anchor on the booking page. */
+export const categoryId = (name: string) =>
+  name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+
+/**
+ * Anchors that don't match a category name.
+ *
+ * The menu item says "IPL Laser Hair Removal" because that's what people
+ * search for; the booking system files those treatments under "Laser Clinic".
+ * The alias lets the link use the customer's words and still land on the right
+ * category, without renaming what the booking system calls it.
+ */
+const CATEGORY_ALIASES: Record<string, string> = {
+  [IPL_ANCHOR]: 'Laser Clinic',
+};
+
+/** Index of the category an #anchor refers to, or -1. */
+export function categoryIndexForAnchor(anchor: string): number {
+  const target = CATEGORY_ALIASES[anchor] ?? '';
+  return serviceCategories.findIndex(
+    (c) => c.name === target || categoryId(c.name) === anchor,
+  );
 }
 
 /** In the order the booking page lists them. */

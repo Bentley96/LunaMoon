@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { ChevronDown, Clock, ExternalLink } from 'lucide-react';
-import { serviceCategories, serviceCount } from '../content/services';
+import { categoryId, categoryIndexForAnchor, serviceCategories, serviceCount } from '../content/services';
 import { formatPrice } from '../lib/format';
 import { BOOKING_URL } from '../config/site';
 
@@ -19,6 +20,30 @@ export default function ServiceAccordion() {
   // Index of the open panel, or null. Single-open keeps the page navigable —
   // with 19 categories, allowing all of them open loses the overview entirely.
   const [open, setOpen] = useState<number | null>(null);
+  const items = useRef<(HTMLDivElement | null)[]>([]);
+
+  // A link can name a category in its hash — the "IPL Laser Hair Removal" menu
+  // item is /book-online#ipl-laser-hair-removal. Landing on the page with the
+  // category still shut would leave the visitor to find it among 19 others, so
+  // open it and bring it into view.
+  //
+  // Keyed on location.key, not the hash, so clicking the same menu item again
+  // while already here still scrolls back to it.
+  const { hash, key } = useLocation();
+  useEffect(() => {
+    const anchor = decodeURIComponent(hash.replace(/^#/, ''));
+    if (!anchor) return;
+
+    const index = categoryIndexForAnchor(anchor);
+    if (index === -1) return;
+
+    setOpen(index);
+    // After paint, so the panel it scrolls to is the open one.
+    const id = requestAnimationFrame(() => {
+      items.current[index]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    return () => cancelAnimationFrame(id);
+  }, [hash, key]);
 
   const cheapest = Math.min(
     ...serviceCategories.flatMap((c) => c.services.map((s) => s.price)),
@@ -43,7 +68,15 @@ export default function ServiceAccordion() {
             const from = Math.min(...category.services.map((s) => s.price));
 
             return (
-              <div key={category.name} className="border-b border-ink-100 last:border-b-0">
+              <div
+                key={category.name}
+                id={categoryId(category.name)}
+                ref={(el) => {
+                  items.current[i] = el;
+                }}
+                // Clears the fixed header when a link jumps straight here.
+                className="scroll-mt-40 border-b border-ink-100 last:border-b-0"
+              >
                 <h3>
                   <button
                     type="button"

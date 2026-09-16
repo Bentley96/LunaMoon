@@ -10,6 +10,7 @@
 
 import { bootstrap } from '../lib/bootstrap';
 import { treatmentPages } from '../content/treatments';
+import { IPL_ANCHOR } from './anchors';
 
 export interface NavLink {
   label: string;
@@ -27,7 +28,8 @@ export interface NavLink {
  * and the page set are no longer the same thing:
  *
  *   - IPL Laser Hair Removal has no page of its own. It's booked, so the menu
- *     item goes straight to /book-online.
+ *     item goes straight to its category on /book-online, which opens as the
+ *     page loads rather than leaving it shut among the other eighteen.
  *   - Aesthetics Treatments has been removed. Its copy now lives on the
  *     homepage, in src/content/homeTreatments.ts.
  *
@@ -45,7 +47,7 @@ const treatmentLinks: NavLink[] = [
     const page = treatmentPages.find((p) => p.slug === slug);
     return page ? [{ label: page.navLabel, to: `/${page.slug}` }] : [];
   }),
-  { label: 'IPL Laser Hair Removal', to: '/book-online' },
+  { label: 'IPL Laser Hair Removal', to: `/book-online#${IPL_ANCHOR}` },
 ];
 
 export const navLinks: NavLink[] = [

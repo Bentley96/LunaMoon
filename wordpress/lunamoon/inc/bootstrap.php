@@ -28,7 +28,7 @@ function lunamoon_default_details() {
 	return array(
 		'phone'              => '',
 		'email'              => '',
-		'address'            => "55-56 Friargate\nPreston\nPR1 2AT",
+		'address'            => "House of Hair & Beauty\n55-56 Friargate\nPreston\nPR1 2AT",
 		'hours'              => '',
 		'facebook'           => '',
 		'instagram'          => '',

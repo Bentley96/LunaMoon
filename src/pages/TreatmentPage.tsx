@@ -2,6 +2,7 @@ import { Navigate } from 'react-router-dom';
 import PageHero from '../components/PageHero';
 import ContactStrip from '../components/ContactStrip';
 import BookOnlineCTA from '../components/BookOnlineCTA';
+import PageFaqs from '../components/PageFaqs';
 import SectionHeading from '../components/ui/SectionHeading';
 import { treatmentBySlug, type TreatmentSection } from '../content/treatments';
 import { bannerFor } from '../config/banners';
@@ -81,6 +82,8 @@ export default function TreatmentPage({ slug }: { slug: string }) {
           </div>
         </div>
       </section>
+
+      <PageFaqs route={`/${page.slug}`} />
 
       <BookOnlineCTA />
     </>

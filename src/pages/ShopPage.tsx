@@ -8,6 +8,7 @@ import PageHero from '../components/PageHero';
 import { banners } from '../config/banners';
 import ProductCard from '../components/ProductCard';
 import ContactStrip from '../components/ContactStrip';
+import PageFaqs from '../components/PageFaqs';
 import Spinner from '../components/ui/Spinner';
 
 const INTRO =
@@ -78,6 +79,8 @@ export default function ShopPage() {
           )}
         </div>
       </section>
+
+      <PageFaqs route="/products" />
 
       <ContactStrip />
     </>

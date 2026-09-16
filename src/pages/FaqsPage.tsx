@@ -1,18 +1,32 @@
-import { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { getFaqs } from '../lib/wp';
 import { useAsync } from '../hooks/useAsync';
 import PageHero from '../components/PageHero';
 import { banners } from '../config/banners';
-import RichText from '../components/ui/RichText';
 import ContactStrip from '../components/ContactStrip';
 import BookOnlineCTA from '../components/BookOnlineCTA';
-import Spinner from '../components/ui/Spinner';
+import FaqAccordion, { FaqSchema } from '../components/FaqAccordion';
+import { faqCount, faqGroups } from '../content/faqs';
 import { faqTeaser } from '../content/home';
 
+/**
+ * Every question the clinic answers, grouped by treatment.
+ *
+ * The groups come from src/content/faqs.ts, which is also what feeds the FAQ
+ * block at the bottom of the individual pages — so an answer is written once
+ * and can't drift between the two places it appears.
+ *
+ * Anything added under FAQs in wp-admin is appended at the end rather than
+ * replacing these, so adding one question there can't hide the other ninety.
+ */
 export default function FaqsPage() {
-  const { data, loading } = useAsync(() => getFaqs(), []);
-  const [openId, setOpenId] = useState<number | null>(null);
+  const { data } = useAsync(() => getFaqs(), []);
+  const extra = data ?? [];
+
+  const all = [
+    ...faqGroups.flatMap((g) => g.faqs),
+    ...extra.map((f) => ({ question: f.question, answer: f.answer, html: true })),
+  ];
 
   return (
     <>
@@ -25,41 +39,58 @@ export default function FaqsPage() {
 
       <section className="section-padding">
         <div className="container-prose">
-          {loading ? (
-            <Spinner label="Loading FAQs…" />
-          ) : data && data.length > 0 ? (
-            <ul className="divide-y divide-ink-100 border-y border-ink-100">
-              {data.map((faq) => {
-                const open = openId === faq.id;
-                return (
-                  <li key={faq.id}>
-                    <h2>
-                      <button type="button" onClick={() => setOpenId(open ? null : faq.id)}
-                              aria-expanded={open}
-                              className="flex w-full items-center justify-between gap-4 py-5 text-left">
-                        <span className="font-display text-xl text-ink-900">{faq.question}</span>
-                        <ChevronDown
-                          className={`h-5 w-5 shrink-0 text-ink-400 transition-transform ${open ? 'rotate-180' : ''}`}
-                          aria-hidden="true" />
-                      </button>
-                    </h2>
-                    {open && <RichText html={faq.answer} className="pb-6 text-ink-600" />}
-                  </li>
-                );
-              })}
-            </ul>
-          ) : (
-            /* The existing site's FAQ copy wasn't in the page saves supplied, so
-               there is nothing to seed here — these come from wp-admin. */
-            <div className="rounded-2xl bg-ink-50 p-8 text-center">
-              <p className="text-ink-600">
-                No FAQs have been added yet. Add them under <strong>FAQs</strong> in wp-admin and
-                they’ll appear here.
-              </p>
-            </div>
-          )}
+          <p className="text-center text-ink-500">
+            {faqCount} questions across {faqGroups.length} treatments. Can’t see yours?{' '}
+            <Link to="/contact" className="text-blush-700 underline underline-offset-4">
+              Get in touch
+            </Link>
+            .
+          </p>
+
+          {/* A nav rather than a list: 13 groups is a long way to scroll past
+              to reach the one you came for. */}
+          <nav aria-label="Jump to a topic" className="mt-8 flex flex-wrap justify-center gap-2">
+            {faqGroups.map((group) => (
+              <a
+                key={group.id}
+                href={`#${group.id}`}
+                className="rounded-full border border-ink-200 px-4 py-1.5 text-sm text-ink-600 transition-colors hover:border-blush-500 hover:text-blush-700"
+              >
+                {group.title}
+              </a>
+            ))}
+          </nav>
+
+          <div className="mt-14 space-y-12">
+            {faqGroups.map((group) => (
+              // scroll-mt clears the fixed header when a chip jumps here.
+              <section key={group.id} id={group.id} className="scroll-mt-40">
+                <h2 className="mb-3 font-display text-2xl uppercase tracking-wide text-ink-900">
+                  {group.title}
+                </h2>
+                <FaqAccordion faqs={group.faqs} />
+              </section>
+            ))}
+
+            {extra.length > 0 && (
+              <section id="more" className="scroll-mt-40">
+                <h2 className="mb-3 font-display text-2xl uppercase tracking-wide text-ink-900">
+                  More questions
+                </h2>
+                <FaqAccordion
+                  faqs={extra.map((f) => ({
+                    question: f.question,
+                    answer: f.answer,
+                    html: true,
+                  }))}
+                />
+              </section>
+            )}
+          </div>
         </div>
       </section>
+
+      <FaqSchema faqs={all} />
 
       <ContactStrip />
       <BookOnlineCTA />

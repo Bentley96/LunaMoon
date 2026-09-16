@@ -4,6 +4,7 @@ import { banners } from '../config/banners';
 import BookingForm from '../components/BookingForm';
 import { business, BOOKING_URL } from '../config/site';
 import SocialLinks from '../components/SocialLinks';
+import PageFaqs from '../components/PageFaqs';
 import { WhatsAppIcon } from '../components/ui/BrandIcons';
 
 export default function ContactPage() {
@@ -113,6 +114,8 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      <PageFaqs route="/contact" />
     </>
   );
 }

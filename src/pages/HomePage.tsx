@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
 import Hero from '../components/Hero';
 import ServiceCards from '../components/ServiceCards';
 import Awards from '../components/Awards';
@@ -7,8 +5,9 @@ import HomeTreatmentDetail from '../components/HomeTreatmentDetail';
 import ContactStrip from '../components/ContactStrip';
 import BookOnlineCTA from '../components/BookOnlineCTA';
 import Testimonials from '../components/Testimonials';
+import PageFaqs from '../components/PageFaqs';
 import FeaturedProducts from '../components/FeaturedProducts';
-import { about, aboutDee, faqTeaser } from '../content/home';
+import { about, aboutDee } from '../content/home';
 
 export default function HomePage() {
   return (
@@ -56,17 +55,9 @@ export default function HomePage() {
       <FeaturedProducts />
       <Testimonials />
 
-      <section className="section-padding">
-        <div className="container-prose text-center">
-          <span className="eyebrow">FAQs</span>
-          <h2 className="mt-3 text-3xl sm:text-4xl">{faqTeaser.heading}</h2>
-          <p className="mt-5 leading-relaxed text-ink-600">{faqTeaser.body}</p>
-          <Link to="/faqs" className="btn-outline-ink mt-8">
-            Find out more
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </Link>
-        </div>
-      </section>
+      {/* Was a teaser pointing at /faqs; now the questions themselves, with
+          the link to the rest kept inside the section. */}
+      <PageFaqs route="/" />
 
       <BookOnlineCTA />
     </>

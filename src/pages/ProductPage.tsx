@@ -9,6 +9,7 @@ import { useCart } from '../store/CartContext';
 import { fallbackProducts } from '../content/products';
 import RichText from '../components/ui/RichText';
 import ContactStrip from '../components/ContactStrip';
+import PageFaqs from '../components/PageFaqs';
 import Spinner from '../components/ui/Spinner';
 
 export default function ProductPage() {
@@ -60,6 +61,7 @@ export default function ProductPage() {
             )}
           </div>
         </section>
+        <PageFaqs product={slug} />
         <ContactStrip />
       </>
     );
@@ -168,6 +170,7 @@ export default function ProductPage() {
           </div>
         </div>
       </section>
+      <PageFaqs product={slug} />
       <ContactStrip />
     </>
   );

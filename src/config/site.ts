@@ -144,7 +144,10 @@ export const business = {
   email: bootstrap.site.email || 'info@aestheticspreston.co.uk',
   addressLines: bootstrap.site.addressLines.length
     ? bootstrap.site.addressLines
-    : ['55-56 Friargate', 'Preston', 'PR1 2AT'],
+    // The clinic is on the second floor of House of Hair & Beauty — as the
+    // existing site's footer and the FAQ copy both say. Without that line
+    // people arrive at the right building and can't find it.
+    : ['House of Hair & Beauty', '55-56 Friargate', 'Preston', 'PR1 2AT'],
   hours: Object.keys(bootstrap.site.hours).length ? bootstrap.site.hours : DEFAULT_HOURS,
   /** Footer blurb — what the clinic is, rather than how to pay for it. */
   about:

@@ -4,6 +4,7 @@ import PackageGrid from '../components/PackageGrid';
 import ServiceAccordion from '../components/ServiceAccordion';
 import { banners } from '../config/banners';
 import ContactStrip from '../components/ContactStrip';
+import PageFaqs from '../components/PageFaqs';
 import { BOOKING_URL } from '../config/site';
 import { bookOnlineCta } from '../content/home';
 
@@ -63,6 +64,8 @@ export default function BookOnlinePage() {
           </div>
         </div>
       </section>
+
+      <PageFaqs route="/book-online" />
 
       <ContactStrip />
     </>

@@ -98,4 +98,97 @@
   .img-placeholder {
     @apply flex items-center justify-center bg-gradient-to-br from-ink-100 via-blush-50 to-gold-100 text-ink-400 text-xs uppercase tracking-[0.2em];
   }
+
+  /* Styling for HTML written in wp-admin — WooCommerce product descriptions,
+     page content, FAQ answers. Applied by components/ui/RichText.tsx.
+     -
+     Tailwind's preflight strips the browser's default margins, list markers
+     and heading sizes, so without this an editor's paragraphs run together in
+     one block, bullet lists lose their bullets and headings read as body copy.
+     Nothing in wp-admin carries a class the app knows about, so the element
+     selectors have to do the work.
+     -
+     Only what an editor can actually produce is covered, with the first and
+     last child's outer margins removed so the block sits flush in whatever
+     spacing the page already gives it. */
+  .prose-lunamoon > :first-child {
+    @apply mt-0;
+  }
+
+  .prose-lunamoon > :last-child {
+    @apply mb-0;
+  }
+
+  .prose-lunamoon p {
+    @apply my-4 leading-relaxed;
+  }
+
+  .prose-lunamoon h2 {
+    @apply mb-3 mt-8 font-display text-2xl text-ink-900;
+  }
+
+  .prose-lunamoon h3 {
+    @apply mb-2 mt-6 font-display text-xl text-ink-900;
+  }
+
+  .prose-lunamoon h4 {
+    @apply mb-2 mt-6 font-semibold text-ink-900;
+  }
+
+  .prose-lunamoon ul {
+    @apply my-4 list-disc space-y-1.5 pl-5;
+  }
+
+  .prose-lunamoon ol {
+    @apply my-4 list-decimal space-y-1.5 pl-5;
+  }
+
+  .prose-lunamoon li {
+    @apply leading-relaxed;
+  }
+
+  /* WooCommerce's own product tabs sometimes nest a list inside a list item. */
+  .prose-lunamoon li > ul,
+  .prose-lunamoon li > ol {
+    @apply my-1.5;
+  }
+
+  .prose-lunamoon a {
+    @apply text-blush-700 underline underline-offset-2 transition-colors hover:text-blush-800;
+  }
+
+  .prose-lunamoon strong,
+  .prose-lunamoon b {
+    @apply font-semibold text-ink-900;
+  }
+
+  .prose-lunamoon em {
+    @apply italic;
+  }
+
+  .prose-lunamoon blockquote {
+    @apply my-5 border-l-2 border-blush-400 pl-4 italic text-ink-600;
+  }
+
+  .prose-lunamoon img {
+    @apply my-5 h-auto max-w-full rounded-xl;
+  }
+
+  .prose-lunamoon hr {
+    @apply my-8 border-ink-100;
+  }
+
+  /* Ingredients and specification tables, which product copy often uses. */
+  .prose-lunamoon table {
+    @apply my-5 w-full border-collapse text-left text-sm;
+  }
+
+  .prose-lunamoon th,
+  .prose-lunamoon td {
+    @apply border-b border-ink-100 py-2.5 pr-4 align-top;
+  }
+
+  .prose-lunamoon th {
+    @apply font-semibold text-ink-900;
+  }
 }

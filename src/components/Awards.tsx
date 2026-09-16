@@ -23,7 +23,7 @@ export default function Awards() {
     caption: (
       <>
         <span className="font-display text-lg">
-          {award.year} — {award.title}
+          {award.badge} — {award.title}
         </span>
         <span className="mt-1 block text-sm text-ink-200">{award.organisation}</span>
       </>
@@ -34,14 +34,14 @@ export default function Awards() {
     <section className="section-padding bg-blush-50">
       <div className="container-lg">
         <SectionHeading
-          eyebrow="Awards & recognition"
+          eyebrow="Awards & qualifications"
           title="AWARD-WINNING AESTHETICS IN PRESTON"
           intro={awardsIntro}
         />
 
-        <ul className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {awards.map((award, i) => (
-            <li key={award.year}>
+            <li key={award.id}>
               <button
                 type="button"
                 onClick={(e) => lightbox.openAt(e.currentTarget, i)}
@@ -60,14 +60,17 @@ export default function Awards() {
                 <div className="flex flex-1 flex-col border-t border-blush-100 p-5">
                   <div className="flex items-center gap-2">
                     <AwardIcon className="h-4 w-4 shrink-0 text-blush-700" aria-hidden="true" />
-                    <span className="font-display text-lg text-ink-900">{award.year}</span>
+                    <span className="font-display text-lg text-ink-900">{award.badge}</span>
                   </div>
                   <p className="mt-2 font-medium text-ink-900">{award.title}</p>
                   <p className="mt-1 text-sm text-ink-600">{award.organisation}</p>
                   {award.detail && <p className="mt-1 text-sm text-ink-500">{award.detail}</p>}
                   <span
                     aria-hidden="true"
-                    className="mt-4 text-sm font-medium text-blush-700 underline underline-offset-4"
+                    // mt-auto, not a fixed gap: the cards carry different
+                    // numbers of lines, so a fixed gap leaves the links at
+                    // four different heights across the row.
+                    className="mt-auto pt-4 text-sm font-medium text-blush-700 underline underline-offset-4"
                   >
                     View certificate
                   </span>

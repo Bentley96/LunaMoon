@@ -1,27 +1,27 @@
 {
-  "_PageHero-BxlWbycG.js": {
-    "file": "assets/PageHero-BxlWbycG.js",
+  "_PageHero-hOoFpkXn.js": {
+    "file": "assets/PageHero-hOoFpkXn.js",
     "name": "PageHero",
     "imports": [
       "src/main.tsx"
     ]
   },
-  "_RichText-Bzx3He2Y.js": {
-    "file": "assets/RichText-Bzx3He2Y.js",
+  "_RichText-DFewtGbl.js": {
+    "file": "assets/RichText-DFewtGbl.js",
     "name": "RichText",
     "imports": [
       "src/main.tsx"
     ]
   },
-  "_external-link-D7Z6RWjQ.js": {
-    "file": "assets/external-link-D7Z6RWjQ.js",
+  "_external-link-DU7_zqPW.js": {
+    "file": "assets/external-link-DU7_zqPW.js",
     "name": "external-link",
     "imports": [
       "src/main.tsx"
     ]
   },
   "src/main.tsx": {
-    "file": "assets/main-D5P8g66I.js",
+    "file": "assets/main-Bo7eA0XR.js",
     "name": "main",
     "src": "src/main.tsx",
     "isEntry": true,
@@ -41,61 +41,61 @@
     ]
   },
   "src/pages/BookOnlinePage.tsx": {
-    "file": "assets/BookOnlinePage-iLFCzafo.js",
+    "file": "assets/BookOnlinePage-CAblwCPM.js",
     "name": "BookOnlinePage",
     "src": "src/pages/BookOnlinePage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "src/main.tsx",
-      "_PageHero-BxlWbycG.js",
-      "_external-link-D7Z6RWjQ.js"
+      "_PageHero-hOoFpkXn.js",
+      "_external-link-DU7_zqPW.js"
     ]
   },
   "src/pages/CartPage.tsx": {
-    "file": "assets/CartPage-B6VwWLnD.js",
+    "file": "assets/CartPage-BQkwgkSj.js",
     "name": "CartPage",
     "src": "src/pages/CartPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "src/main.tsx",
-      "_PageHero-BxlWbycG.js"
+      "_PageHero-hOoFpkXn.js"
     ]
   },
   "src/pages/ClinicPolicyPage.tsx": {
-    "file": "assets/ClinicPolicyPage-CG44A4HU.js",
+    "file": "assets/ClinicPolicyPage-D4IV0tVt.js",
     "name": "ClinicPolicyPage",
     "src": "src/pages/ClinicPolicyPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "src/main.tsx",
-      "_PageHero-BxlWbycG.js",
-      "_RichText-Bzx3He2Y.js"
+      "_PageHero-hOoFpkXn.js",
+      "_RichText-DFewtGbl.js"
     ]
   },
   "src/pages/ContactPage.tsx": {
-    "file": "assets/ContactPage-D5EGvuOe.js",
+    "file": "assets/ContactPage-DshvTPHD.js",
     "name": "ContactPage",
     "src": "src/pages/ContactPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "src/main.tsx",
-      "_PageHero-BxlWbycG.js",
-      "_external-link-D7Z6RWjQ.js"
+      "_PageHero-hOoFpkXn.js",
+      "_external-link-DU7_zqPW.js"
     ]
   },
   "src/pages/FaqsPage.tsx": {
-    "file": "assets/FaqsPage-D9J0JZyC.js",
+    "file": "assets/FaqsPage-C7M0I_2q.js",
     "name": "FaqsPage",
     "src": "src/pages/FaqsPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "src/main.tsx",
-      "_PageHero-BxlWbycG.js",
-      "_RichText-Bzx3He2Y.js"
+      "_PageHero-hOoFpkXn.js",
+      "_RichText-DFewtGbl.js"
     ]
   },
   "src/pages/NotFoundPage.tsx": {
-    "file": "assets/NotFoundPage-7DkoRiqp.js",
+    "file": "assets/NotFoundPage-BAJAkH8-.js",
     "name": "NotFoundPage",
     "src": "src/pages/NotFoundPage.tsx",
     "isDynamicEntry": true,
@@ -104,33 +104,33 @@
     ]
   },
   "src/pages/ProductPage.tsx": {
-    "file": "assets/ProductPage-BlXqzylD.js",
+    "file": "assets/ProductPage-GC9vwd7p.js",
     "name": "ProductPage",
     "src": "src/pages/ProductPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "src/main.tsx",
-      "_RichText-Bzx3He2Y.js"
+      "_RichText-DFewtGbl.js"
     ]
   },
   "src/pages/ShopPage.tsx": {
-    "file": "assets/ShopPage-Bpg_slHK.js",
+    "file": "assets/ShopPage-CJ1hZULI.js",
     "name": "ShopPage",
     "src": "src/pages/ShopPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "src/main.tsx",
-      "_PageHero-BxlWbycG.js"
+      "_PageHero-hOoFpkXn.js"
     ]
   },
   "src/pages/TreatmentPage.tsx": {
-    "file": "assets/TreatmentPage-BOJglGcH.js",
+    "file": "assets/TreatmentPage-BJ-lTzRD.js",
     "name": "TreatmentPage",
     "src": "src/pages/TreatmentPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "src/main.tsx",
-      "_PageHero-BxlWbycG.js"
+      "_PageHero-hOoFpkXn.js"
     ]
   }
 }

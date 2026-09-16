@@ -25,12 +25,16 @@ export default function BookOnlinePage() {
         intro="Check availability and book your appointment online, any time."
         banner={banners['book-online']}
       >
+        {/* All three share btn-* (not btn-*-lg) so they match the homepage
+            hero: same height, same font size, one line. Mixing sizes here
+            stretched the shorter buttons, and the longer labels pushed the
+            third onto a second row — the column is 576px wide. */}
         <div className="flex flex-wrap gap-3">
-          <a href="#packages" className="btn-primary-lg">
-            Packages &amp; prices
+          <a href="#packages" className="btn-primary">
+            Packages
           </a>
           <a href="#services" className="btn-outline">
-            Individual treatments
+            Treatments
           </a>
           <a href={BOOKING_URL} target="_blank" rel="noreferrer" className="btn-outline">
             Make a booking

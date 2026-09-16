@@ -46,7 +46,6 @@ function lunamoon_routes() {
 		'home'                            => __( 'Home', 'lunamoon' ),
 		'book-online'                     => __( 'Book Online', 'lunamoon' ),
 		'products'                        => __( 'Products', 'lunamoon' ),
-		'aesthetics-treatments'           => __( 'Aesthetics Treatments', 'lunamoon' ),
 		'advanced-facial-treatments'      => __( 'Advanced Facial Treatments', 'lunamoon' ),
 		'laser-cosmetic-teeth-whitening'  => __( 'Laser Cosmetic Teeth Whitening', 'lunamoon' ),
 		'skin-tightening-weight-loss'     => __( 'Skin Tightening & Weight Loss', 'lunamoon' ),

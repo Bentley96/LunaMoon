@@ -1,21 +1,19 @@
-import { treatmentBySlug } from '../content/treatments';
+import { homeTreatmentDetail } from '../content/homeTreatments';
 
 /**
  * The keyword-heavy treatment copy the existing site carries on its homepage,
  * below the "WHAT WE DO" cards: the Aesthetics Treatments block (Skin Boosters,
- * Lumie Eye, B Complex) and the IPL Laser Hair Removal block with its benefits.
+ * Lumi Eye, B Complex) and the IPL Laser Hair Removal block with its benefits.
  *
  * It ranks for the terms in it, so it belongs on the homepage rather than only
  * on an interior page. Rendered dark with gold headings to match how the
  * existing site presents it.
  *
- * Read from src/content/treatments.ts rather than copied, so the homepage and
- * the /aesthetics-treatments page can't drift apart. Note this does mean the
- * same copy is served at two URLs — see the note on that page's entry.
+ * This is the only place the copy lives now; the /aesthetics-treatments page
+ * that used to carry it has been removed.
  */
 export default function HomeTreatmentDetail() {
-  const page = treatmentBySlug('aesthetics-treatments');
-  if (!page) return null;
+  const page = homeTreatmentDetail;
 
   // The last section is IPL, which the existing site gives its own block and
   // heading; everything before it sits under the Aesthetics Treatments heading.

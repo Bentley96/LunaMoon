@@ -28,9 +28,8 @@ export interface NavLink {
  *
  *   - IPL Laser Hair Removal has no page of its own. It's booked, so the menu
  *     item goes straight to /book-online.
- *   - Aesthetics Treatments is off the menu. Its page still resolves, so
- *     existing links and search results keep working, but nothing links to it
- *     any more — see the note in src/content/treatments.ts.
+ *   - Aesthetics Treatments has been removed. Its copy now lives on the
+ *     homepage, in src/content/homeTreatments.ts.
  *
  * Labels still come from the page data so they can't drift; a slug that no
  * longer exists drops out of the menu rather than rendering a dead link.

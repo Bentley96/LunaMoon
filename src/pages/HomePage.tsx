@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import Hero from '../components/Hero';
 import ServiceCards from '../components/ServiceCards';
+import HomeTreatmentDetail from '../components/HomeTreatmentDetail';
 import ContactStrip from '../components/ContactStrip';
 import BookOnlineCTA from '../components/BookOnlineCTA';
 import Testimonials from '../components/Testimonials';
@@ -47,6 +48,8 @@ export default function HomePage() {
 
       <ContactStrip />
       <ServiceCards />
+      {/* Sits directly under the service cards, as on the existing site. */}
+      <HomeTreatmentDetail />
       <FeaturedProducts />
       <Testimonials />
 

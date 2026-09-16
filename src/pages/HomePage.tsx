@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import Hero from '../components/Hero';
 import ServiceCards from '../components/ServiceCards';
+import Awards from '../components/Awards';
 import HomeTreatmentDetail from '../components/HomeTreatmentDetail';
 import ContactStrip from '../components/ContactStrip';
 import BookOnlineCTA from '../components/BookOnlineCTA';
@@ -48,6 +49,8 @@ export default function HomePage() {
 
       <ContactStrip />
       <ServiceCards />
+      {/* The awards sit with the "what we do" copy that claims them. */}
+      <Awards />
       {/* Sits directly under the service cards, as on the existing site. */}
       <HomeTreatmentDetail />
       <FeaturedProducts />

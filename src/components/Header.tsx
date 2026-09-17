@@ -39,7 +39,10 @@ export default function Header() {
   }, [pathname]);
 
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 transition-shadow duration-300 ${scrolled ? 'shadow-lg' : ''}`}>
+    <header
+      data-site-header
+      className={`fixed inset-x-0 top-0 z-50 transition-shadow duration-300 ${scrolled ? 'shadow-lg' : ''}`}
+    >
       <div data-header-bars>
       {/* Utility bar — phone, email, socials */}
       <div className="bg-ink-850 text-white">

@@ -168,6 +168,23 @@ function lunamoon_enqueue_app() {
 		wp_enqueue_style( 'lunamoon-app-' . $i, $dist_uri . $css, array(), $ver );
 	}
 
+	// The theme's own stylesheet, after the app's so it can override it. It
+	// holds the WordPress-specific tweaks the build knows nothing about — the
+	// admin bar offset, for one.
+	$style     = get_template_directory() . '/style.css';
+	$style_ver = file_exists( $style ) ? filemtime( $style ) : null;
+	wp_enqueue_style(
+		'lunamoon-theme',
+		get_stylesheet_uri(),
+		array_map(
+			static function ( $i ) {
+				return 'lunamoon-app-' . $i;
+			},
+			array_keys( $files['css'] )
+		),
+		$style_ver
+	);
+
 	$ver = file_exists( $dist_dir . $files['js'] ) ? filemtime( $dist_dir . $files['js'] ) : null;
 	wp_enqueue_script( 'lunamoon-app', $dist_uri . $files['js'], array(), $ver, true );
 }

@@ -15,7 +15,36 @@ Text Domain: lunamoon
  * The visual styling lives in the compiled Tailwind CSS that the React build
  * emits (loaded from /dist). This file exists so WordPress recognises the theme
  * and to hold any small WordPress-specific tweaks below.
- *
- * Note: the WordPress admin bar (only visible to logged-in admins) can overlap
- * the app's fixed header. Real visitors never see it, so no offset is applied.
  */
+
+/*
+ * The admin bar, which only logged-in users see.
+ *
+ * WordPress adds margin-top to <html> to make room for it, but the app's header
+ * is fixed to the viewport, so without this it sits on top of the admin bar and
+ * covers it. The offsets are WordPress's own: 32px normally, 46px below 782px,
+ * where the bar is taller.
+ *
+ * The gap this used to leave under the header is handled in the app itself
+ * (src/components/Layout.tsx), which measures where <main> actually starts
+ * rather than assuming it starts at the top of the viewport.
+ */
+body.admin-bar [data-site-header] {
+	top: 32px;
+}
+
+@media screen and (max-width: 782px) {
+	body.admin-bar [data-site-header] {
+		top: 46px;
+	}
+}
+
+/*
+ * Below 600px WordPress stops fixing the admin bar, so it scrolls away with the
+ * page; the header goes back to the top of the viewport to follow it.
+ */
+@media screen and (max-width: 600px) {
+	body.admin-bar [data-site-header] {
+		top: 0;
+	}
+}

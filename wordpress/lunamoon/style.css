@@ -3,7 +3,7 @@ Theme Name: Luna Moon Aesthetics
 Theme URI: https://aestheticspreston.co.uk
 Author: Luna Moon Aesthetics
 Description: Hybrid headless theme for Luna Moon Aesthetics. The front end is a React app (built with Vite); WordPress and WooCommerce own the data — treatments, products, cart, checkout and orders — and serve it over the REST API.
-Version: 1.0.0
+Version: 1.1.0
 Requires at least: 6.0
 Requires PHP: 7.4
 License: GNU General Public License v2 or later
@@ -11,19 +11,779 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: lunamoon
 */
 
-/*
- * The visual styling lives in the compiled Tailwind CSS that the React build
- * emits (loaded from /dist). This file exists so WordPress recognises the theme
- * and to hold any small WordPress-specific tweaks below.
- */
+/* The two brand faces. The app's stylesheet imports these as well, but it isn't
+   loaded on these pages, so this file has to ask for them itself. */
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap");
 
 /*
- * The admin bar, which only logged-in users see.
+ * Styling for the pages WordPress renders itself: WooCommerce's checkout and
+ * account pages, served by page.php with header.php and footer.php around them.
  *
- * WordPress adds margin-top to <html> to make room for it, but the app's header
- * is fixed to the viewport, so without this it sits on top of the admin bar and
- * covers it. The offsets are WordPress's own: 32px normally, 46px below 782px,
- * where the bar is taller.
+ * Everything they need is in this file, in plain CSS, deliberately. The first
+ * version leaned on the app's compiled Tailwind classes and arrived on a real
+ * install with a 700px logo: those classes only exist in the build output if
+ * the build put them there, and between purge, minifiers, combiners and caching
+ * plugins there are too many ways for one to go missing. A checkout page is the
+ * last place on a site that should depend on that, so this stylesheet is served
+ * as written and these pages hold their shape whatever happens to the app's CSS.
+ *
+ * Nothing here applies outside the .lm- classes and the WooCommerce wrapper, so
+ * the React pages are untouched by it.
+ */
+
+:root {
+	--lm-ink-950: #110e0d;
+	--lm-ink-900: #1c1817;
+	--lm-ink-850: #201d1c;
+	--lm-ink-800: #2b2422;
+	--lm-ink-700: #3f3431;
+	--lm-ink-600: #524440;
+	--lm-ink-300: #b9aba5;
+	--lm-ink-200: #d9cfcb;
+	--lm-ink-100: #ede7e5;
+	--lm-ink-50: #f7f4f3;
+	--lm-ink-400: #8f7e77;
+	--lm-blush-800: #7a4e42;
+	--lm-blush-700: #9a6354;
+	--lm-blush-600: #b87f6e;
+	--lm-blush-500: #d2a294;
+	--lm-blush-400: #e4c3ba;
+	--lm-blush-200: #f4e2dc;
+	--lm-blush-50: #fdf8f7;
+	--lm-sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+	--lm-display: "Cormorant Garamond", Georgia, serif;
+}
+
+/* ----------------------------------------------------------------- shell -- */
+
+body.lm-page {
+	margin: 0;
+	background: #fff;
+	color: var(--lm-ink-900);
+	font-family: var(--lm-sans);
+	-webkit-font-smoothing: antialiased;
+}
+
+.lm-page img {
+	max-width: 100%;
+}
+
+.lm-wrap {
+	margin: 0 auto;
+	max-width: 80rem;
+	padding: 0 1rem;
+}
+
+@media (min-width: 640px) {
+	.lm-wrap {
+		padding: 0 1.5rem;
+	}
+}
+
+/* ---------------------------------------------------------------- header -- */
+
+.lm-header {
+	position: relative;
+	z-index: 40;
+}
+
+.lm-contact {
+	background: var(--lm-ink-850);
+	color: #fff;
+	font-size: 0.875rem;
+}
+
+.lm-contact .lm-wrap {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+}
+
+.lm-contact a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.lm-contact a:hover {
+	color: var(--lm-blush-400);
+}
+
+.lm-contact-details {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.25rem 1.25rem;
+}
+
+.lm-contact-email {
+	display: none;
+}
+
+@media (min-width: 640px) {
+	.lm-contact-email {
+		display: inline;
+	}
+}
+
+.lm-brand {
+	background: var(--lm-blush-400);
+}
+
+.lm-brand .lm-wrap {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	padding-top: 0.75rem;
+	padding-bottom: 0.75rem;
+}
+
+/* The one that went wrong on the install: an explicit height, not a utility. */
+.lm-logo {
+	display: block;
+	height: 3.5rem;
+	width: auto;
+	flex: none;
+}
+
+@media (min-width: 640px) {
+	.lm-logo {
+		height: 5rem;
+	}
+}
+
+.lm-nav {
+	display: none;
+	align-items: center;
+	gap: 0.25rem;
+}
+
+@media (min-width: 1024px) {
+	.lm-nav {
+		display: flex;
+	}
+}
+
+.lm-nav a,
+.lm-nav summary {
+	display: flex;
+	align-items: center;
+	gap: 0.25rem;
+	border-radius: 9999px;
+	padding: 0.5rem 0.75rem;
+	color: var(--lm-ink-800);
+	font-size: 0.875rem;
+	font-weight: 600;
+	letter-spacing: 0.025em;
+	text-decoration: none;
+	text-transform: uppercase;
+	white-space: nowrap;
+	cursor: pointer;
+	list-style: none;
+}
+
+.lm-nav a:hover,
+.lm-nav summary:hover {
+	color: var(--lm-blush-800);
+}
+
+.lm-nav summary::-webkit-details-marker {
+	display: none;
+}
+
+.lm-dropdown {
+	position: relative;
+}
+
+.lm-dropdown-panel {
+	position: absolute;
+	left: 0;
+	top: 100%;
+	z-index: 50;
+	width: 18rem;
+	overflow: hidden;
+	border: 1px solid var(--lm-ink-100);
+	border-radius: 0.75rem;
+	background: #fff;
+	padding: 0.5rem 0;
+	box-shadow: 0 20px 40px -12px rgb(17 14 13 / 25%);
+}
+
+.lm-dropdown-panel a {
+	display: block;
+	border-radius: 0;
+	padding: 0.625rem 1rem;
+	color: var(--lm-ink-700);
+	font-size: 0.875rem;
+	font-weight: 400;
+	letter-spacing: normal;
+	text-transform: none;
+	white-space: normal;
+}
+
+.lm-dropdown-panel a:hover {
+	background: var(--lm-blush-50);
+	color: var(--lm-blush-700);
+}
+
+.lm-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	border: 1px solid var(--lm-ink-900);
+	border-radius: 9999px;
+	background: var(--lm-ink-900);
+	padding: 0.75rem 1.5rem;
+	color: #fff;
+	font-size: 0.875rem;
+	font-weight: 700;
+	text-decoration: none;
+	white-space: nowrap;
+	transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.lm-btn:hover {
+	background: var(--lm-ink-800);
+	color: #fff;
+}
+
+.lm-book {
+	display: none;
+}
+
+@media (min-width: 640px) {
+	.lm-book {
+		display: inline-flex;
+	}
+}
+
+/* Mobile menu — a <details>, so it needs no JavaScript on a checkout page. */
+.lm-mobile {
+	position: relative;
+}
+
+@media (min-width: 1024px) {
+	.lm-mobile {
+		display: none;
+	}
+}
+
+.lm-mobile summary {
+	border-radius: 9999px;
+	padding: 0.5rem 0.75rem;
+	color: var(--lm-ink-800);
+	font-size: 0.875rem;
+	font-weight: 600;
+	letter-spacing: 0.025em;
+	text-transform: uppercase;
+	cursor: pointer;
+	list-style: none;
+}
+
+.lm-mobile summary::-webkit-details-marker {
+	display: none;
+}
+
+.lm-mobile-panel {
+	position: absolute;
+	right: 0;
+	top: calc(100% + 0.75rem);
+	z-index: 50;
+	width: 17rem;
+	border: 1px solid var(--lm-blush-500);
+	border-radius: 0.75rem;
+	background: var(--lm-blush-400);
+	padding: 0.5rem;
+	box-shadow: 0 20px 40px -12px rgb(17 14 13 / 35%);
+}
+
+.lm-mobile-panel a {
+	display: block;
+	border-radius: 0.5rem;
+	padding: 0.5rem;
+	color: var(--lm-ink-800);
+	font-size: 0.875rem;
+	text-decoration: none;
+}
+
+.lm-mobile-panel a:hover {
+	background: rgb(255 255 255 / 40%);
+}
+
+.lm-mobile-group {
+	margin: 0.75rem 0 0.25rem;
+	padding: 0 0.5rem;
+	color: var(--lm-ink-700);
+	font-size: 0.6875rem;
+	font-weight: 600;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+}
+
+/* ------------------------------------------------------------------ page -- */
+
+.lm-title-band {
+	border-bottom: 1px solid var(--lm-ink-100);
+	background: var(--lm-blush-50);
+}
+
+.lm-title-band .lm-wrap {
+	padding-top: 2.5rem;
+	padding-bottom: 2.5rem;
+}
+
+.lm-title {
+	margin: 0;
+	color: var(--lm-ink-900);
+	font-family: var(--lm-display);
+	font-size: 2rem;
+	font-weight: 600;
+	letter-spacing: -0.01em;
+	line-height: 1.1;
+	text-align: left;
+	text-transform: uppercase;
+}
+
+@media (min-width: 640px) {
+	.lm-title {
+		font-size: 2.5rem;
+	}
+
+	.lm-title-band .lm-wrap {
+		padding-top: 3.5rem;
+		padding-bottom: 3.5rem;
+	}
+}
+
+.lm-content {
+	padding-top: 3rem;
+	padding-bottom: 3rem;
+}
+
+@media (min-width: 640px) {
+	.lm-content {
+		padding-top: 4rem;
+		padding-bottom: 4rem;
+	}
+}
+
+/* ---------------------------------------------------------------- footer -- */
+
+.lm-footer {
+	background: var(--lm-ink-950);
+	color: var(--lm-ink-200);
+	font-size: 0.875rem;
+}
+
+.lm-footer .lm-wrap {
+	padding-top: 4rem;
+	padding-bottom: 4rem;
+}
+
+.lm-footer-grid {
+	display: grid;
+	gap: 2.5rem;
+}
+
+@media (min-width: 768px) {
+	.lm-footer-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (min-width: 1024px) {
+	.lm-footer-grid {
+		grid-template-columns: repeat(7, minmax(0, 1fr));
+	}
+
+	.lm-footer-wide {
+		grid-column: span 2 / span 2;
+	}
+}
+
+.lm-footer a {
+	color: var(--lm-ink-300);
+	text-decoration: none;
+}
+
+.lm-footer a:hover {
+	color: #fff;
+}
+
+.lm-footer h2 {
+	margin: 0 0 1rem;
+	color: #fff;
+	font-family: var(--lm-display);
+	font-size: 1.125rem;
+	font-weight: 600;
+}
+
+.lm-footer ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.lm-footer li + li {
+	margin-top: 0.625rem;
+}
+
+.lm-footer-logo {
+	display: block;
+	height: 6rem;
+	width: auto;
+}
+
+.lm-footer-tagline {
+	margin: 1rem 0 0;
+	max-width: 24rem;
+	color: var(--lm-ink-300);
+	line-height: 1.6;
+}
+
+.lm-footer-about {
+	margin: 0.75rem 0 0;
+	max-width: 24rem;
+	color: var(--lm-ink-400);
+	line-height: 1.6;
+}
+
+.lm-footer-details {
+	margin-top: 1.5rem;
+}
+
+.lm-footer-details p {
+	margin: 0 0 0.625rem;
+}
+
+.lm-hours {
+	margin: 0;
+}
+
+.lm-hours div {
+	display: flex;
+	gap: 0.625rem;
+	margin-bottom: 0.625rem;
+}
+
+.lm-hours dt {
+	color: var(--lm-ink-200);
+}
+
+.lm-hours dd {
+	margin: 0;
+	color: #fff;
+}
+
+.lm-klarna {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin-top: 1.5rem;
+}
+
+.lm-klarna img {
+	height: 1.75rem;
+	width: auto;
+}
+
+.lm-klarna p {
+	margin: 0;
+	color: var(--lm-ink-300);
+}
+
+.lm-footer-bottom {
+	border-top: 1px solid var(--lm-ink-800);
+}
+
+.lm-footer-bottom .lm-wrap {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.75rem;
+	padding-top: 1.5rem;
+	padding-bottom: 1.5rem;
+	color: var(--lm-ink-400);
+	font-size: 0.75rem;
+}
+
+.lm-footer-bottom p {
+	margin: 0;
+}
+
+@media (min-width: 640px) {
+	.lm-footer-bottom .lm-wrap {
+		flex-direction: row;
+	}
+}
+
+/* ----------------------------------------------------------- woocommerce -- */
+
+/*
+ * WooCommerce's own stylesheet supplies the layout on these pages; this puts
+ * the site's type, colour and controls over the top. Both the classic
+ * shortcode checkout and the newer Checkout block are covered, because which
+ * one a site has depends on when its checkout page was created and the two
+ * share almost no class names.
+ */
+
+.lunamoon-woo {
+	color: var(--lm-ink-700);
+	line-height: 1.6;
+}
+
+.lunamoon-woo h2,
+.lunamoon-woo h3,
+.lunamoon-woo .wc-block-components-title,
+.lunamoon-woo .wc-block-components-checkout-step__title {
+	color: var(--lm-ink-900);
+	font-family: var(--lm-display);
+	font-weight: 600;
+	letter-spacing: 0.025em;
+	text-transform: uppercase;
+}
+
+.lunamoon-woo a:not(.button):not(.wc-block-components-button) {
+	color: var(--lm-blush-700);
+	text-decoration: underline;
+	text-underline-offset: 2px;
+}
+
+.lunamoon-woo a:not(.button):not(.wc-block-components-button):hover {
+	color: var(--lm-blush-800);
+}
+
+.lunamoon-woo label {
+	color: var(--lm-ink-800);
+	font-size: 0.875rem;
+	font-weight: 500;
+}
+
+/* The :not() keeps this off the block checkout, whose fields sit inside
+   .wc-block-components-text-input with a floating label that a border and
+   padding of ours would break. */
+.lunamoon-woo :not(.wc-block-components-text-input) > input[type="text"],
+.lunamoon-woo :not(.wc-block-components-text-input) > input[type="email"],
+.lunamoon-woo :not(.wc-block-components-text-input) > input[type="tel"],
+.lunamoon-woo :not(.wc-block-components-text-input) > input[type="password"],
+.lunamoon-woo :not(.wc-block-components-text-input) > input[type="number"],
+.lunamoon-woo :not(.wc-block-components-textarea) > textarea,
+.lunamoon-woo select,
+.lunamoon-woo .select2-container .select2-selection {
+	width: 100%;
+	border: 1px solid var(--lm-ink-200);
+	border-radius: 0.5rem;
+	padding: 0.625rem 1rem;
+	color: var(--lm-ink-900);
+	font-family: inherit;
+	font-size: 1rem;
+}
+
+.lunamoon-woo :not(.wc-block-components-text-input) > input:focus,
+.lunamoon-woo :not(.wc-block-components-textarea) > textarea:focus,
+.lunamoon-woo select:focus {
+	border-color: var(--lm-blush-500);
+	outline: 2px solid var(--lm-blush-200);
+	outline-offset: 0;
+}
+
+.lunamoon-woo .button,
+.lunamoon-woo button[type="submit"]:not([class*="wc-block"]),
+.lunamoon-woo #place_order,
+.lunamoon-woo .wc-block-components-button:not(.is-link) {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	border: 1px solid var(--lm-blush-600);
+	border-radius: 9999px;
+	background: var(--lm-blush-400);
+	padding: 0.75rem 1.5rem;
+	color: var(--lm-ink-900);
+	font-family: inherit;
+	font-size: 1rem;
+	font-weight: 600;
+	text-decoration: none;
+	cursor: pointer;
+	transition: background-color 0.2s;
+}
+
+.lunamoon-woo .button:hover,
+.lunamoon-woo #place_order:hover,
+.lunamoon-woo .wc-block-components-button:not(.is-link):hover {
+	background: var(--lm-blush-500);
+	color: var(--lm-ink-900);
+}
+
+.lunamoon-woo .wc-block-components-button:not(.is-link) .wc-block-components-button__text {
+	color: var(--lm-ink-900);
+}
+
+.lunamoon-woo #place_order,
+.lunamoon-woo .wc-block-components-checkout-place-order-button {
+	width: 100%;
+	font-size: 1.125rem;
+}
+
+.lunamoon-woo table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.875rem;
+	text-align: left;
+}
+
+.lunamoon-woo table th,
+.lunamoon-woo table td {
+	border-bottom: 1px solid var(--lm-ink-100);
+	padding: 0.75rem;
+	vertical-align: top;
+}
+
+.lunamoon-woo table th {
+	color: var(--lm-ink-900);
+	font-weight: 600;
+}
+
+/*
+ * An order table with five columns is wider than a phone. WooCommerce's own
+ * small-screen stylesheet stacks these into rows, but that's one more thing
+ * that has to load correctly; scrolling the table rather than the page means
+ * it can't push the whole layout sideways either way.
+ */
+@media (max-width: 640px) {
+	.lunamoon-woo .shop_table,
+	.lunamoon-woo .woocommerce-orders-table {
+		display: block;
+		overflow-x: auto;
+	}
+}
+
+.lunamoon-woo .woocommerce-Price-amount,
+.lunamoon-woo .wc-block-components-totals-item__value,
+.lunamoon-woo .wc-block-components-formatted-money-amount {
+	color: var(--lm-ink-900);
+	font-family: var(--lm-display);
+	font-weight: 600;
+}
+
+.lunamoon-woo #customer_details,
+.lunamoon-woo .woocommerce-checkout-review-order,
+.lunamoon-woo .woocommerce-MyAccount-content,
+.lunamoon-woo .woocommerce-form-login,
+.lunamoon-woo .woocommerce-form-register,
+.lunamoon-woo .wc-block-checkout__sidebar .wc-block-components-sidebar {
+	border: 1px solid var(--lm-ink-100);
+	border-radius: 1rem;
+	background: #fff;
+	padding: 1.5rem;
+	box-shadow: 0 1px 2px rgb(17 14 13 / 5%);
+}
+
+@media (min-width: 640px) {
+	.lunamoon-woo #customer_details,
+	.lunamoon-woo .woocommerce-checkout-review-order,
+	.lunamoon-woo .woocommerce-MyAccount-content {
+		padding: 2rem;
+	}
+}
+
+.lunamoon-woo .woocommerce-info,
+.lunamoon-woo .woocommerce-message,
+.lunamoon-woo .woocommerce-notice,
+.lunamoon-woo .wc-block-components-notice-banner {
+	margin-bottom: 1.5rem;
+	border-left: 4px solid var(--lm-blush-500);
+	border-radius: 1rem;
+	background: var(--lm-blush-50);
+	padding: 1rem 1.25rem;
+	color: var(--lm-ink-800);
+	list-style: none;
+}
+
+.lunamoon-woo .woocommerce-error {
+	margin-bottom: 1.5rem;
+	border-left: 4px solid #dc2626;
+	border-radius: 1rem;
+	background: #fef2f2;
+	padding: 1rem 1.25rem;
+	color: #7f1d1d;
+	list-style: none;
+}
+
+.lunamoon-woo #payment {
+	border-radius: 1rem;
+	background: var(--lm-ink-50);
+	padding: 1.25rem;
+}
+
+.lunamoon-woo #payment ul.payment_methods {
+	margin: 0;
+	border: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.lunamoon-woo #payment ul.payment_methods li {
+	margin-bottom: 0.5rem;
+	border: 1px solid var(--lm-ink-200);
+	border-radius: 0.75rem;
+	background: #fff;
+	padding: 0.75rem 1rem;
+}
+
+.lunamoon-woo #payment div.payment_box {
+	margin-top: 0.75rem;
+	border-radius: 0.5rem;
+	background: var(--lm-ink-50);
+	padding: 1rem;
+	color: var(--lm-ink-600);
+	font-size: 0.875rem;
+}
+
+.lunamoon-woo #payment div.payment_box::before {
+	display: none;
+}
+
+.lunamoon-woo .woocommerce-MyAccount-navigation ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.lunamoon-woo .woocommerce-MyAccount-navigation li a {
+	display: block;
+	border-radius: 9999px;
+	padding: 0.625rem 1rem;
+	color: var(--lm-ink-700);
+	font-size: 0.875rem;
+	font-weight: 600;
+	letter-spacing: 0.025em;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+.lunamoon-woo .woocommerce-MyAccount-navigation li a:hover {
+	background: var(--lm-blush-50);
+	color: var(--lm-blush-800);
+}
+
+.lunamoon-woo .woocommerce-MyAccount-navigation li.is-active a {
+	background: var(--lm-blush-400);
+	color: var(--lm-ink-900);
+}
+
+/* ------------------------------------------------------------- admin bar -- */
+
+/*
+ * WordPress adds margin-top to <html> to make room for the admin bar, but the
+ * app's header is fixed to the viewport, so without this it sits on top of the
+ * bar and covers it. The offsets are WordPress's own: 32px normally, 46px below
+ * 782px, where the bar is taller.
  *
  * The gap this used to leave under the header is handled in the app itself
  * (src/components/Layout.tsx), which measures where <main> actually starts
@@ -47,4 +807,9 @@ body.admin-bar [data-site-header] {
 	body.admin-bar [data-site-header] {
 		top: 0;
 	}
+}
+
+/* The PHP header isn't fixed, so it never needs that offset. */
+body.admin-bar .lm-header {
+	top: auto;
 }

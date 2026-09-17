@@ -18,19 +18,17 @@ defined( 'ABSPATH' ) || exit;
 get_header();
 ?>
 
-<main class="bg-white">
+<main class="lm-main">
 	<?php while ( have_posts() ) : ?>
 		<?php the_post(); ?>
 
-		<div class="border-b border-ink-100 bg-blush-50">
-			<div class="container-xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
-				<h1 class="font-display text-3xl uppercase tracking-tight text-ink-900 sm:text-4xl">
-					<?php the_title(); ?>
-				</h1>
+		<div class="lm-title-band">
+			<div class="lm-wrap">
+				<h1 class="lm-title"><?php the_title(); ?></h1>
 			</div>
 		</div>
 
-		<div class="container-xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+		<div class="lm-wrap lm-content">
 			<div class="lunamoon-woo">
 				<?php the_content(); ?>
 			</div>

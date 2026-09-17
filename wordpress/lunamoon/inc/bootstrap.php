@@ -19,15 +19,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Default clinic details.
  *
- * TODO(content): confirm these against the live site, then set them for real in
- * the Customizer — these are only the fallbacks shipped with the theme.
+ * These match the defaults in src/config/site.ts, so the PHP-rendered pages and
+ * the app say the same thing before anyone opens the Customizer. Setting a
+ * value there overrides it.
  *
  * @return array
  */
 function lunamoon_default_details() {
 	return array(
-		'phone'              => '',
-		'email'              => '',
+		'phone'              => '07592 608 064',
+		'email'              => 'info@aestheticspreston.co.uk',
 		'address'            => "House of Hair & Beauty\n55-56 Friargate\nPreston\nPR1 2AT",
 		'hours'              => '',
 		'facebook'           => '',

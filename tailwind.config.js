@@ -8,14 +8,7 @@
 //   blush  — the rose primary; buttons, links and active states.
 //   gold   — the champagne secondary; accents, rules and price/offer badges.
 export default {
-  // The PHP templates are in here too: header.php, footer.php and page.php
-  // render WooCommerce's checkout and account pages with the same classes, and
-  // without this every one of them would be purged out of the stylesheet.
-  content: [
-    './index.html',
-    './src/**/*.{js,ts,jsx,tsx}',
-    './wordpress/lunamoon/**/*.php',
-  ],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {

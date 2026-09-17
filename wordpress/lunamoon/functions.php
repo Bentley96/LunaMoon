@@ -230,6 +230,19 @@ function lunamoon_entry_files() {
  */
 add_action( 'wp_enqueue_scripts', 'lunamoon_enqueue_app' );
 function lunamoon_enqueue_app() {
+	$style     = get_template_directory() . '/style.css';
+	$style_ver = file_exists( $style ) ? filemtime( $style ) : null;
+
+	// Checkout and My Account are rendered by WooCommerce through page.php, not
+	// by the app. They get WooCommerce's stylesheet and this theme's, and
+	// nothing else: the app has no #root to mount into there, and its CSS
+	// carries Tailwind's preflight, which would strip the defaults out of
+	// WooCommerce's own markup for no gain.
+	if ( function_exists( 'lunamoon_is_woo_owned_request' ) && lunamoon_is_woo_owned_request() ) {
+		wp_enqueue_style( 'lunamoon-theme', get_stylesheet_uri(), array(), $style_ver );
+		return;
+	}
+
 	$files = lunamoon_entry_files();
 	if ( '' === $files['js'] ) {
 		return; // Not built / files not present.
@@ -243,11 +256,9 @@ function lunamoon_enqueue_app() {
 		wp_enqueue_style( 'lunamoon-app-' . $i, $dist_uri . $css, array(), $ver );
 	}
 
-	// The theme's own stylesheet, after the app's so it can override it. It
-	// holds the WordPress-specific tweaks the build knows nothing about — the
-	// admin bar offset, for one.
-	$style     = get_template_directory() . '/style.css';
-	$style_ver = file_exists( $style ) ? filemtime( $style ) : null;
+	// The theme's own stylesheet last, so it can override the app's — it holds
+	// the WordPress-specific tweaks the build knows nothing about, the admin
+	// bar offset among them.
 	wp_enqueue_style(
 		'lunamoon-theme',
 		get_stylesheet_uri(),
@@ -259,13 +270,6 @@ function lunamoon_enqueue_app() {
 		),
 		$style_ver
 	);
-
-	// The CSS is wanted everywhere — it styles the PHP-rendered checkout and
-	// account pages too — but the app itself has nothing to do there: those
-	// pages have no #root, and a payment form should have the page to itself.
-	if ( function_exists( 'lunamoon_is_woo_owned_request' ) && lunamoon_is_woo_owned_request() ) {
-		return;
-	}
 
 	$ver = file_exists( $dist_dir . $files['js'] ) ? filemtime( $dist_dir . $files['js'] ) : null;
 	wp_enqueue_script( 'lunamoon-app', $dist_uri . $files['js'], array(), $ver, true );

@@ -134,6 +134,20 @@ const DEFAULT_SOCIAL: Record<string, string> = {
   whatsapp: 'https://wa.me/+447592608064',
 };
 
+/**
+ * The map on the contact page.
+ *
+ * Google's keyless embed: `?output=embed` renders a map for a search term with
+ * no API key and no account, so the page works as shipped. It searches for the
+ * address rather than pointing at the clinic's own listing, which is the one
+ * thing it can't do — for the pin with the clinic's name and reviews on it,
+ * paste the URL from Share → Embed a map on the Google Business Profile into
+ * the Customizer, and that wins.
+ */
+export const MAP_EMBED_URL =
+  'https://maps.google.com/maps?output=embed&z=16&q=' +
+  encodeURIComponent('House of Hair & Beauty, 55-56 Friargate, Preston PR1 2AT');
+
 /** Business details, with the theme's injected values taking precedence. */
 export const business = {
   name: bootstrap.site.name || 'Luna Moon Aesthetics',
@@ -158,6 +172,13 @@ export const business = {
   bookingUrl: bootstrap.site.bookingUrl || BOOKING_URL,
   /** Google Business Profile listing, linked from the reviews section. */
   googleReviewsUrl: bootstrap.site.googleReviewsUrl || GOOGLE_REVIEWS_URL,
+  /**
+   * Map iframe on the contact page. An empty Customizer field means "use the
+   * default", as with every other detail here — `??` would have read the
+   * empty string the theme always sends as a deliberate choice and shown no
+   * map at all.
+   */
+  mapEmbedUrl: bootstrap.site.mapEmbedUrl || MAP_EMBED_URL,
   /** Shown beneath the contact details on the homepage and contact page. */
   finance: 'We accept pay monthly payment options as well as Klarna finance options.',
 };

@@ -5,6 +5,7 @@ import BookingForm from '../components/BookingForm';
 import { business, BOOKING_URL } from '../config/site';
 import SocialLinks from '../components/SocialLinks';
 import PageFaqs from '../components/PageFaqs';
+import ClinicMap from '../components/ClinicMap';
 import { WhatsAppIcon } from '../components/ui/BrandIcons';
 import KlarnaBadge from '../components/KlarnaBadge';
 
@@ -103,10 +104,7 @@ export default function ContactPage() {
               <SocialLinks variant="light" className="mt-4" />
             </div>
 
-            {/* TODO(content): replace with the clinic's Google Maps embed. */}
-            <div className="img-placeholder mt-8 aspect-[4/3] rounded-2xl">
-              <span>Map embed — 55-56 Friargate, Preston</span>
-            </div>
+            <ClinicMap />
           </div>
 
           <div className="card p-8">

@@ -37,6 +37,7 @@ function lunamoon_default_details() {
 		'whatsapp'           => 'https://wa.me/+447592608064',
 		'booking_url'        => 'https://www.that-time.co.uk/luna-moon-aesthetics',
 		'google_reviews_url' => '',
+		'map_embed_url'      => '',
 	);
 }
 
@@ -200,6 +201,7 @@ function lunamoon_print_bootstrap() {
 			'bookingUrl'       => lunamoon_detail( 'booking_url' ),
 			// Linked from the reviews section so visitors can read the rest.
 			'googleReviewsUrl' => lunamoon_detail( 'google_reviews_url' ),
+			'mapEmbedUrl'      => lunamoon_detail( 'map_embed_url' ),
 		),
 	);
 
@@ -234,6 +236,7 @@ function lunamoon_customize_details( $wp_customize ) {
 		'whatsapp'           => array( __( 'WhatsApp URL (e.g. https://wa.me/447592608064)', 'lunamoon' ), 'url' ),
 		'booking_url'        => array( __( 'External booking URL (optional)', 'lunamoon' ), 'url' ),
 		'google_reviews_url' => array( __( 'Google reviews URL (optional) — the listing link from your Google Business Profile', 'lunamoon' ), 'url' ),
+		'map_embed_url'      => array( __( 'Map embed URL (optional) — the src from Google Maps → Share → Embed a map', 'lunamoon' ), 'url' ),
 	);
 
 	$defaults = lunamoon_default_details();

@@ -32,6 +32,8 @@ export interface SiteInfo {
   bookingUrl: string;
   /** Google Business Profile listing, for the "read more reviews" link. */
   googleReviewsUrl: string;
+  /** The src of the map iframe on the contact page. */
+  mapEmbedUrl: string;
 }
 
 /** Permalinks of the pages WooCommerce renders itself. */
@@ -97,6 +99,7 @@ const FALLBACK: Bootstrap = {
     social: {},
     bookingUrl: '',
     googleReviewsUrl: '',
+    mapEmbedUrl: '',
   },
 };
 

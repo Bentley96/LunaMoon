@@ -30,12 +30,12 @@ function lunamoon_default_details() {
 		'phone'              => '07592 608 064',
 		'email'              => 'info@aestheticspreston.co.uk',
 		'address'            => "House of Hair & Beauty\n55-56 Friargate\nPreston\nPR1 2AT",
-		'hours'              => '',
-		'facebook'           => '',
-		'instagram'          => '',
-		'tiktok'             => '',
-		'whatsapp'           => '',
-		'booking_url'        => '',
+		'hours'              => "Monday|10am - 6pm\nTuesday|10am - 6pm\nWednesday|10am - 5pm\nThursday|10am - 7pm\nFriday|10am - 7pm\nSaturday|10am - 3pm\nSunday|Closed",
+		'facebook'           => 'https://www.facebook.com/lunamoonaesthetics',
+		'instagram'          => 'https://www.instagram.com/luna_moon_aesthetics__/',
+		'tiktok'             => 'https://www.tiktok.com/@luna_moon_aesthetics',
+		'whatsapp'           => 'https://wa.me/+447592608064',
+		'booking_url'        => 'https://www.that-time.co.uk/luna-moon-aesthetics',
 		'google_reviews_url' => '',
 	);
 }

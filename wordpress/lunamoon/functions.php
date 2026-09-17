@@ -276,6 +276,73 @@ function lunamoon_enqueue_app() {
 }
 
 /**
+ * Page-builder and old-theme CSS, off the pages WooCommerce renders.
+ *
+ * Checkout and My Account are built by this theme and WooCommerce, not by
+ * Elementor or a JetPlugins widget, but those stylesheets still load site-wide
+ * and bring rules broad enough to reach anything on the page — a heading, an
+ * image. There's nothing on these two pages for them to style, so they come
+ * off: the page gets lighter and the cascade gets predictable.
+ *
+ * Deliberately narrow: a payment gateway's own CSS is left alone, because
+ * that's what draws the card fields.
+ */
+add_action( 'wp_enqueue_scripts', 'lunamoon_dequeue_builder_styles', 100 );
+function lunamoon_dequeue_builder_styles() {
+	if ( ! function_exists( 'lunamoon_is_woo_owned_request' ) || ! lunamoon_is_woo_owned_request() ) {
+		return;
+	}
+
+	$styles = wp_styles();
+	if ( ! $styles || empty( $styles->queue ) ) {
+		return;
+	}
+
+	$drop = apply_filters( 'lunamoon_dequeue_style_prefixes', array( 'elementor', 'jet-', 'eael-', 'e-animation', 'widget-' ) );
+
+	foreach ( (array) $styles->queue as $handle ) {
+		foreach ( $drop as $prefix ) {
+			if ( 0 === strpos( $handle, $prefix ) ) {
+				wp_dequeue_style( $handle );
+				break;
+			}
+		}
+	}
+}
+
+/**
+ * The few rules on those pages that must not lose.
+ *
+ * Printed last in <head>, after every plugin stylesheet, and marked important.
+ * That isn't how a theme should normally get its way, but a live WordPress
+ * carries CSS this theme has never seen — the first version of these templates
+ * reached the clinic's install with a 700px logo because something else on the
+ * page won the argument about image heights. The rest of the styling is in
+ * style.css as ordinary rules; this is only the handful that decide whether the
+ * page is usable.
+ */
+add_action( 'wp_head', 'lunamoon_critical_css', 999 );
+function lunamoon_critical_css() {
+	if ( ! function_exists( 'lunamoon_is_woo_owned_request' ) || ! lunamoon_is_woo_owned_request() ) {
+		return;
+	}
+	?>
+<style id="lunamoon-critical">
+.lm-page .lm-logo{height:3.5rem!important;width:auto!important;max-width:none!important;display:block!important}
+@media (min-width:640px){.lm-page .lm-logo{height:5rem!important}}
+.lm-page .lm-footer-logo{height:6rem!important;width:auto!important;max-width:none!important}
+.lm-page .lm-klarna img{height:1.75rem!important;width:auto!important}
+.lm-page .lm-title{font-family:"Cormorant Garamond",Georgia,serif!important;font-size:2rem!important;color:#1c1817!important;text-align:left!important;text-transform:uppercase!important;letter-spacing:-.01em!important;margin:0!important}
+@media (min-width:640px){.lm-page .lm-title{font-size:2.5rem!important}}
+.lm-page .lm-contact{background:#201d1c!important;color:#fff!important}
+.lm-page .lm-brand{background:#e4c3ba!important}
+.lm-page .lm-footer{background:#110e0d!important;color:#d9cfcb!important}
+.lm-page .lm-wrap{max-width:80rem!important;margin-left:auto!important;margin-right:auto!important}
+</style>
+	<?php
+}
+
+/**
  * Load the entry as a native ES module (Vite output requires type="module").
  *
  * The `?ver=` query is stripped deliberately: the entry's lazy-loaded chunks

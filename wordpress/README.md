@@ -81,6 +81,18 @@ React owns browsing and the basket. From the Checkout button onwards it's
 WooCommerce — which means every gateway, plugin and tax/shipping rule works out
 of the box, with no gateway-specific code to maintain.
 
+Those two pages are rendered by `page.php`, with `header.php` and `footer.php`
+giving them the site's own header and footer, and the WooCommerce styling in
+`src/index.css` (under `.lunamoon-woo`) putting the site's type, colour and
+controls over WooCommerce's layout. Both the classic shortcode checkout and the
+newer Checkout block are covered, since which one a site has depends on when
+its checkout page was created.
+
+The app's JavaScript is not loaded on those pages — there's no `#root` to mount
+into, and nothing should compete with a payment form — but its CSS is, which is
+what the styling above rides on. `tailwind.config.js` scans the theme's PHP so
+the classes those templates use survive the build.
+
 `inc/commerce.php` forces `index.php` back for the shop and product URLs that
 WooCommerce would otherwise template itself, and leaves checkout and account
 URLs alone. The owned paths are read from WooCommerce's own page settings, so

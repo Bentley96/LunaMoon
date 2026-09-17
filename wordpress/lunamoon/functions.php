@@ -58,6 +58,81 @@ function lunamoon_routes() {
 }
 
 /**
+ * The main menu, for the PHP-rendered pages.
+ *
+ * WooCommerce renders checkout and account itself, so those pages get the
+ * header and footer from header.php / footer.php rather than from React. This
+ * is the same menu as src/config/site.ts — kept in step by hand, which is the
+ * price of the two pages the app doesn't own. It changes about once a year.
+ *
+ * @return array<int,array{label:string,url:string,children?:array}>
+ */
+function lunamoon_menu() {
+	return apply_filters(
+		'lunamoon_menu',
+		array(
+			array( 'label' => __( 'Home', 'lunamoon' ), 'url' => '/' ),
+			array( 'label' => __( 'Book Online', 'lunamoon' ), 'url' => '/book-online' ),
+			array( 'label' => __( 'Products', 'lunamoon' ), 'url' => '/products' ),
+			array(
+				'label'    => __( 'Our Treatments', 'lunamoon' ),
+				'url'      => '#',
+				'children' => array(
+					array( 'label' => __( 'Advanced Facial Treatments', 'lunamoon' ), 'url' => '/advanced-facial-treatments' ),
+					array( 'label' => __( 'Laser Cosmetic Teeth Whitening', 'lunamoon' ), 'url' => '/laser-cosmetic-teeth-whitening' ),
+					array( 'label' => __( 'Skin Tightening & Weight Loss', 'lunamoon' ), 'url' => '/skin-tightening-weight-loss' ),
+					array( 'label' => __( 'IPL Laser Hair Removal', 'lunamoon' ), 'url' => '/book-online#ipl-laser-hair-removal' ),
+				),
+			),
+			array( 'label' => __( 'FAQ’s', 'lunamoon' ), 'url' => '/faqs' ),
+			array( 'label' => __( 'Contact', 'lunamoon' ), 'url' => '/contact' ),
+		)
+	);
+}
+
+/**
+ * Footer link columns, mirroring src/config/site.ts.
+ *
+ * @return array<string,array<int,array{label:string,url:string}>>
+ */
+function lunamoon_footer_menus() {
+	$treatments = array();
+	foreach ( lunamoon_menu() as $item ) {
+		if ( ! empty( $item['children'] ) ) {
+			$treatments = $item['children'];
+			break;
+		}
+	}
+
+	return apply_filters(
+		'lunamoon_footer_menus',
+		array(
+			__( 'Our Treatments', 'lunamoon' ) => $treatments,
+			__( 'Shop', 'lunamoon' )           => array(
+				array( 'label' => __( 'All products', 'lunamoon' ), 'url' => '/products' ),
+				array( 'label' => __( 'Basket', 'lunamoon' ), 'url' => '/cart' ),
+			),
+			__( 'Clinic', 'lunamoon' )         => array(
+				array( 'label' => __( 'Book Online', 'lunamoon' ), 'url' => '/book-online' ),
+				array( 'label' => __( 'FAQ’s', 'lunamoon' ), 'url' => '/faqs' ),
+				array( 'label' => __( 'Contact', 'lunamoon' ), 'url' => '/contact' ),
+				array( 'label' => __( 'Clinic Policy', 'lunamoon' ), 'url' => '/clinic-policy' ),
+			),
+		)
+	);
+}
+
+/**
+ * A site URL for one of the app's routes.
+ *
+ * @param string $path Route path, e.g. "/book-online".
+ * @return string
+ */
+function lunamoon_url( $path ) {
+	return esc_url( home_url( $path ) );
+}
+
+/**
  * Basic theme support.
  */
 add_action( 'after_setup_theme', 'lunamoon_setup' );
@@ -184,6 +259,13 @@ function lunamoon_enqueue_app() {
 		),
 		$style_ver
 	);
+
+	// The CSS is wanted everywhere — it styles the PHP-rendered checkout and
+	// account pages too — but the app itself has nothing to do there: those
+	// pages have no #root, and a payment form should have the page to itself.
+	if ( function_exists( 'lunamoon_is_woo_owned_request' ) && lunamoon_is_woo_owned_request() ) {
+		return;
+	}
 
 	$ver = file_exists( $dist_dir . $files['js'] ) ? filemtime( $dist_dir . $files['js'] ) : null;
 	wp_enqueue_script( 'lunamoon-app', $dist_uri . $files['js'], array(), $ver, true );

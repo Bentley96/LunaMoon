@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useParams } from 'react-router-dom';
 import Layout from './components/Layout';
 import ScrollToTop from './components/ScrollToTop';
 import Seo from './components/Seo';
@@ -21,6 +21,12 @@ const FaqsPage = lazy(() => import('./pages/FaqsPage'));
 const ClinicPolicyPage = lazy(() => import('./pages/ClinicPolicyPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
+/** /shop/<slug> is the same product as /product/<slug> on some Woo setups. */
+function ShopRedirect() {
+  const { slug } = useParams<{ slug: string }>();
+  return <Navigate to={`/product/${slug ?? ''}`} replace />;
+}
+
 export default function App() {
   return (
     <>
@@ -41,6 +47,15 @@ export default function App() {
 
             <Route path="/products" element={<ShopPage />} />
             <Route path="/product/:slug" element={<ProductPage />} />
+            {/* WooCommerce's own links — "Return to shop" on an empty basket,
+                breadcrumbs, category archives — point at the shop page and the
+                product taxonomies, which this app doesn't have pages for. They
+                resolve to the shell, so without these they'd 404 inside a site
+                that does have the products. */}
+            <Route path="/shop" element={<Navigate to="/products" replace />} />
+            <Route path="/shop/:slug" element={<ShopRedirect />} />
+            <Route path="/product-category/*" element={<Navigate to="/products" replace />} />
+            <Route path="/product-tag/*" element={<Navigate to="/products" replace />} />
             <Route path="/cart" element={<CartPage />} />
             {/* /checkout and /my-account are served by WooCommerce, not React —
                 see wordpress/lunamoon/inc/commerce.php. */}

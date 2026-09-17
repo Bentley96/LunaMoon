@@ -66,12 +66,16 @@ header and persists the guest `Cart-Token`.
 
 This is the one thing to keep straight:
 
-| URL                                     | Rendered by              |
-| --------------------------------------- | ------------------------ |
-| `/`, `/treatments/…`, `/about`, `/faqs` | React                    |
-| `/shop`, `/shop/<slug>`, `/cart`        | React (Store API)        |
-| `/checkout/…`                           | **WooCommerce** (native) |
-| `/my-account/…`                         | **WooCommerce** (native) |
+| URL                                                    | Rendered by              |
+| ------------------------------------------------------ | ------------------------ |
+| `/`, the three treatment pages, `/book-online`, `/faqs`, `/contact`, the policy pages | React |
+| `/products`, `/product/<slug>`, `/cart`                | React (Store API)        |
+| `/checkout/…`                                          | **WooCommerce** (native) |
+| `/my-account/…`                                        | **WooCommerce** (native) |
+
+WooCommerce's own links point at `/shop`, `/product-category/…` and
+`/product-tag/…`, which the app has no pages for; `src/App.tsx` redirects those
+to `/products` so they don't 404 on a site that does have the products.
 
 React owns browsing and the basket. From the Checkout button onwards it's
 WooCommerce — which means every gateway, plugin and tax/shipping rule works out
@@ -123,8 +127,11 @@ Install → Activate.
 4. **WooCommerce → Settings → Payments** — enable at least one gateway. Style
    the checkout page to match if you want the transition to feel seamless.
 5. Add content: **Treatments**, **Testimonials**, **FAQs**, and **Products**.
-6. Fill in the `privacy-policy`, `terms-conditions` and `cancellation-policy`
-   pages (activation creates them empty).
+6. Fill in the `clinic-policy` and `privacy-policy` pages (activation creates
+   them empty; the app reads them through `lunamoon/v1/page/<slug>`).
+7. **WooCommerce → Settings → Products** — if you want `/shop` to be the app's
+   listing rather than a redirect, point the Shop page at the theme's
+   **Products** page.
 
 ### 4. Configure email
 

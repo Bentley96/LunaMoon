@@ -33,7 +33,7 @@ export interface TreatmentPageData {
 }
 
 const SERVICES_BLURB =
-  'From laser cosmetic teeth whitening and skin and facial treatments to skin tightening and weight loss, we have something for everyone, all at affordable prices. Luna Moon Aesthetics have won awards for the top 10 regional salons, finalists at the UK Hair and Beauty Awards in 2022 and 2023 and 2nd in the UK Advanced practitioner awards.';
+  'Advanced skin treatments, body contouring and laser, delivered with clinical technology and a plan built around you. Luna Moon Aesthetics have won awards for the top 10 regional salons, finalists at the UK Hair and Beauty Awards in 2022 and 2023 and 2nd in the UK Advanced practitioner awards.';
 
 export const treatmentPages: TreatmentPageData[] = [
   {
@@ -123,15 +123,15 @@ export const treatmentPages: TreatmentPageData[] = [
     intro: {
       heading: 'LASER COSMETIC TEETH WHITENING',
       body: [
-        'Get instant results with cosmetic teeth whitening at Luna Moon Aesthetics Preston! We can take your teeth up to 8-12 shades whiter than your natural tooth shade by utilising a laser light to enhance the whiteness of teeth.',
-        'Luna Moon Aesthetics is a Preston based clinic offering everything you need to keep you looking and feeling glamorous for that special occasion in your life. We are at 55-56 Friargate, Preston, PR1 2AT. Please visit our online booking form for services and availability. We hope to see you soon.',
+        'Professional laser cosmetic teeth whitening at Luna Moon Aesthetics Preston. A whitening gel is activated by a laser light to lift staining from the enamel, for a noticeably brighter smile in a single appointment. How much lighter your teeth go depends on your enamel and the staining you start with, which your practitioner will talk through with you.',
+        'We are at 55-56 Friargate, Preston, PR1 2AT. Please visit our online booking form for services and availability. We hope to see you soon.',
       ],
       image: '/images/teeth-whitening-1.webp',
     },
     secondary: {
       heading: 'NATURAWHITE — SMILE YOUR BEST SMILE',
       body: [
-        'Treat yourself to safe, effective teeth whitening at Luna Moon Aesthetics clinic in Preston. Laser cosmetic teeth whitening is a procedure that uses a teeth whitening gel and powerful laser light to improve the appearance of teeth by lightening their colour by up to 12 shades.',
+        'Treat yourself to safe, effective teeth whitening at Luna Moon Aesthetics clinic in Preston. Laser cosmetic teeth whitening is a procedure that uses a teeth whitening gel and a powerful laser light to lift staining and lighten the colour of your teeth, with the result varying from person to person.',
       ],
       image: '/images/teeth-whitening-2.webp',
     },
@@ -170,16 +170,16 @@ export const treatmentPages: TreatmentPageData[] = [
 
   {
     slug: 'skin-tightening-weight-loss',
-    navLabel: 'Skin Tightening & Weight Loss',
-    title: 'SKIN TIGHTENING & WEIGHT LOSS',
+    navLabel: 'Body Contouring & Skin Tightening',
+    title: 'BODY CONTOURING & SKIN TIGHTENING',
     heroBlurb:
-      'We provide professional skin tightening & weight loss services in Preston. For more information, or to make a booking get in touch now!',
+      'Sculpt, firm and reshape with advanced body contouring and skin tightening in Preston. Book a consultation to talk through what you want to change.',
     heroImage: '/images/body-contouring.webp',
     intro: {
-      heading: 'SKIN TIGHTENING & WEIGHT LOSS',
+      heading: 'BODY CONTOURING & SKIN TIGHTENING',
       body: [
-        'Luna Moon Aesthetics is a Preston based clinic offering everything you need to keep you looking fabulous and feeling fantastic. We are based at 55-56 Friargate, Preston, PR1 2AT. Please visit our online booking form for services and availability.',
-        'Whether you are seeking to tighten sagging skin or embark on a journey to a slimmer, sculpted body, Luna Moon Aesthetics Preston offer radio frequency skin tightening and body sculpting, lemon bottle injections, sauna blanket with essential oils, liquid lipo, cavitation and vacuum therapy.',
+        'Luna Moon Aesthetics is a Preston clinic specialising in body contouring and skin tightening. We are based at 55-56 Friargate, Preston, PR1 2AT. Please visit our online booking form for services and availability.',
+        'Whether you want to firm skin that has lost its tone or reshape a particular area, we offer radio frequency skin tightening and body sculpting, EMS, Liquid Lipo, Lemon Bottle injections, pressotherapy, wood therapy, sauna blanket treatments, cavitation and vacuum therapy — taken as a course and combined around the areas you want to work on.',
       ],
       image: '/images/liquid-lipo-brand.webp',
     },
@@ -192,7 +192,7 @@ export const treatmentPages: TreatmentPageData[] = [
       {
         title: 'LIQUID LIPO',
         body: [
-          'Offering a non-invasive alternative to fat dissolving injections, Liquid Lipo can target larger areas. It acts on fat deposits by causing fat cells to shrink, forcing the fat into the blood stream, this is then naturally excreted through urine — please drink 2-4 litres of water following treatment. This allows for significantly faster weight loss, slimmer body shape and a reduction in fat levels. It can reduce the risk of diabetes, high blood pressure and other conditions associated with being obese. Liquid Lipo is used with cavitation & radio frequency to enhance the results.',
+          'Offering a non-invasive alternative to fat dissolving injections, Liquid Lipo can target larger areas. It acts on fat deposits by causing fat cells to shrink, and is used alongside cavitation and radio frequency to enhance the result. Drinking 2-4 litres of water after treatment supports the process. It is a body contouring treatment rather than a weight-management one, and works best as part of a course; your practitioner will talk through what to expect for the area you want to treat.',
         ],
         image: '/images/body-cavitation-tummy.webp',
       },

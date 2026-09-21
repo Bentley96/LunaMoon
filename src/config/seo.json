@@ -3,8 +3,8 @@
   "_suffix": "Luna Moon Aesthetics",
   "routes": {
     "/": {
-      "title": "Aesthetic & Facial Treatments Preston",
-      "description": "Award-nominated Preston clinic for facial treatments, microneedling, skin boosters, laser treatments, IPL hair removal, skin tightening and weight loss."
+      "title": "Body, Skin & Laser Treatments Preston",
+      "description": "Advanced skin treatments, body contouring and laser hair removal in Preston. Personalised programmes built around your goals at our Friargate clinic."
     },
     "/advanced-facial-treatments": {
       "title": "Facial Treatments & Microneedling Preston",
@@ -12,15 +12,15 @@
     },
     "/laser-cosmetic-teeth-whitening": {
       "title": "Laser Cosmetic Teeth Whitening Preston",
-      "description": "Laser treatments that brighten your smile by 8-12 shades in one appointment, at Luna Moon Aesthetics on Friargate in Preston. Book online today."
+      "description": "Professional laser whitening that lifts staining for a noticeably brighter smile in one appointment, at Luna Moon Aesthetics on Friargate in Preston."
     },
     "/skin-tightening-weight-loss": {
-      "title": "Skin Tightening & Weight Loss Preston",
-      "description": "Liquid Lipo, RF skin tightening, body sculpting, Lemon Bottle injections, sauna blanket and cavitation vacuum therapy at our Preston clinic."
+      "title": "Body Contouring & Skin Tightening Preston",
+      "description": "Liquid Lipo, RF skin tightening, body sculpting, EMS, pressotherapy and wood therapy at our Preston clinic. Book a consultation to talk it through."
     },
     "/book-online": {
       "title": "Book Laser Treatments & Facials Online",
-      "description": "Packages and treatments with prices: laser treatments, IPL hair removal, facial treatments, microneedling, skin boosters and body contouring in Preston."
+      "description": "Packages and treatments with prices: laser hair removal, facial treatments, microneedling, skin boosters and body contouring in Preston."
     },
     "/products": {
       "title": "Shop Skincare & Aesthetics Products",

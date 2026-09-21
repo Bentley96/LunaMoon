@@ -9,7 +9,7 @@ const TREATMENT_OPTIONS = [
   'Aesthetics Treatments',
   'Advanced Facial Treatments',
   'Laser Cosmetic Teeth Whitening',
-  'Skin Tightening & Weight Loss',
+  'Body Contouring & Skin Tightening',
   'IPL Laser Hair Removal',
   'Products',
   'Something else',

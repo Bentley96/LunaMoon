@@ -4,8 +4,9 @@ import { hero } from '../content/home';
 import Logo from './Logo';
 
 /**
- * Homepage hero — the existing site's full-bleed clinic photo with the wordmark
- * split across two lines and three CTAs beneath.
+ * Homepage hero — the full-bleed clinic photo with the wordmark, the brand
+ * line under it, and the two things the clinic wants people to do: book a
+ * consultation, or go and read what's on offer.
  */
 export default function Hero() {
   return (
@@ -40,18 +41,20 @@ export default function Hero() {
             <span className="sr-only">Luna Moon Aesthetics</span>
           </h1>
 
-          <p className="mt-8 max-w-xl text-lg leading-relaxed text-ink-100">{hero.blurb}</p>
+          <p className="mt-6 font-display text-xl uppercase tracking-[0.2em] text-gold-400 sm:text-2xl">
+            {hero.eyebrow}
+          </p>
+
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-100">{hero.blurb}</p>
+          <p className="mt-4 max-w-xl leading-relaxed text-ink-200">{hero.detail}</p>
 
           <div className="mt-10 flex flex-wrap gap-3">
+            <Link to="/contact" className="btn-primary">
+              Book your consultation
+            </Link>
             <a href="#more" className="btn-outline">
-              Find out more
+              Explore treatments
             </a>
-            <Link to="/book-online" className="btn-primary">
-              Book now
-            </Link>
-            <Link to="/contact" className="btn-outline">
-              Contact
-            </Link>
           </div>
         </div>
       </div>

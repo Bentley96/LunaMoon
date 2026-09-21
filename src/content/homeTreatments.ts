@@ -1,71 +1,74 @@
-// The treatment detail the existing site carries on its homepage, below the
-// "WHAT WE DO" cards.
+// What the clinic does, as three categories rather than one long block.
 //
-// This used to live on an /aesthetics-treatments page. That page is gone: the
-// copy belongs on the homepage, which is where the existing site has it and
-// where it earned its rankings, and serving it at two URLs would have had the
-// two competing. Nothing linked to the old URL and the domain isn't live yet,
-// so no redirect was needed.
+// This section used to be the old site's treatment copy — several paragraphs
+// running Skin Boosters into Lumi Eye into B Complex into IPL, which is where
+// the homepage started to feel cluttered. The clinic's brief was explicit:
+// drop Lumi Eye and B Complex, lose the giant paragraph, and split the rest
+// into categories people can scan.
 //
-// Source: "Existing SIte/" homepage save, September 2026.
+// Each category keeps a sentence of real copy, because the terms in it are what
+// the page is found for — "microneedling", "polynucleotides", "laser hair
+// removal" — and a bare list of names would throw that away.
 
-export interface DetailSection {
+export interface TreatmentCategory {
+  /** Stable id, used as the React key and the anchor. */
+  id: string;
   title: string;
-  /** One entry per paragraph. */
-  body?: string[];
-  /** Rendered as "Label — description" pairs. */
-  bullets?: string[];
-  /** Not currently rendered on the homepage; kept for future use. */
-  image?: string;
+  /** One line on what the category is for. */
+  blurb: string;
+  /** The treatments themselves, as the clinic lists them. */
+  items: string[];
+  /** Where "See treatments" goes. */
+  to: string;
 }
 
-export interface HomeTreatmentDetailContent {
-  intro: { heading: string; body: string[] };
-  sections: DetailSection[];
-}
-
-export const homeTreatmentDetail: HomeTreatmentDetailContent = {
-  intro: {
-    heading: 'AESTHETICS TREATMENTS PRESTON',
-    body: [
-      'Luna Moon Aesthetics in Preston offer a range of cutting-edge treatments designed to leave you feeling refreshed, revitalised and confident.',
-    ],
-  },
-  sections: [
-    {
-      title: 'SKIN BOOSTERS: PROFHILO & SEVENTY HYAL',
-      body: [
-        'Say goodbye to dry fine lines and dullness as your skin becomes plump, hydrated and radiant with Profhilo and Seventy Hyal skin boosters. These injectable treatments deliver a powerful combination of hyaluronic acid and other skin-loving nutrients deep into the skin, promoting collagen production and improving elasticity.',
-      ],
-      image: '/images/skin-boosters.webp',
-    },
-    {
-      title: 'LUMI EYE',
-      body: [
-        'Say hello to brighter, radiant eyes that sparkle with vitality. Lumi Eye is here to brighten and rejuvenate your delicate under-eye area. This non-invasive treatment uses advanced technology to target dark circles, puffiness and fine lines, leaving you with a more youthful and refreshed appearance.',
-      ],
-      image: '/images/lumi-eye-treatment.webp',
-    },
-    {
-      title: 'B COMPLEX',
-      body: [
-        'Unlock the power of the B vitamins with our B Complex injections. This blend of essential B vitamins, including B1, B2, B3, B5, and B6, offers a range of health benefits, from supporting nerve function and metabolism to promoting healthy skin and hair. Whether you’re looking to boost your immune system, improve your mood or enhance your overall health, our B Complex injections are the perfect solution.',
-      ],
-      image: '/images/mature-skin-glow.webp',
-    },
-    {
-      title: 'IPL LASER HAIR REMOVAL PRESTON — HAIR FREE, CARE FREE',
-      body: [
-        'Luna Moon Aesthetics in Preston specialise in IPL laser hair removal. It is a popular method of hair removal providing long-lasting results with minimal discomfort. This cosmetic procedure uses intense pulses of light to remove unwanted hair, it damages the follicles and inhibits future regrowth. IPL targets hair follicles precisely, leaving the surrounding skin undamaged. It is effective for reducing hair growth on any part of the body, including the face, legs, arms, bikini line and back.',
-      ],
-      bullets: [
-        'Long-lasting results — IPL can significantly reduce hair growth over time, leading to long-lasting smoothness.',
-        'Fast hair removal — IPL can treat large areas of skin quickly due to its wide treatment applicator.',
-        'Reduction in ingrown hairs — IPL can help reduce the occurrence of ingrown hairs, a common problem with other methods.',
-        'Minimal discomfort — while some people may experience mild discomfort during the procedure, it is generally well-tolerated.',
-        'Improved skin appearance — some people notice improvements in the texture and appearance of their skin after IPL treatments.',
-      ],
-      image: '/images/ipl-hair-removal-legs.webp',
-    },
-  ],
+export const treatmentsIntro = {
+  eyebrow: 'What we treat',
+  heading: 'BODY • SKIN • LASER',
+  body: 'Three areas, one plan. Tell us what you want to change and we’ll build a programme from the treatments below — on their own or combined, at our clinic on Friargate in Preston.',
 };
+
+export const treatmentCategories: TreatmentCategory[] = [
+  {
+    id: 'advanced-skin',
+    title: 'ADVANCED SKIN',
+    blurb:
+      'Rejuvenation and resurfacing for texture, tone, fine lines and hydration — from injectable skin boosters to microneedling and peels.',
+    items: [
+      'Polynucleotides',
+      'Skin Boosters',
+      'Microneedling',
+      'RF Microneedling',
+      'BioRePeel',
+      'Hydrofacial',
+      'Microdermabrasion',
+      'LED',
+      'Bespoke Facials',
+    ],
+    to: '/advanced-facial-treatments',
+  },
+  {
+    id: 'body-contouring',
+    title: 'BODY CONTOURING',
+    blurb:
+      'Sculpting, firming and skin tightening, targeted at the areas you want to work on and taken as a course rather than a one-off.',
+    items: [
+      'Tummy Reset',
+      'Body Sculpting',
+      'EMS',
+      'RF Skin Tightening',
+      'Pressotherapy',
+      'Lymphatic treatments',
+      'Wood Therapy',
+    ],
+    to: '/skin-tightening-weight-loss',
+  },
+  {
+    id: 'laser',
+    title: 'LASER',
+    blurb:
+      'IPL laser hair removal for long-term hair reduction, on the face and body, with packages for the areas most people treat together.',
+    items: ['Laser Hair Removal', 'IPL treatments', 'Packages'],
+    to: '/book-online#ipl-laser-hair-removal',
+  },
+];

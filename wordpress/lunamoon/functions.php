@@ -49,7 +49,7 @@ function lunamoon_routes() {
 		'products'                        => __( 'Products', 'lunamoon' ),
 		'advanced-facial-treatments'      => __( 'Advanced Facial Treatments', 'lunamoon' ),
 		'laser-cosmetic-teeth-whitening'  => __( 'Laser Cosmetic Teeth Whitening', 'lunamoon' ),
-		'skin-tightening-weight-loss'     => __( 'Skin Tightening & Weight Loss', 'lunamoon' ),
+		'skin-tightening-weight-loss'     => __( 'Body Contouring & Skin Tightening', 'lunamoon' ),
 		'faqs'                            => __( 'FAQs', 'lunamoon' ),
 		'contact'                         => __( 'Contact', 'lunamoon' ),
 		'clinic-policy'                   => __( 'Clinic Policy', 'lunamoon' ),
@@ -80,7 +80,7 @@ function lunamoon_menu() {
 				'children' => array(
 					array( 'label' => __( 'Advanced Facial Treatments', 'lunamoon' ), 'url' => '/advanced-facial-treatments' ),
 					array( 'label' => __( 'Laser Cosmetic Teeth Whitening', 'lunamoon' ), 'url' => '/laser-cosmetic-teeth-whitening' ),
-					array( 'label' => __( 'Skin Tightening & Weight Loss', 'lunamoon' ), 'url' => '/skin-tightening-weight-loss' ),
+					array( 'label' => __( 'Body Contouring & Skin Tightening', 'lunamoon' ), 'url' => '/skin-tightening-weight-loss' ),
 					array( 'label' => __( 'IPL Laser Hair Removal', 'lunamoon' ), 'url' => '/book-online#ipl-laser-hair-removal' ),
 				),
 			),

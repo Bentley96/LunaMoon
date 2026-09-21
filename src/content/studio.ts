@@ -5,9 +5,10 @@
 // place — and the alt text describes each room rather than repeating the
 // business name, because that's what someone who can't see them needs.
 //
-// Source: the "Homepage Carousel" folder in the repo root, resized to 1400px
-// with a 400px thumbnail each. Order runs from the room you walk into, through
-// the treatment rooms, to the equipment.
+// Source: the "Homepage Carousel" folder in the repo root, plus the newer
+// treatment room in "Images/", resized to 1400px with a 400px thumbnail each.
+// The newest photo leads, then the order runs from the room you walk into,
+// through the treatment rooms, to the equipment.
 
 export interface StudioPhoto {
   src: string;
@@ -20,6 +21,15 @@ export interface StudioPhoto {
 }
 
 export const studioPhotos: StudioPhoto[] = [
+  {
+    src: '/images/studio/studio-00-treatment-room.webp',
+    thumb: '/images/studio/studio-00-treatment-room-thumb.webp',
+    width: 1050,
+    height: 1400,
+    thumbWidth: 300,
+    thumbHeight: 400,
+    alt: 'A treatment room at Luna Moon Aesthetics: a dressed couch with pink and cream throws, a backlit mirror, a lit shelving unit of skincare and a facial steamer.',
+  },
   {
     src: '/images/studio/studio-01-flower-wall-reception.webp',
     thumb: '/images/studio/studio-01-flower-wall-reception-thumb.webp',

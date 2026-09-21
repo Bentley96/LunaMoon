@@ -1,6 +1,7 @@
 // Frequently asked questions, grouped by the page each set belongs to.
 //
-// Source: the clinic's "FAQs for each page" document, September 2026. Each
+// Source: the clinic's "FAQs for each page" document, September 2026. The Lumi
+// Eye and B Complex groups have since been removed with those treatments. Each
 // group there is labelled with the page it should appear at the bottom of, and
 // that label is what `route` holds — so moving a group to a different page is a
 // one-line change here rather than an edit to the page itself.
@@ -124,90 +125,6 @@ export const faqGroups: FaqGroup[] = [
     ],
   },
   {
-    id: 'lumi-eye',
-    title: 'Lumi Eye',
-    route: '/',
-    faqs: [
-      {
-        question: 'What is Lumi Eye?',
-        answer:
-          'Lumi Eye is a treatment designed to improve the appearance of the delicate under-eye area and target concerns such as dark circles, puffiness, and fine lines.',
-      },
-      {
-        question: 'What does Lumi Eye help with?',
-        answer:
-          'The treatment is designed to rejuvenate the under-eye area and create a brighter, fresher-looking appearance.',
-      },
-      {
-        question: 'Is Lumi Eye suitable for dark circles?',
-        answer:
-          'It may be suitable for certain types of dark circles, although results depend on the underlying cause of the pigmentation or discolouration.',
-      },
-      {
-        question: 'Can Lumi Eye help with under-eye puffiness?',
-        answer:
-          'Lumi Eye is designed to target concerns around the eye area, including puffiness. Your practitioner can assess whether it is appropriate for you.',
-      },
-      {
-        question: 'Is Lumi Eye painful?',
-        answer:
-          'Treatment comfort varies between individuals. Your practitioner will explain the procedure beforehand and answer any questions you have.',
-      },
-      {
-        question: 'How long does Lumi Eye take?',
-        answer:
-          'Treatment time varies depending on the individual and the treatment plan. Your practitioner can confirm the expected appointment length when you book.',
-      },
-      {
-        question: 'How many Lumi Eye treatments will I need?',
-        answer:
-          'The number of treatments required depends on your individual concerns and desired outcome.',
-      },
-    ],
-  },
-  {
-    id: 'b-complex',
-    title: 'B Complex injections',
-    route: '/',
-    faqs: [
-      {
-        question: 'What are B Complex injections?',
-        answer:
-          'B Complex injections contain a combination of B vitamins and are designed to provide these essential nutrients.',
-      },
-      {
-        question: 'What vitamins are included in B Complex?',
-        answer:
-          'The B Complex treatment offered by Luna Moon Aesthetics includes B1, B2, B3, B5 and B6.',
-      },
-      {
-        question: 'Why do people choose B Complex injections?',
-        answer:
-          'People may choose B Complex injections as part of their approach to supporting their general wellbeing, although individual results and suitability vary.',
-      },
-      {
-        question: 'Are B Complex injections suitable for everyone?',
-        answer:
-          'No treatment is suitable for everyone. Your practitioner will discuss your health and circumstances before treatment.',
-      },
-      {
-        question: 'Are B Complex injections painful?',
-        answer:
-          'You may experience a brief sensation during the injection. Your practitioner will explain what to expect.',
-      },
-      {
-        question: 'How often can I have B Complex injections?',
-        answer:
-          'Treatment frequency should be discussed with your practitioner, who can advise based on your individual circumstances.',
-      },
-      {
-        question: 'Do I need a consultation before having B Complex?',
-        answer:
-          'Your practitioner will discuss your requirements and suitability before treatment.',
-      },
-    ],
-  },
-  {
     id: 'ipl-laser-hair-removal',
     title: 'IPL laser hair removal',
     route: '/book-online',
@@ -266,7 +183,7 @@ export const faqGroups: FaqGroup[] = [
   },
   {
     id: 'skin-tightening-weight-loss',
-    title: 'Skin tightening & weight loss',
+    title: 'Body contouring & skin tightening',
     route: '/skin-tightening-weight-loss',
     faqs: [
       {
@@ -322,9 +239,9 @@ export const faqGroups: FaqGroup[] = [
           'Laser cosmetic teeth whitening is a professional cosmetic treatment designed to brighten the appearance of the teeth.',
       },
       {
-        question: 'How much whiter can my teeth become?',
+        question: 'How much brighter will my teeth look?',
         answer:
-          'Luna Moon Aesthetics states that its treatment can brighten teeth by 8–12 shades, although results vary between individuals.',
+          'Laser whitening lifts staining from the enamel for a noticeably brighter smile, usually in a single appointment. How much lighter your teeth go depends on your enamel and the staining you start with.',
       },
       {
         question: 'How quickly will I see results?',

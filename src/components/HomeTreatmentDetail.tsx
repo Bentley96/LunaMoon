@@ -1,96 +1,63 @@
-import { homeTreatmentDetail } from '../content/homeTreatments';
+import { Link } from 'react-router-dom';
+import { ArrowRight, Check } from 'lucide-react';
+import { treatmentCategories, treatmentsIntro } from '../content/homeTreatments';
 
 /**
- * The keyword-heavy treatment copy the existing site carries on its homepage,
- * below the "WHAT WE DO" cards: the Aesthetics Treatments block (Skin Boosters,
- * Lumi Eye, B Complex) and the IPL Laser Hair Removal block with its benefits.
+ * The three things the clinic does, on the homepage below the service cards.
  *
- * It ranks for the terms in it, so it belongs on the homepage rather than only
- * on an interior page. Rendered dark with gold headings to match how the
- * existing site presents it.
+ * This replaced several paragraphs that ran every treatment together — the part
+ * of the page the clinic said felt cluttered. Cards make the same content
+ * scannable: the category, a line on what it's for, and the treatments in it.
  *
- * This is the only place the copy lives now; the /aesthetics-treatments page
- * that used to carry it has been removed.
+ * Still dark with gold headings, which is how the existing site presents this
+ * band and what separates it from the white sections either side.
  */
 export default function HomeTreatmentDetail() {
-  const page = homeTreatmentDetail;
-
-  // The last section is IPL, which the existing site gives its own block and
-  // heading; everything before it sits under the Aesthetics Treatments heading.
-  const aesthetics = page.sections.filter((s) => !s.title.startsWith('IPL'));
-  const ipl = page.sections.find((s) => s.title.startsWith('IPL'));
-
   return (
     <section className="section-padding bg-ink-950 text-ink-100">
-      <div className="container-lg grid gap-10 lg:grid-cols-2 lg:items-start">
-        <div className="rounded-3xl bg-ink-900/60 p-8 sm:p-10">
-          <span className="eyebrow text-white">Luna Moon Preston</span>
-          <h2 className="mt-2 font-display text-2xl uppercase text-gold-400 sm:text-3xl">
-            {page.intro.heading}
+      <div className="container-lg">
+        <div className="container-prose text-center">
+          <span className="eyebrow text-gold-400">{treatmentsIntro.eyebrow}</span>
+          <h2 className="mt-3 font-display text-3xl uppercase text-white sm:text-4xl">
+            {treatmentsIntro.heading}
           </h2>
-          {page.intro.body.map((p) => (
-            <p key={p} className="mt-4 leading-relaxed text-ink-100">
-              {p}
-            </p>
-          ))}
-
-          {aesthetics.map((section) => (
-            <div key={section.title} className="mt-8">
-              <h3 className="font-display text-lg uppercase tracking-wide text-blush-300">
-                {section.title}
-              </h3>
-              {section.body?.map((p) => (
-                <p key={p} className="mt-2 leading-relaxed text-ink-100">
-                  {p}
-                </p>
-              ))}
-            </div>
-          ))}
+          <p className="mt-5 text-lg leading-relaxed text-ink-200">{treatmentsIntro.body}</p>
         </div>
 
-        {ipl && (
-          <div className="rounded-3xl bg-ink-900/60 p-8 sm:p-10">
-            <span className="eyebrow text-white">Luna Moon Preston</span>
-            {/* The existing site splits this into a title and a strapline; the
-                content file keeps them on one line, so split on the dash. */}
-            <h2 className="mt-2 font-display text-2xl uppercase text-gold-400 sm:text-3xl">
-              {ipl.title.split('—')[0].trim()}
-            </h2>
-            {ipl.title.includes('—') && (
-              <p className="mt-1 font-display text-base uppercase tracking-wide text-blush-300">
-                {ipl.title.split('—')[1].trim()}
-              </p>
-            )}
+        <ul className="mt-14 grid gap-6 lg:grid-cols-3">
+          {treatmentCategories.map((category) => (
+            <li key={category.id} className="flex">
+              <div className="flex flex-1 flex-col rounded-3xl bg-ink-900/60 p-8">
+                <h3 className="font-display text-xl uppercase tracking-wide text-gold-400 sm:text-2xl">
+                  {category.title}
+                </h3>
+                <p className="mt-3 leading-relaxed text-ink-200">{category.blurb}</p>
 
-            {ipl.body?.map((p) => (
-              <p key={p} className="mt-4 leading-relaxed text-ink-100">
-                {p}
-              </p>
-            ))}
+                <ul className="mt-6 space-y-2.5">
+                  {category.items.map((item) => (
+                    <li key={item} className="flex items-start gap-2.5 text-ink-100">
+                      <Check
+                        className="mt-1 h-4 w-4 shrink-0 text-blush-300"
+                        aria-hidden="true"
+                      />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
 
-            {ipl.bullets && (
-              <dl className="mt-6 space-y-5">
-                {ipl.bullets.map((bullet) => {
-                  // Each bullet is "Label — description".
-                  const [label, ...rest] = bullet.split('—');
-                  // The source writes each bullet as one sentence running
-                  // across the dash, so the detail half starts lowercase once
-                  // it's split out as its own line.
-                  const raw = rest.join('—').trim();
-                  const detail = raw ? raw.charAt(0).toUpperCase() + raw.slice(1) : '';
-                  return (
-                    <div key={bullet}>
-                      <dt className="font-display text-base uppercase tracking-wide text-blush-300">
-                        {label.trim()}
-                      </dt>
-                      {detail && <dd className="mt-1 leading-relaxed text-ink-100">{detail}</dd>}
-                    </div>
-                  );
-                })}
-              </dl>
-            )}
-          </div>
-        )}
+                {/* mt-auto, so the links sit on one line across the three cards
+                    however many treatments each of them carries. */}
+                <Link
+                  to={category.to}
+                  className="mt-auto pt-8 text-sm font-semibold uppercase tracking-wide text-blush-300 underline-offset-4 hover:underline"
+                >
+                  See treatments
+                  <ArrowRight className="ml-2 inline h-4 w-4" aria-hidden="true" />
+                </Link>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

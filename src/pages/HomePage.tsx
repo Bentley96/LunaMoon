@@ -39,13 +39,16 @@ export default function HomePage() {
           <img src={aboutDee.image} alt="Dee, owner of Luna Moon Aesthetics" loading="lazy"
                className="order-last aspect-[4/5] w-full rounded-3xl object-cover lg:order-none" />
           <div>
-            <span className="eyebrow">Meet the owner</span>
+            <span className="eyebrow">{aboutDee.eyebrow}</span>
             <h2 className="mt-3 text-3xl sm:text-4xl">{aboutDee.heading}</h2>
             <div className="mt-6 space-y-4 text-lg leading-relaxed text-ink-700">
               {aboutDee.body.map((p) => (
                 <p key={p}>{p}</p>
               ))}
             </div>
+            <blockquote className="mt-6 border-l-2 border-blush-400 pl-5 text-lg italic leading-relaxed text-ink-800">
+              {aboutDee.quote}
+            </blockquote>
           </div>
         </div>
       </section>

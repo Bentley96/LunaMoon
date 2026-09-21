@@ -12,6 +12,11 @@
 // into wp-admin so the clinic can maintain it themselves.
 //
 // Captured 15 September 2026.
+//
+// One edit since: the Feel Good package's summary claimed a B12 injection "can
+// aid metabolism & weight loss". The clinic is moving away from weight-loss
+// positioning, so that clause is gone here — which means this one line no
+// longer matches that-time.co.uk until the same edit is made there.
 
 export interface Package {
   name: string;
@@ -60,7 +65,7 @@ export const packages: Package[] = [
     price: 9900,
     duration: '1 hr',
     deposit: true,
-    summary: 'NEW PACKAGE The Feel Good Package Wow! What a package the Queen of beauty Dee has put together For LESS than £100 you’ll get: A B12 injection. This is perfect for increasing energy, reducing anxiety and fatigue, increases brain function, can aid metabolism & weight loss amongst other things- the B12 shot is fab for overall health…',
+    summary: 'NEW PACKAGE The Feel Good Package Wow! What a package the Queen of beauty Dee has put together For LESS than £100 you’ll get: A B12 injection. This is perfect for increasing energy, reducing anxiety and fatigue, increases brain function, supports metabolism amongst other things- the B12 shot is fab for overall health…',
   },
   {
     name: 'Dazzle & go',

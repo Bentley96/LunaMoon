@@ -8,17 +8,21 @@ export const hero = {
   /** Rendered as two lines, the first in outline/display weight. */
   titleTop: 'LUNA',
   titleBottom: 'Moon Aesthetics',
+  /** The three areas the clinic wants to be known for, under the lockup. */
+  eyebrow: 'Body • Skin • Laser',
   blurb:
-    'Professional Aesthetic Beauty Treatments In Preston. For more information, or to make a booking get in touch now!',
+    'Advanced treatments designed to help you sculpt, firm, refresh and feel confident in your skin.',
+  detail:
+    'Based in Preston, Lancashire, Luna Moon combines advanced technology with personalised treatment programmes created around your individual goals.',
   image: '/images/clinic-reception.jpg',
 };
 
 export const about = {
-  heading: 'BE THE BEST YOU THAT YOU CAN BE',
+  heading: 'PERSONALISED TREATMENTS. ADVANCED TECHNOLOGY. YOUR GOALS.',
   body: [
-    'Luna Moon Aesthetics Preston is owned by Dee, a highly experienced and qualified aesthetician. Our goal is simple — to provide affordable and professional beauty, aesthetics and skincare treatments.',
-    'Luna Moon Aesthetics is a Preston based clinic offering everything you need to keep you looking and feeling glamorous for that special occasion in your life. Based at 55-56 Friargate, Preston, PR1 2AT.',
-    'Please visit our online booking form for services and availability. We hope to see you soon. Get in touch to find out more.',
+    'Luna Moon Aesthetics is a Preston clinic specialising in advanced skin, body contouring and laser treatments, led by Dee, a highly experienced and qualified aesthetician.',
+    'Every treatment starts with what you want to achieve. Rather than a fixed menu to choose from, we build a programme around your skin, your body and the result you’re working towards — using the technology that will actually get you there.',
+    'Book a consultation to talk it through, or take a look at the treatments and prices and book online. We’re at 55-56 Friargate, Preston, PR1 2AT.',
   ],
   // Unused since the studio carousel took this section's image slot. Kept
   // because the photo is still in public/images if the carousel ever moves.
@@ -26,11 +30,15 @@ export const about = {
 };
 
 export const aboutDee = {
-  heading: 'ABOUT DEE, OWNER AT LUNA MOON AESTHETICS IN PRESTON',
+  eyebrow: 'Meet Dee',
+  heading: 'THE FOUNDER BEHIND LUNA MOON AESTHETICS',
   body: [
-    'My goal and my passion is to provide every single client with VIP treatment so they leave our clinic looking and feeling amazing. I want to give you the confidence to take over the world!',
-    'If I can help with anything at all please get in touch and we can have a chat about your requirements and help you to choose the best services for you, because everyone deserves to feel special!',
+    'Luna Moon Aesthetics was created by Dee with a simple vision — to create a welcoming space where women can invest in themselves and receive personalised, professional treatments without feeling overwhelmed by endless treatment choices.',
+    'With experience across advanced aesthetics, body contouring and skin treatments, Dee takes a personalised approach to every client.',
   ],
+  /** Set apart from the body copy, in her own words. */
+  quote:
+    'I don’t believe in a one-treatment-fits-all approach. I want to understand what you want to achieve and create a treatment plan around you.',
   image: '/images/dee-owner.webp',
 };
 
@@ -43,19 +51,19 @@ export const serviceCards = [
     image: '/images/liquid-lipo-brand.webp',
   },
   {
-    title: 'LIQUID LIPO SKIN TIGHTENING & WEIGHT LOSS',
-    body: 'Whether you are seeking to tighten sagging skin or embark on a journey to a slimmer, sculpted body, Luna Moon Aesthetics Preston offer Liquid Lipo, RF skin tightening, body sculpting, lemon bottle injections, sauna blanket with essential oils, cavitation vacuum therapy and more.',
+    title: 'BODY CONTOURING & SKIN TIGHTENING',
+    body: 'Sculpt, firm and reshape with Liquid Lipo, RF skin tightening, body sculpting, EMS, pressotherapy, wood therapy, lymphatic treatments and cavitation vacuum therapy — chosen and combined around the areas you want to work on.',
     to: '/skin-tightening-weight-loss',
     image: '/images/body-contouring.webp',
   },
   {
     title: 'LASER COSMETIC TEETH WHITENING',
-    body: 'Get instant results with our professional cosmetic teeth whitening treatment at Luna Moon Aesthetics clinic in Preston! We can brighten your teeth 8-12 shades whiter than your natural tooth shade by utilising a laser light to enhance the whiteness of your teeth.',
+    body: 'Professional laser cosmetic teeth whitening at Luna Moon Aesthetics in Preston. A laser light lifts staining from the enamel for a noticeably brighter smile in a single appointment, with the result varying from person to person.',
     to: '/laser-cosmetic-teeth-whitening',
     image: '/images/teeth-whitening-smile.webp',
   },
   {
-    title: 'ADVANCED SKIN AND FACIAL TREATMENTS',
+    title: 'ADVANCED SKIN & FACIAL TREATMENTS',
     body: 'Unleash your inner beauty at Luna Moon Aesthetics in Preston with our range of professional aesthetic treatments including dermaplaning, microneedling, RF microneedling, hydrofacial, skin boosters, polynucleotides, chemical peel, carboxy facial, blepharonat eye treatment, teeth whitening and IPL laser hair removal.',
     to: '/advanced-facial-treatments',
     image: '/images/facial-treatment.webp',
@@ -67,7 +75,7 @@ export const whatWeDo = {
   // `body` is the existing site's wording, left exactly as it was — it's what
   // the homepage already ranks on. `body2` is added underneath rather than
   // rewritten into it, so nothing that earned those rankings is disturbed.
-  body: 'From laser cosmetic teeth whitening and skin and facial treatments to skin tightening and weight loss, we have something for everyone, all at affordable prices. Luna Moon Aesthetics have won awards for the top 10 regional salons, finalists at the UK Hair and Beauty Awards in 2022 and 2023 and 2nd in the UK Advanced practitioner awards.',
+  body: 'Advanced skin treatments, body contouring and laser, delivered with clinical technology and a plan built around you. Luna Moon Aesthetics have won awards for the top 10 regional salons, finalists at the UK Hair and Beauty Awards in 2022 and 2023 and 2nd in the UK Advanced practitioner awards.',
   body2:
     'Alongside our laser treatments — cosmetic teeth whitening and IPL laser hair removal — we offer facial treatments including dermaplaning, microneedling, chemical peels and polynucleotides skin booster courses.',
 };

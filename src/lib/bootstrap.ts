@@ -42,6 +42,14 @@ export interface WooUrls {
   myAccount: string;
 }
 
+/** A route's head values, as WordPress computed them. */
+export interface RouteMeta {
+  title: string;
+  description: string;
+  /** Only when the SEO plugin has a custom one set for that page. */
+  canonical?: string;
+}
+
 export interface Bootstrap {
   /** Absolute REST root, always ending in a slash. */
   restUrl: string;
@@ -54,6 +62,16 @@ export interface Bootstrap {
   hasWoo: boolean;
   wooUrls: WooUrls;
   currency: CurrencyInfo;
+  /**
+   * Per-route titles and descriptions, keyed by path.
+   *
+   * WordPress builds this, and an SEO plugin's per-page values win over the
+   * theme's — so whatever the clinic has set in Rank Math is what the app uses
+   * when it changes the title on a client-side route change. Empty in dev and
+   * wherever the theme isn't serving the app, which is why src/config/seo.ts
+   * still carries the wording as a fallback.
+   */
+  seo: Record<string, RouteMeta>;
   site: SiteInfo;
 }
 
@@ -75,6 +93,7 @@ const FALLBACK: Bootstrap = {
   basename: '',
   hasWoo: true,
   wooUrls: { checkout: '/checkout/', myAccount: '/my-account/' },
+  seo: {},
   currency: {
     code: 'GBP',
     symbol: '£',
@@ -110,6 +129,7 @@ function read(): Bootstrap {
     ...injected,
     wooUrls: { ...FALLBACK.wooUrls, ...injected.wooUrls },
     currency: { ...FALLBACK.currency, ...injected.currency },
+    seo: { ...FALLBACK.seo, ...injected.seo },
     site: { ...FALLBACK.site, ...injected.site },
   };
 }

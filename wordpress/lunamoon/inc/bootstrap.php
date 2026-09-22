@@ -189,6 +189,10 @@ function lunamoon_print_bootstrap() {
 		// needs their real permalinks to hand off to.
 		'wooUrls'  => lunamoon_woo_urls(),
 		'currency' => lunamoon_currency(),
+		// Per-route titles and descriptions, so the app can set the right ones
+		// as visitors move between pages without a page load. An SEO plugin's
+		// values win here; see inc/seo.php.
+		'seo'      => function_exists( 'lunamoon_seo_routes' ) ? lunamoon_seo_routes() : array(),
 		'site'     => array(
 			'name'             => get_bloginfo( 'name' ),
 			'description'      => get_bloginfo( 'description' ),

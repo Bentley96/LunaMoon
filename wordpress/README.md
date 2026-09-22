@@ -129,6 +129,36 @@ Install → Activate.
 > `dist/` is required. Without it wp-admin shows a warning and the site renders
 > blank.
 
+### SEO titles and descriptions
+
+The theme ships its own per-page titles and descriptions (in
+`src/config/seo.json`, served from `dist/seo.json`), used when no SEO plugin is
+installed.
+
+**Rank Math, Yoast or All in One SEO overrides all of it.** When one is active
+the theme stops printing a title or a description and stands out of its way, so
+whatever is set on each page in wp-admin is what the site serves, exactly as it
+did before the theme changed. Nothing needs configuring for that.
+
+The part that isn't obvious: the app changes the title itself when someone
+moves between pages, because React Router doesn't reload the document. So the
+theme reads each page's stored SEO meta and hands the whole table to the app in
+`window.__LUNAMOON__.seo`. Without that, the first click inside the site would
+replace the plugin's title with the theme's.
+
+Worth knowing:
+
+- Titles from a plugin are used exactly as written. The theme won't append the
+  site name to them, so keep whatever `%sep% %sitename%` your templates have.
+- A field left empty in the plugin falls back to the theme's wording rather
+  than to nothing.
+- A title still containing a `%variable%` the plugin couldn't resolve is
+  treated as unusable, and the theme's wording is used instead of printing a
+  literal `%sep%`.
+- A custom canonical set on a page is respected.
+- This covers the pages: products come from WooCommerce, and the plugin
+  handles those server-side as usual.
+
 ### 3. Finish setup
 
 1. **Install and activate WooCommerce**, then run its setup wizard.

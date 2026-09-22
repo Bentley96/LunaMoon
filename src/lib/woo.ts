@@ -8,14 +8,38 @@
 // Checkout is deliberately NOT here: the visitor is handed to WooCommerce's own
 // checkout page, which reads the same cart from the WooCommerce session.
 //
-// Two pieces of state have to be carried between requests:
-//   Nonce       — rotated by the server on every response; required on writes.
-//   Cart-Token  — identifies a guest's cart when cookies aren't available
-//                 (page caching, Safari ITP). Persisted to localStorage.
+// One piece of state has to be carried between requests: the Nonce, which the
+// server rotates on every response and which writes require.
+//
+// The cart itself is carried by WooCommerce's session cookie, and deliberately
+// nothing else. The Store API will also identify a cart by a Cart-Token header,
+// which is how a genuinely headless shop on another domain keeps a basket, and
+// this client used to send one. It cost us the hand-off: a cart reached by
+// token lives under that token, the checkout page is ordinary PHP and reads
+// only the cookie, so a device whose cookie went missing once kept a basket the
+// app could see and the checkout could not. Checkout then bounced back to the
+// basket, every time, on that device only. See forgetCartToken() below.
 
 import { bootstrap, restUrl } from './bootstrap';
 
 const CART_TOKEN_KEY = 'lunamoon_cart_token';
+
+/**
+ * Drop a Cart-Token this app stored before it stopped using them.
+ *
+ * A device that kept one would otherwise keep sending it for as long as the
+ * browser held the key, and keep the basket in a cart its own checkout can't
+ * read. Runs once, when the module loads.
+ */
+function forgetCartToken(): void {
+  try {
+    localStorage.removeItem(CART_TOKEN_KEY);
+  } catch {
+    // Storage blocked: then there's no token to forget.
+  }
+}
+
+forgetCartToken();
 
 export class WooError extends Error {
   constructor(
@@ -32,39 +56,12 @@ export class WooError extends Error {
 // hands back, so a long-lived session keeps working.
 let nonce: string = bootstrap.nonce;
 
-function readCartToken(): string {
-  try {
-    return localStorage.getItem(CART_TOKEN_KEY) ?? '';
-  } catch {
-    // Private browsing / blocked storage — fall back to cookie-based carts.
-    return '';
-  }
-}
-
-function writeCartToken(token: string): void {
-  try {
-    localStorage.setItem(CART_TOKEN_KEY, token);
-  } catch {
-    // Non-fatal: the cart cookie still works in most browsers.
-  }
-}
-
-export function clearCartToken(): void {
-  try {
-    localStorage.removeItem(CART_TOKEN_KEY);
-  } catch {
-    // Ignore.
-  }
-}
-
 async function request<T>(route: string, init: RequestInit = {}): Promise<T> {
   const headers = new Headers(init.headers);
   if (init.body && !headers.has('Content-Type')) {
     headers.set('Content-Type', 'application/json');
   }
   if (nonce) headers.set('Nonce', nonce);
-  const token = readCartToken();
-  if (token) headers.set('Cart-Token', token);
 
   const res = await fetch(restUrl(`wc/store/v1/${route.replace(/^\/+/, '')}`), {
     credentials: 'same-origin',
@@ -72,11 +69,11 @@ async function request<T>(route: string, init: RequestInit = {}): Promise<T> {
     headers,
   });
 
-  // Carry the rotated nonce and the guest cart token forward.
+  // Carry the rotated nonce forward. The Cart-Token the response also carries
+  // is ignored on purpose: the session cookie, which this request sent and the
+  // checkout page reads, is what holds the basket.
   const freshNonce = res.headers.get('Nonce');
   if (freshNonce) nonce = freshNonce;
-  const freshToken = res.headers.get('Cart-Token');
-  if (freshToken) writeCartToken(freshToken);
 
   if (!res.ok) {
     let message = `Shop request failed (${res.status})`;

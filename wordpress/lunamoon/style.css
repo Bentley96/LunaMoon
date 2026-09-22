@@ -56,6 +56,24 @@ Text Domain: lunamoon
 
 /* ----------------------------------------------------------------- shell -- */
 
+/*
+ * Border-box, everywhere on these pages.
+ *
+ * The app's stylesheet carries a reset that does this, but it isn't loaded on
+ * the pages WooCommerce renders, so this file has to say it. Without it, an
+ * element given both a width and padding here is that much wider than it was
+ * asked to be: WooCommerce sets width:100% on the checkout's customer details,
+ * this file gives it 1.5rem of padding and a border, and the result was 50px
+ * wider than the screen. On a phone that is a page you can drag sideways, with
+ * the header scrolled half out of view.
+ */
+.lm-page,
+.lm-page *,
+.lm-page *::before,
+.lm-page *::after {
+	box-sizing: border-box;
+}
+
 body.lm-page {
 	margin: 0;
 	background: #fff;
@@ -697,6 +715,7 @@ body.lm-page {
 .lunamoon-woo .woocommerce-notice,
 .lunamoon-woo .wc-block-components-notice-banner {
 	margin-bottom: 1.5rem;
+	border: 0;
 	border-left: 4px solid var(--lm-blush-500);
 	border-radius: 1rem;
 	background: var(--lm-blush-50);
@@ -707,12 +726,26 @@ body.lm-page {
 
 .lunamoon-woo .woocommerce-error {
 	margin-bottom: 1.5rem;
+	border: 0;
 	border-left: 4px solid #dc2626;
 	border-radius: 1rem;
 	background: #fef2f2;
 	padding: 1rem 1.25rem;
 	color: #7f1d1d;
 	list-style: none;
+}
+
+/*
+ * WooCommerce draws an icon in these panels with a ::before, positioned
+ * absolutely against the 3.5em of left padding its own stylesheet gives them.
+ * The padding here is this theme's, and smaller, so the icon landed on the
+ * first word of "Returning customer?" and "Have a coupon?".
+ */
+.lunamoon-woo .woocommerce-info::before,
+.lunamoon-woo .woocommerce-message::before,
+.lunamoon-woo .woocommerce-error::before,
+.lunamoon-woo .woocommerce-notice::before {
+	display: none;
 }
 
 .lunamoon-woo #payment {

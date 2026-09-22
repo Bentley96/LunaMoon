@@ -239,20 +239,31 @@ Leads are stored as a private `lunamoon_enquiry` post type (menu: **Enquiries**)
 
 ### 5. reCAPTCHA (optional)
 
-The forms are protected by a honeypot always, and by reCAPTCHA v3 when
-configured. Set the secret in `wp-config.php`:
+The forms are protected by a honeypot always, and by reCAPTCHA v3 when both
+halves of the key pair are set. Get a pair from
+[google.com/recaptcha/admin](https://www.google.com/recaptcha/admin), choosing
+**score based (v3)** and adding the site's domain.
+
+**Secret key** goes in `wp-config.php`, above the "stop editing" line:
 
 ```php
-define( 'LUNAMOON_RECAPTCHA_SECRET', '...' );
+define( 'LUNAMOON_RECAPTCHA_SECRET', '6Lxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' );
 ```
 
-and build with the matching public site key:
+If the host makes editing `wp-config.php` awkward, the
+`lunamoon_recaptcha_secret` filter takes it from an mu-plugin instead.
 
-```bash
-VITE_RECAPTCHA_SITE_KEY=... npm run build
-```
+**Site key** goes in **Appearance → Customize → Clinic details → reCAPTCHA v3
+site key**. It is public, which is why it can live there; the secret cannot and
+never appears in the page. `VITE_RECAPTCHA_SITE_KEY=... npm run build` still
+works as a build-time default, for a preview deploy with no WordPress behind
+it, and the Customizer field wins over it.
 
-Leave both unset to run honeypot-only.
+Both are optional, but set them together. With neither, the forms run on the
+honeypot alone. With the site key only, the forms load Google's script and the
+server ignores the token, which is harmless but pointless. **With the secret
+only, every submission is rejected**: the server asks for a token the forms
+were never given a key to produce.
 
 ---
 

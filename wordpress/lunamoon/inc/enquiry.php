@@ -75,7 +75,18 @@ function lunamoon_from_name() {
  * @return string
  */
 function lunamoon_recaptcha_secret() {
-	return defined( 'LUNAMOON_RECAPTCHA_SECRET' ) ? LUNAMOON_RECAPTCHA_SECRET : '';
+	$secret = defined( 'LUNAMOON_RECAPTCHA_SECRET' ) ? LUNAMOON_RECAPTCHA_SECRET : '';
+
+	/**
+	 * Filter the reCAPTCHA secret.
+	 *
+	 * wp-config.php is where it belongs, which is why it is read from a
+	 * constant. This is for a host that makes editing wp-config awkward and a
+	 * small mu-plugin easier.
+	 *
+	 * @param string $secret The secret, or '' when reCAPTCHA is off.
+	 */
+	return (string) apply_filters( 'lunamoon_recaptcha_secret', $secret );
 }
 
 /**

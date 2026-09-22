@@ -34,6 +34,8 @@ export interface SiteInfo {
   googleReviewsUrl: string;
   /** The src of the map iframe on the contact page. */
   mapEmbedUrl: string;
+  /** reCAPTCHA v3 site key. Empty means the forms run on the honeypot alone. */
+  recaptchaSiteKey: string;
 }
 
 /** Permalinks of the pages WooCommerce renders itself. */
@@ -121,6 +123,7 @@ const FALLBACK: Bootstrap = {
     bookingUrl: '',
     googleReviewsUrl: '',
     mapEmbedUrl: '',
+    recaptchaSiteKey: '',
   },
 };
 

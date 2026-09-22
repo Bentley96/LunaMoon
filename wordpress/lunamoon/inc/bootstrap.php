@@ -38,6 +38,7 @@ function lunamoon_default_details() {
 		'booking_url'        => 'https://www.that-time.co.uk/luna-moon-aesthetics',
 		'google_reviews_url' => '',
 		'map_embed_url'      => '',
+		'recaptcha_site_key' => '',
 	);
 }
 
@@ -212,6 +213,11 @@ function lunamoon_print_bootstrap() {
 			// Linked from the reviews section so visitors can read the rest.
 			'googleReviewsUrl' => lunamoon_detail( 'google_reviews_url' ),
 			'mapEmbedUrl'      => lunamoon_detail( 'map_embed_url' ),
+			// The public half of the reCAPTCHA pair: the forms load Google's
+			// script with it. The secret half stays server-side and is never
+			// printed here. Empty means reCAPTCHA is off and the honeypot
+			// guards the forms on its own.
+			'recaptchaSiteKey' => lunamoon_detail( 'recaptcha_site_key' ),
 		),
 	);
 
@@ -247,6 +253,7 @@ function lunamoon_customize_details( $wp_customize ) {
 		'booking_url'        => array( __( 'External booking URL (optional)', 'lunamoon' ), 'url' ),
 		'google_reviews_url' => array( __( 'Google reviews URL (optional). The listing link from your Google Business Profile', 'lunamoon' ), 'url' ),
 		'map_embed_url'      => array( __( 'Map embed URL (optional). The src from Google Maps, Share, Embed a map', 'lunamoon' ), 'url' ),
+		'recaptcha_site_key' => array( __( 'reCAPTCHA v3 site key (optional). The secret key goes in wp-config.php as LUNAMOON_RECAPTCHA_SECRET', 'lunamoon' ), 'text' ),
 	);
 
 	$defaults = lunamoon_default_details();

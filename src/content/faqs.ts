@@ -79,7 +79,7 @@ export const faqGroups: FaqGroup[] = [
   },
   {
     id: 'skin-boosters',
-    title: 'Skin boosters — Profhilo & Seventy Hyal',
+    title: 'Skin boosters: Profhilo & Seventy Hyal',
     route: '/',
     faqs: [
       {
@@ -507,7 +507,7 @@ export const faqGroups: FaqGroup[] = [
       {
         question: 'What are the clinic opening hours?',
         answer:
-          'The website lists Monday 10am–6pm, Tuesday 10am–6pm, Wednesday 10am–5pm, Thursday 10am–7pm, Friday 10am–7pm and Saturday 10am–3pm. The clinic is closed on Sundays.',
+          'The website lists Monday 10am to 6pm, Tuesday 10am to 6pm, Wednesday 10am to 5pm, Thursday 10am to 7pm, Friday 10am to 7pm and Saturday 10am to 3pm. The clinic is closed on Sundays.',
       },
       {
         question: 'Does Luna Moon Aesthetics offer finance options?',

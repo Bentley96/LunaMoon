@@ -46,7 +46,7 @@ export default function ProductPage() {
                   <h1 className="text-3xl sm:text-4xl">{p.name}</h1>
                   <p className="mt-5 text-2xl font-semibold text-ink-900">
                     {formatPrice(p.price)}
-                    {p.priceMax ? ` – ${formatPrice(p.priceMax)}` : ''}
+                    {p.priceMax ? ` to ${formatPrice(p.priceMax)}` : ''}
                   </p>
                   <p className="mt-6 rounded-lg bg-ink-50 px-4 py-3 text-ink-600">
                     Online ordering isn’t connected yet. Get in touch and we’ll sort this out for you.

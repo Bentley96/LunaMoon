@@ -29,7 +29,7 @@ export function metaForRoute(pathname: string): PageMeta | null {
   return routes[path] ?? null;
 }
 
-/** "Advanced Facial Treatments Preston — Luna Moon Aesthetics" */
+/** "Advanced Facial Treatments Preston | Luna Moon Aesthetics" */
 export function fullTitle(title: string): string {
-  return title === TITLE_SUFFIX ? title : `${title} — ${TITLE_SUFFIX}`;
+  return title === TITLE_SUFFIX ? title : `${title} | ${TITLE_SUFFIX}`;
 }

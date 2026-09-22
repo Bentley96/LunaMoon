@@ -23,7 +23,7 @@ export default function Awards() {
     caption: (
       <>
         <span className="font-display text-lg">
-          {award.badge} — {award.title}
+          {award.badge}: {award.title}
         </span>
         <span className="mt-1 block text-sm text-ink-200">{award.organisation}</span>
       </>

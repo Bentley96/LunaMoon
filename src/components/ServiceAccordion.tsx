@@ -56,7 +56,7 @@ export default function ServiceAccordion() {
           <span className="eyebrow">Services</span>
           <h2 className="mt-3 text-3xl sm:text-4xl">Individual treatments</h2>
           <p className="mt-5 leading-relaxed text-ink-600">
-            {serviceCount} treatments across {serviceCategories.length} categories — laser
+            {serviceCount} treatments across {serviceCategories.length} categories: laser
             treatments, facial treatments, microneedling, skin boosters, body contouring and more,
             from {formatPrice(cheapest)}. Choose a category to see prices.
           </p>

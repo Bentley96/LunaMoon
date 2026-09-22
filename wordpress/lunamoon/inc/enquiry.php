@@ -214,7 +214,7 @@ function lunamoon_handle_enquiry( WP_REST_Request $request ) {
 			'post_type'    => 'lunamoon_enquiry',
 			'post_status'  => 'private',
 			/* translators: 1: treatment name, 2: enquirer name */
-			'post_title'   => sprintf( __( '%1$s — %2$s', 'lunamoon' ), $treatment ? $treatment : __( 'General enquiry', 'lunamoon' ), $name ),
+			'post_title'   => sprintf( __( '%1$s: %2$s', 'lunamoon' ), $treatment ? $treatment : __( 'General enquiry', 'lunamoon' ), $name ),
 			'post_content' => $message,
 		)
 	);
@@ -254,7 +254,7 @@ function lunamoon_handle_enquiry( WP_REST_Request $request ) {
 
 	$subject = sprintf(
 		/* translators: 1: treatment name, 2: enquirer name */
-		__( 'New enquiry: %1$s — %2$s', 'lunamoon' ),
+		__( 'New enquiry: %1$s, from %2$s', 'lunamoon' ),
 		$treatment ? $treatment : __( 'General', 'lunamoon' ),
 		$name
 	);

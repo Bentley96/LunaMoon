@@ -25,7 +25,7 @@ export interface TreatmentCategory {
 export const treatmentsIntro = {
   eyebrow: 'What we treat',
   heading: 'BODY • SKIN • LASER',
-  body: 'Three areas, one plan. Tell us what you want to change and we’ll build a programme from the treatments below — on their own or combined, at our clinic on Friargate in Preston.',
+  body: 'Three areas, one plan. Tell us what you want to change and we’ll build a programme from the treatments below, on their own or combined, at our clinic on Friargate in Preston.',
 };
 
 export const treatmentCategories: TreatmentCategory[] = [
@@ -33,7 +33,7 @@ export const treatmentCategories: TreatmentCategory[] = [
     id: 'advanced-skin',
     title: 'ADVANCED SKIN',
     blurb:
-      'Rejuvenation and resurfacing for texture, tone, fine lines and hydration — from injectable skin boosters to microneedling and peels.',
+      'Rejuvenation and resurfacing for texture, tone, fine lines and hydration, from injectable skin boosters to microneedling and peels.',
     items: [
       'Polynucleotides',
       'Skin Boosters',

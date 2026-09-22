@@ -24,7 +24,7 @@ export default function FeaturedProducts() {
         <SectionHeading
           eyebrow="Our products"
           title="Luna Moon Aesthetics online shop"
-          intro="Treat yourself to a pamper session without leaving your living room — the same professional brands we use in clinic."
+          intro="Treat yourself to a pamper session without leaving your living room, using the same professional brands we use in clinic."
         />
 
         {loading ? (
@@ -49,7 +49,7 @@ export default function FeaturedProducts() {
                       </h3>
                       <p className="mt-auto pt-3 text-lg font-semibold text-ink-900">
                         {formatPrice(p.price)}
-                        {p.priceMax ? ` – ${formatPrice(p.priceMax)}` : ''}
+                        {p.priceMax ? ` to ${formatPrice(p.priceMax)}` : ''}
                       </p>
                     </div>
                   </article>

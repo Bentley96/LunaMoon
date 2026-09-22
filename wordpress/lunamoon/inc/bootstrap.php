@@ -229,14 +229,14 @@ function lunamoon_customize_details( $wp_customize ) {
 		'phone'              => array( __( 'Phone number', 'lunamoon' ), 'text' ),
 		'email'              => array( __( 'Email address', 'lunamoon' ), 'text' ),
 		'address'            => array( __( 'Address (one line per row)', 'lunamoon' ), 'textarea' ),
-		'hours'              => array( __( 'Opening hours — one per row as "Mon-Fri|9am-7pm"', 'lunamoon' ), 'textarea' ),
+		'hours'              => array( __( 'Opening hours, one per row as "Mon-Fri|9am-7pm"', 'lunamoon' ), 'textarea' ),
 		'facebook'           => array( __( 'Facebook URL', 'lunamoon' ), 'url' ),
 		'instagram'          => array( __( 'Instagram URL', 'lunamoon' ), 'url' ),
 		'tiktok'             => array( __( 'TikTok URL', 'lunamoon' ), 'url' ),
 		'whatsapp'           => array( __( 'WhatsApp URL (e.g. https://wa.me/447592608064)', 'lunamoon' ), 'url' ),
 		'booking_url'        => array( __( 'External booking URL (optional)', 'lunamoon' ), 'url' ),
-		'google_reviews_url' => array( __( 'Google reviews URL (optional) — the listing link from your Google Business Profile', 'lunamoon' ), 'url' ),
-		'map_embed_url'      => array( __( 'Map embed URL (optional) — the src from Google Maps → Share → Embed a map', 'lunamoon' ), 'url' ),
+		'google_reviews_url' => array( __( 'Google reviews URL (optional). The listing link from your Google Business Profile', 'lunamoon' ), 'url' ),
+		'map_embed_url'      => array( __( 'Map embed URL (optional). The src from Google Maps, Share, Embed a map', 'lunamoon' ), 'url' ),
 	);
 
 	$defaults = lunamoon_default_details();

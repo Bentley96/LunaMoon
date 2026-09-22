@@ -40,7 +40,7 @@ export default function PageFaqs({
           title="FREQUENTLY ASKED QUESTIONS"
           intro={
             groups.length === 1
-              ? `${groups[0].title} — the questions we're asked most.`
+              ? `${groups[0].title}: the questions we're asked most.`
               : 'The questions we’re asked most, by treatment.'
           }
         />

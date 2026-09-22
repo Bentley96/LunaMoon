@@ -129,7 +129,7 @@ export const treatmentPages: TreatmentPageData[] = [
       image: '/images/teeth-whitening-1.webp',
     },
     secondary: {
-      heading: 'NATURAWHITE — SMILE YOUR BEST SMILE',
+      heading: 'NATURAWHITE: SMILE YOUR BEST SMILE',
       body: [
         'Treat yourself to safe, effective teeth whitening at Luna Moon Aesthetics clinic in Preston. Laser cosmetic teeth whitening is a procedure that uses a teeth whitening gel and a powerful laser light to lift staining and lighten the colour of your teeth, with the result varying from person to person.',
       ],
@@ -140,16 +140,16 @@ export const treatmentPages: TreatmentPageData[] = [
         title: 'PROFESSIONAL TEETH WHITENING PRESTON',
         bullets: [
           'No recovery time',
-          'Treatment time — 1 hour',
+          'Treatment time: 1 hour',
           'Immediate visible results',
-          'Result duration — permanent',
+          'Result duration: permanent',
         ],
         image: '/images/teeth-whitening-3.webp',
       },
       {
         title: 'TEETH WHITENING BENEFITS',
         bullets: [
-          'Boosts confidence — smile with pride',
+          'Boosts confidence: smile with pride',
           'A radiant, youthful, healthier smile',
           'Look your best in photographs',
           'Our service is cost effective',
@@ -179,7 +179,7 @@ export const treatmentPages: TreatmentPageData[] = [
       heading: 'BODY CONTOURING & SKIN TIGHTENING',
       body: [
         'Luna Moon Aesthetics is a Preston clinic specialising in body contouring and skin tightening. We are based at 55-56 Friargate, Preston, PR1 2AT. Please visit our online booking form for services and availability.',
-        'Whether you want to firm skin that has lost its tone or reshape a particular area, we offer radio frequency skin tightening and body sculpting, EMS, Liquid Lipo, Lemon Bottle injections, pressotherapy, wood therapy, sauna blanket treatments, cavitation and vacuum therapy — taken as a course and combined around the areas you want to work on.',
+        'Whether you want to firm skin that has lost its tone or reshape a particular area, we offer radio frequency skin tightening and body sculpting, EMS, Liquid Lipo, Lemon Bottle injections, pressotherapy, wood therapy, sauna blanket treatments, cavitation and vacuum therapy, taken as a course and combined around the areas you want to work on.',
       ],
       image: '/images/liquid-lipo-brand.webp',
     },
@@ -206,7 +206,7 @@ export const treatmentPages: TreatmentPageData[] = [
       {
         title: 'CAVITATION',
         body: [
-          'Ultrasonic cavitation is a cosmetic procedure that breaks apart stubborn areas of fat in your body. The cavitation treatment works as an effective, less invasive alternative to liposuction. It is extremely convenient and effective because recovery time is minimal and side effects are rare. It can be used to sculpt and firm areas of the body, it works well alongside RF skin tightening and alongside Liquid Lipo. Why not treat yourself to a package of all 3 treatments — if this is something that would interest you, contact me to discuss a treatment package and let’s firm and tone your body.',
+          'Ultrasonic cavitation is a cosmetic procedure that breaks apart stubborn areas of fat in your body. The cavitation treatment works as an effective, less invasive alternative to liposuction. It is extremely convenient and effective because recovery time is minimal and side effects are rare. It can be used to sculpt and firm areas of the body, it works well alongside RF skin tightening and alongside Liquid Lipo. Why not treat yourself to a package of all 3 treatments If this is something that would interest you, contact me to discuss a treatment package and let’s firm and tone your body.',
         ],
         image: '/images/body-cavitation-2.webp',
       },

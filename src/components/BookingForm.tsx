@@ -71,7 +71,7 @@ export default function BookingForm({
         <CheckCircle2 className="h-10 w-10 text-blush-600" aria-hidden="true" />
         <h3 className="text-2xl text-ink-900">Thank you</h3>
         <p className="text-ink-600">
-          Your enquiry is with us — we'll be in touch shortly to confirm your appointment.
+          Your enquiry is with us. We'll be in touch shortly to confirm your appointment.
         </p>
       </div>
     );

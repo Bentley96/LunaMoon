@@ -12,7 +12,7 @@ import PageFaqs from '../components/PageFaqs';
 import Spinner from '../components/ui/Spinner';
 
 const INTRO =
-  'Hi, Dee here again. I hope you’re enjoying browsing my site as much as I enjoy helping you achieve the best you that you can be — feel free to drop me a message if you need anything. We all love the salon experience, but sometimes it’s nice to get that in the comfort of your own home. These are my at-home treatments: visit my shop and treat yourself to a pamper session without leaving your living room.';
+  'Hi, Dee here again. I hope you’re enjoying browsing my site as much as I enjoy helping you achieve the best you that you can be. Feel free to drop me a message if you need anything. We all love the salon experience, but sometimes it’s nice to get that in the comfort of your own home. These are my at-home treatments: visit my shop and treat yourself to a pamper session without leaving your living room.';
 
 export default function ShopPage() {
   const { data, loading } = useAsync(
@@ -67,7 +67,7 @@ export default function ShopPage() {
                     </h3>
                     <p className="mt-3 text-lg font-semibold text-ink-900">
                       {formatPrice(p.price)}
-                      {p.priceMax ? ` – ${formatPrice(p.priceMax)}` : ''}
+                      {p.priceMax ? ` to ${formatPrice(p.priceMax)}` : ''}
                     </p>
                     <Link to={`/product/${p.slug}`} className="btn-outline-ink mt-5 w-full">
                       {p.hasOptions ? 'Select options' : 'View product'}

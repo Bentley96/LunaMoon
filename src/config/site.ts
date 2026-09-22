@@ -152,7 +152,7 @@ export const MAP_EMBED_URL =
 export const business = {
   name: bootstrap.site.name || 'Luna Moon Aesthetics',
   /** The brand line, used under the logo in the footer. */
-  tagline: bootstrap.site.description || 'Body • Skin • Laser — advanced treatments in Preston',
+  tagline: bootstrap.site.description || 'Body • Skin • Laser. Advanced treatments in Preston.',
   /** Registered company name, for the footer's copyright line. */
   legalName: 'Luna Moon LTD',
   phone: bootstrap.site.phone || '07592 608 064',

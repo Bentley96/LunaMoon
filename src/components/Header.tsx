@@ -69,7 +69,7 @@ export default function Header() {
 
       <div className="bg-blush-400">
         <div className="container-xl flex items-center justify-between gap-6 px-4 py-3 sm:px-6 lg:px-8">
-          <Link to="/" className="shrink-0" aria-label={`${business.name} — home`}>
+          <Link to="/" className="shrink-0" aria-label={`${business.name}, home`}>
             <Logo className="h-14 sm:h-20" />
           </Link>
 
@@ -123,7 +123,7 @@ export default function Header() {
                 type="button"
                 onClick={openDrawer}
                 className="relative rounded-full p-2.5 text-ink-800 transition-colors hover:bg-white/60 hover:text-blush-900"
-                aria-label={`Basket${count ? ` — ${count} item${count === 1 ? '' : 's'}` : ' — empty'}`}
+                aria-label={`Basket${count ? `, ${count} item${count === 1 ? '' : 's'}` : ', empty'}`}
               >
                 <ShoppingBag className="h-5 w-5" aria-hidden="true" />
                 {count > 0 && (

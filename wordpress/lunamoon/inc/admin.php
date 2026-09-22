@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 function lunamoon_meta_fields() {
 	return array(
 		'treatment'   => array(
-			'lunamoon_price_from'  => array( __( 'Price from', 'lunamoon' ), 'text', __( 'e.g. 120 — leave blank to show "On consultation".', 'lunamoon' ) ),
+			'lunamoon_price_from'  => array( __( 'Price from', 'lunamoon' ), 'text', __( 'e.g. 120. Leave blank to show "On consultation".', 'lunamoon' ) ),
 			'lunamoon_duration'    => array( __( 'Duration', 'lunamoon' ), 'text', __( 'e.g. 45 mins', 'lunamoon' ) ),
 			'lunamoon_product_id'  => array( __( 'WooCommerce product ID', 'lunamoon' ), 'number', __( 'Optional. Links this treatment to a product so it can be paid for online.', 'lunamoon' ) ),
 			'lunamoon_booking_url' => array( __( 'External booking URL', 'lunamoon' ), 'url', __( 'Optional. Used when there is no linked product.', 'lunamoon' ) ),

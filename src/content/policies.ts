@@ -50,7 +50,7 @@ export const policies: Record<string, PolicyContent> = {
         body: [
           'The preferred method of booking an appointment is online via our website, where the availability of each treatment can be found and your deposit can be paid to secure your booking. Bookings can also be made via our social media sites. Please note, booking an appointment via social media, the appointment will not be booked until the appointment time has been confirmed to the client by the Clinic and the deposit received. Being offered a time slot does not guarantee the space until the clinic has confirmed it with the client.',
           'We regret we cannot hold bookings with Facebook appointments until confirmation. Luna Moon Aesthetics runs on an appointment-based system and these go on a first-come-first-serve basis. We do not hold back any appointments for last minute calls, so we always advise you to book in advance to avoid disappointment. Remember that during the summer months and at Christmas time we do get extremely busy and appointments can go 2-3 weeks in advance (sometimes longer for late nights and weekends).',
-          'SYMPTOMS OF COVID -19 – If you are experiencing any symptoms of Covid 19 which include high fever, continuous cough, loss of sense of smell and taste, please reschedule your appointment.',
+          'SYMPTOMS OF COVID-19: If you are experiencing any symptoms of Covid 19 which include high fever, continuous cough, loss of sense of smell and taste, please reschedule your appointment.',
         ],
       },
       {

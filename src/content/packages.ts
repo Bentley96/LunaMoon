@@ -86,7 +86,7 @@ export const packages: Package[] = [
     price: 12000,
     duration: '1 hr 30 mins',
     deposit: true,
-    summary: 'INTRODUCING: THE BODY SYSTEMS RESET A structured, results-focused protocol designed to work with your body’s natural systems to: • Reduce inflammation & bloating • Support lymphatic drainage • Sculpt and define your body THE SYSTEM INCLUDES: • Vibration Plate — stimulate circulation & tone muscles • Infrared Sauna — support detox & f…',
+    summary: 'INTRODUCING: THE BODY SYSTEMS RESET A structured, results-focused protocol designed to work with your body’s natural systems to: • Reduce inflammation & bloating • Support lymphatic drainage • Sculpt and define your body THE SYSTEM INCLUDES: • Vibration Plate: stimulate circulation & tone muscles • Infrared Sauna: support detox & f…',
   },
   {
     name: 'Makeover Special',

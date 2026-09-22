@@ -69,7 +69,7 @@ export const serviceCategories: ServiceCategory[] = [
         price: 6900,
         duration: '1 hr',
         deposit: true,
-        summary: 'SIGNATURE SCULPT - SNATCHED JAW / CHIN FAT REDUCTION & RF FACIAL If you’re after a sharper jawline, a more defined chin, and firmer, glowing skin—this treatment was made for you. Signature Sculpt targets stubborn chin fat while tightening and lifting the lower face using advanced, non-invasive technology. It’s all about contour, definition, and co…',
+        summary: 'SIGNATURE SCULPT - SNATCHED JAW / CHIN FAT REDUCTION & RF FACIAL If you’re after a sharper jawline, a more defined chin, and firmer, glowing skin. This treatment was made for you. Signature Sculpt targets stubborn chin fat while tightening and lifting the lower face using advanced, non-invasive technology. It’s all about contour, definition, and co…',
       },
       {
         name: 'Bingo Wings with Liquid Lipo',

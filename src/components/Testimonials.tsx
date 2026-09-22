@@ -21,7 +21,7 @@ export default function Testimonials() {
     <section className="section-padding bg-ink-50">
       <div className="container-xl">
         <SectionHeading
-          eyebrow={`${reviewSummary.rating} — based on ${reviewSummary.count} ${reviewSummary.source} reviews`}
+          eyebrow={`${reviewSummary.rating}, based on ${reviewSummary.count} ${reviewSummary.source} reviews`}
           title="What our clients say"
         />
 

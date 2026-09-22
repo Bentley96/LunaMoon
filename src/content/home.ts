@@ -21,7 +21,7 @@ export const about = {
   heading: 'PERSONALISED TREATMENTS. ADVANCED TECHNOLOGY. YOUR GOALS.',
   body: [
     'Luna Moon Aesthetics is a Preston clinic specialising in advanced skin, body contouring and laser treatments, led by Dee, a highly experienced and qualified aesthetician.',
-    'Every treatment starts with what you want to achieve. Rather than a fixed menu to choose from, we build a programme around your skin, your body and the result you’re working towards — using the technology that will actually get you there.',
+    'Every treatment starts with what you want to achieve. Rather than a fixed menu to choose from, we build a programme around your skin, your body and the result you’re working towards, using the technology that will actually get you there.',
     'Book a consultation to talk it through, or take a look at the treatments and prices and book online. We’re at 55-56 Friargate, Preston, PR1 2AT.',
   ],
   // Unused since the studio carousel took this section's image slot. Kept
@@ -33,7 +33,7 @@ export const aboutDee = {
   eyebrow: 'Meet Dee',
   heading: 'THE FOUNDER BEHIND LUNA MOON AESTHETICS',
   body: [
-    'Luna Moon Aesthetics was created by Dee with a simple vision — to create a welcoming space where women can invest in themselves and receive personalised, professional treatments without feeling overwhelmed by endless treatment choices.',
+    'Luna Moon Aesthetics was created by Dee with a simple vision: to create a welcoming space where women can invest in themselves and receive personalised, professional treatments without feeling overwhelmed by endless treatment choices.',
     'With experience across advanced aesthetics, body contouring and skin treatments, Dee takes a personalised approach to every client.',
   ],
   /** Set apart from the body copy, in her own words. */
@@ -52,7 +52,7 @@ export const serviceCards = [
   },
   {
     title: 'BODY CONTOURING & SKIN TIGHTENING',
-    body: 'Sculpt, firm and reshape with Liquid Lipo, RF skin tightening, body sculpting, EMS, pressotherapy, wood therapy, lymphatic treatments and cavitation vacuum therapy — chosen and combined around the areas you want to work on.',
+    body: 'Sculpt, firm and reshape with Liquid Lipo, RF skin tightening, body sculpting, EMS, pressotherapy, wood therapy, lymphatic treatments and cavitation vacuum therapy, chosen and combined around the areas you want to work on.',
     to: '/skin-tightening-weight-loss',
     image: '/images/body-contouring.webp',
   },
@@ -77,7 +77,7 @@ export const whatWeDo = {
   // rewritten into it, so nothing that earned those rankings is disturbed.
   body: 'Advanced skin treatments, body contouring and laser, delivered with clinical technology and a plan built around you. Luna Moon Aesthetics have won awards for the top 10 regional salons, finalists at the UK Hair and Beauty Awards in 2022 and 2023 and 2nd in the UK Advanced practitioner awards.',
   body2:
-    'Alongside our laser treatments — cosmetic teeth whitening and IPL laser hair removal — we offer facial treatments including dermaplaning, microneedling, chemical peels and polynucleotides skin booster courses.',
+    'Alongside our laser treatments (cosmetic teeth whitening and IPL laser hair removal) we offer facial treatments including dermaplaning, microneedling, chemical peels and polynucleotides skin booster courses.',
 };
 
 export const bookOnlineCta = {
@@ -101,7 +101,7 @@ export const contactBlock = {
 
 export const faqTeaser = {
   heading: 'FREQUENTLY ASKED QUESTIONS',
-  body: 'Take a look at a few of our frequently asked questions, you will also find our clinic policy in the footer. If you do not see what you are looking for, please contact the clinic — we will be more than happy to answer any questions.',
+  body: 'Take a look at a few of our frequently asked questions, you will also find our clinic policy in the footer. If you do not see what you are looking for, please contact the clinic and we will be more than happy to answer any questions.',
 };
 
 /**
@@ -126,7 +126,7 @@ export const reviews = [
     date: '2026-01-06',
     rating: 5,
     quote:
-      'Second visit — there will be many more! I was feeling down when I went and these ladies cheered me up no end! And that’s just who they are. The Ultimate Collagen treatment is AMAZING. Also they won’t do something if they don’t think you’ll benefit from it! They won’t just take your money.',
+      'Second visit, and there will be many more! I was feeling down when I went and these ladies cheered me up no end! And that’s just who they are. The Ultimate Collagen treatment is AMAZING. Also they won’t do something if they don’t think you’ll benefit from it! They won’t just take your money.',
   },
   {
     author: 'doa',
@@ -154,6 +154,6 @@ export const reviews = [
     date: '2025-05-20',
     rating: 5,
     quote:
-      'Highly recommend. I had the Hour Glass package and have seen big improvements — as a mum of four I struggle with the mum tummy, and my waist and tummy look so much better. Very friendly, would be coming back for more treatments.',
+      'Highly recommend. I had the Hour Glass package and have seen big improvements. As a mum of four I struggle with the mum tummy, and my waist and tummy look so much better. Very friendly, would be coming back for more treatments.',
   },
 ];

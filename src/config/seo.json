@@ -1,5 +1,5 @@
 {
-  "_readme": "Per-route <title> and meta description. JSON rather than TypeScript so the WordPress theme can read the same file (the build copies it to dist/seo.json and inc/seo.php serves it), which keeps one copy of the wording instead of two. See src/config/seo.ts. Titles are written to stay under about 60 characters once ' — Luna Moon Aesthetics' is appended, and descriptions under about 155, so neither is cut off in search results.",
+  "_readme": "Per-route <title> and meta description. JSON rather than TypeScript so the WordPress theme can read the same file (the build copies it to dist/seo.json and inc/seo.php serves it), which keeps one copy of the wording instead of two. See src/config/seo.ts. Titles are written to stay under about 60 characters once ' | Luna Moon Aesthetics' is appended, and descriptions under about 155, so neither is cut off in search results.",
   "_suffix": "Luna Moon Aesthetics",
   "routes": {
     "/": {
@@ -27,7 +27,7 @@
       "description": "Professional and home-use skincare from Luna Moon Aesthetics in Preston, including the Liquid Lipo home kit and Blepharonat eye treatments."
     },
     "/faqs": {
-      "title": "FAQs — Facial & Laser Treatments",
+      "title": "FAQs: Facial & Laser Treatments",
       "description": "Answers about facial treatments, microneedling, polynucleotides skin booster, laser treatments, IPL hair removal and booking at our Preston clinic."
     },
     "/contact": {

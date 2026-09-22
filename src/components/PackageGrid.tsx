@@ -91,7 +91,7 @@ export default function PackageGrid() {
         <div className="mt-10 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-center">
           <KlarnaBadge className="h-6" />
           <p className="text-sm text-ink-600">
-            Pay monthly options available — ask us about Klarna when you book.
+            Pay monthly options available. Ask us about Klarna when you book.
           </p>
         </div>
 

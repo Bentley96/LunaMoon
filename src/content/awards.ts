@@ -32,7 +32,7 @@ export interface Award {
 }
 
 export const awardsIntro =
-  'Luna Moon Aesthetics has been named in the top 10 regional salons, shortlisted at the UK Hair and Beauty Awards three years running, and placed 2nd in the UK Advanced Practitioner Awards — and Dee is trained and accredited in the treatments she offers.';
+  'Luna Moon Aesthetics has been named in the top 10 regional salons, shortlisted at the UK Hair and Beauty Awards three years running, and placed 2nd in the UK Advanced Practitioner Awards. Dee is trained and accredited in the treatments she offers.';
 
 export const awards: Award[] = [
   {
@@ -49,7 +49,7 @@ export const awards: Award[] = [
   {
     id: 'hba-2023',
     badge: '2023',
-    title: 'Finalist — Best Salon',
+    title: 'Finalist, Best Salon',
     organisation: 'UK Hair and Beauty Awards',
     detail: 'Representing Preston',
     image: '/images/awards/hba-2023-finalist.webp',
@@ -60,7 +60,7 @@ export const awards: Award[] = [
   {
     id: 'hba-2024',
     badge: '2024',
-    title: 'Finalist — Best Salon',
+    title: 'Finalist, Best Salon',
     organisation: 'Official UK Hair and Beauty Awards',
     detail: 'Representing Preston',
     image: '/images/awards/hba-2024-finalist.webp',

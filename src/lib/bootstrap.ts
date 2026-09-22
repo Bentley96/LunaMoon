@@ -38,6 +38,8 @@ export interface SiteInfo {
 
 /** Permalinks of the pages WooCommerce renders itself. */
 export interface WooUrls {
+  /** WooCommerce's own cart page, which is rarely the app's /cart. */
+  cart: string;
   checkout: string;
   myAccount: string;
 }
@@ -92,7 +94,7 @@ const FALLBACK: Bootstrap = {
   siteUrl: '',
   basename: '',
   hasWoo: true,
-  wooUrls: { checkout: '/checkout/', myAccount: '/my-account/' },
+  wooUrls: { cart: '', checkout: '/checkout/', myAccount: '/my-account/' },
   seo: {},
   currency: {
     code: 'GBP',
@@ -145,6 +147,38 @@ export const bootstrap: Bootstrap = read();
  */
 export function checkoutUrl(): string {
   return bootstrap.wooUrls.checkout || '/checkout/';
+}
+
+/**
+ * WooCommerce's own cart page, as a router path, when it isn't the app's.
+ *
+ * The app's basket is /cart, but WooCommerce has a cart page of its own and on
+ * this site it is /basket/. WooCommerce sends people to it without asking: load
+ * the checkout with an empty basket and it redirects there. The theme redirects
+ * that URL back to /cart, but a page served from a cache never runs the theme,
+ * so the app recognises it too.
+ *
+ * Returns '' when there's nothing to do, which is every site whose cart page is
+ * already /cart, and every build running without WordPress.
+ */
+export function wooCartPath(): string {
+  const url = bootstrap.wooUrls.cart;
+  if (!url) return '';
+
+  let path: string;
+  try {
+    path = new URL(url, window.location.origin).pathname;
+  } catch {
+    return '';
+  }
+
+  // React Router paths are relative to the basename, so a WordPress in a
+  // subdirectory has to have it taken off the front.
+  const base = bootstrap.basename;
+  if (base && path.startsWith(base)) path = path.slice(base.length);
+
+  path = '/' + path.replace(/^\/+/, '').replace(/\/+$/, '');
+  return path === '/cart' || path === '/' ? '' : path;
 }
 
 /** Absolute URL for a REST route, e.g. restUrl('wc/store/v1/cart'). */

@@ -6,6 +6,7 @@ import Seo from './components/Seo';
 import HomePage from './pages/HomePage';
 import Spinner from './components/ui/Spinner';
 import { treatmentPages } from './content/treatments';
+import { wooCartPath } from './lib/bootstrap';
 
 // Everything past the homepage is code-split, so a first visit only downloads
 // the landing page. The chunks resolve relative to the entry script's own URL
@@ -28,6 +29,8 @@ function ShopRedirect() {
 }
 
 export default function App() {
+  const wooCart = wooCartPath();
+
   return (
     <>
       <ScrollToTop />
@@ -57,6 +60,11 @@ export default function App() {
             <Route path="/product-category/*" element={<Navigate to="/products" replace />} />
             <Route path="/product-tag/*" element={<Navigate to="/products" replace />} />
             <Route path="/cart" element={<CartPage />} />
+            {/* WooCommerce's cart page is called something else on this site,
+                and WooCommerce sends people to it on its own: loading the
+                checkout with an empty basket is a redirect there. The theme
+                redirects it back, but a cached page never runs the theme. */}
+            {wooCart && <Route path={wooCart} element={<Navigate to="/cart" replace />} />}
             {/* /checkout and /my-account are served by WooCommerce, not React —
                 see wordpress/lunamoon/inc/commerce.php. */}
 

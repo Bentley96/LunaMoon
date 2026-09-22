@@ -208,6 +208,41 @@ function lunamoon_is_builder_page( $post ) {
 }
 
 /**
+ * Send WooCommerce's cart page to the app's basket.
+ *
+ * The app owns the basket, at /cart. WooCommerce has a cart page of its own,
+ * and on a site that was set up before this theme it is usually called
+ * something else: this one's is "Basket", at /basket/. Nothing in the app links
+ * there, but WooCommerce does. Opening the checkout with nothing in the basket
+ * is a redirect to the cart page, and that URL landed on the app with no route
+ * to match it, so it showed the "page not found" screen.
+ *
+ * Redirecting rather than routing keeps one URL for the basket.
+ *
+ * The query string is dropped deliberately. WooCommerce's own cart links carry
+ * ?add-to-cart= and ?remove_item=, which it acts on before this runs; carrying
+ * them to the next request would apply them a second time.
+ */
+add_action( 'template_redirect', 'lunamoon_redirect_woo_cart' );
+function lunamoon_redirect_woo_cart() {
+	if ( is_admin() || ! lunamoon_has_woo() || ! function_exists( 'is_cart' ) || ! is_cart() ) {
+		return;
+	}
+
+	$target = home_url( '/cart/' );
+	$here   = wp_parse_url( isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : '', PHP_URL_PATH );
+
+	// Already on it: a site whose WooCommerce cart page IS /cart, where this
+	// would otherwise redirect to itself forever.
+	if ( untrailingslashit( (string) $here ) === untrailingslashit( (string) wp_parse_url( $target, PHP_URL_PATH ) ) ) {
+		return;
+	}
+
+	wp_safe_redirect( $target, 302 );
+	exit;
+}
+
+/**
  * Keep WooCommerce's own stylesheets off the app's pages.
  *
  * They're only needed where Woo renders its own markup; everywhere else they

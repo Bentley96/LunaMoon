@@ -127,12 +127,18 @@ function lunamoon_currency() {
 function lunamoon_woo_urls() {
 	if ( ! lunamoon_has_woo() ) {
 		return array(
+			'cart'      => '',
 			'checkout'  => '',
 			'myAccount' => '',
 		);
 	}
 
 	return array(
+		// WooCommerce's own cart page, which is not the app's basket unless the
+		// site happens to have named it "cart". WooCommerce sends people there
+		// itself (loading the checkout with an empty basket is a redirect to
+		// it), so the app has to recognise the URL.
+		'cart'      => esc_url_raw( wc_get_cart_url() ),
 		'checkout'  => esc_url_raw( wc_get_checkout_url() ),
 		'myAccount' => esc_url_raw( wc_get_page_permalink( 'myaccount' ) ),
 	);

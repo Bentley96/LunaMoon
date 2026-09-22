@@ -46,6 +46,7 @@ function lunamoon_routes() {
 	return array(
 		'home'                            => __( 'Home', 'lunamoon' ),
 		'book-online'                     => __( 'Book Online', 'lunamoon' ),
+		'cart'                            => __( 'Basket', 'lunamoon' ),
 		'products'                        => __( 'Products', 'lunamoon' ),
 		'advanced-facial-treatments'      => __( 'Advanced Facial Treatments', 'lunamoon' ),
 		'laser-cosmetic-teeth-whitening'  => __( 'Laser Cosmetic Teeth Whitening', 'lunamoon' ),

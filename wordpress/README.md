@@ -129,6 +129,49 @@ Install → Activate.
 > `dist/` is required. Without it wp-admin shows a warning and the site renders
 > blank.
 
+### Pages that already exist
+
+Activation does **not** replace the pages that are already on the site. For
+each of its ten routes it looks for a page with that slug and reuses it,
+keeping the post ID, and only creates one when nothing matches:
+
+`home`, `book-online`, `products`, `advanced-facial-treatments`,
+`laser-cosmetic-teeth-whitening`, `skin-tightening-weight-loss`, `faqs`,
+`contact`, `clinic-policy`, `privacy-policy`.
+
+That is deliberate: the Rank Math title and description for a page are stored
+against its ID, so reusing the page keeps the meta the site already ranks with.
+
+**Leave those ten published.** Setting one to draft removes the URL, so the
+route 404s and the SEO meta goes with it. The same goes for WooCommerce's
+Cart, Checkout and My Account pages.
+
+Their old Elementor content is ignored rather than shown: the app's template
+never calls `the_content()`. Leaving it in place costs nothing and means
+switching the theme back restores the old site as it was.
+
+Two things are worth checking before you activate:
+
+1. **Slugs have to match.** If the current FAQ page is `/faq` and the route is
+   `/faqs`, activation creates a second page and the old one keeps the meta.
+   Rename the slug on the existing page first (Quick Edit, URL slug) and the
+   page, its ID and its meta all carry over. Add a redirect from the old URL.
+2. **The front page.** Activation points Settings, Reading at the page with
+   the slug `home`. If the current front page uses a different slug, give it
+   `home` beforehand so the homepage meta comes with it.
+
+**Any other published page** now renders the app, and the app has no route for
+it, so visitors get its "page not found" screen at an HTTP 200 status. Search
+engines treat that as a soft 404. Deal with those page by page:
+
+- Still useful, just moved: redirect it to the new page with Rank Math,
+  Redirections (301). Best option when the URL has links or rankings.
+- Obsolete: move it to the bin, or set it to draft. WordPress then returns a
+  real 404, which is the honest answer.
+
+Listing them is quickest from Pages, sorted by title: anything outside the ten
+above, the Woo pages, and whatever you have redirected is a candidate.
+
 ### SEO titles and descriptions
 
 The theme ships its own per-page titles and descriptions (in

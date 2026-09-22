@@ -338,6 +338,7 @@ function lunamoon_critical_css() {
 .lm-page .lm-brand{background:#e4c3ba!important}
 .lm-page .lm-footer{background:#110e0d!important;color:#d9cfcb!important}
 .lm-page .lm-wrap{max-width:80rem!important;margin-left:auto!important;margin-right:auto!important}
+.lm-page .lunamoon-woo .elementor-section,.lm-page .lunamoon-woo .elementor-container,.lm-page .lunamoon-woo .elementor-column,.lm-page .lunamoon-woo .elementor-column-wrap,.lm-page .lunamoon-woo .elementor-widget-wrap,.lm-page .lunamoon-woo .e-con,.lm-page .lunamoon-woo .e-con-inner,.lm-page .lunamoon-woo .et_pb_section,.lm-page .lunamoon-woo .et_pb_row,.lm-page .lunamoon-woo .vc_row{margin:0!important;padding:0!important;min-height:0!important}
 </style>
 	<?php
 }

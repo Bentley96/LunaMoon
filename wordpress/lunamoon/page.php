@@ -30,7 +30,16 @@ get_header();
 
 		<div class="lm-wrap lm-content">
 			<div class="lunamoon-woo">
-				<?php the_content(); ?>
+				<?php
+				// On checkout and My Account, a page built with Elementor (or
+				// Divi, or WPBakery) is rendered as the WooCommerce shortcode
+				// alone, without the builder's layout. Everywhere else, and on
+				// a page that was never built with one, this is the page's own
+				// content as usual.
+				if ( ! function_exists( 'lunamoon_woo_page_content' ) || ! lunamoon_woo_page_content() ) {
+					the_content();
+				}
+				?>
 			</div>
 		</div>
 	<?php endwhile; ?>

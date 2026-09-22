@@ -114,10 +114,97 @@ function lunamoon_template_include( $template ) {
 	}
 
 	if ( lunamoon_is_woo_owned_request() ) {
+		// page.php, not whatever template the page has been assigned. A site
+		// that was built with Elementor usually has "Elementor Full Width" set
+		// on its checkout page, and that template prints the content on its
+		// own: no title band, and none of the markup the theme's WooCommerce
+		// styling hangs off. Forcing page.php means these two pages look the
+		// same whatever the page was set to before the theme changed.
+		$page = get_template_directory() . '/page.php';
+		if ( file_exists( $page ) ) {
+			return $page;
+		}
 		return $template;
 	}
 
 	return get_template_directory() . '/index.php';
+}
+
+/**
+ * Print the WooCommerce page's own content, without the builder layout round it.
+ *
+ * A checkout page that was built with Elementor doesn't hold a bare shortcode.
+ * It holds a section, holding a column, holding a widget, holding the
+ * shortcode, plus whatever else was dropped on the page: a heading that repeats
+ * the page title, an empty spacer section. The builder's stylesheet is what
+ * gives all of that its size, and on these two pages the theme takes that
+ * stylesheet off, so the layout is left standing with nothing holding it up:
+ * a tall empty band above the form, and a second "Checkout" heading above the
+ * theme's own.
+ *
+ * Nothing on a checkout page needs a builder. WooCommerce's shortcode renders
+ * the whole thing. So when the page was built with one, this renders the
+ * shortcode and leaves the layout out of it.
+ *
+ * @return bool True when it printed something, false to fall back to the_content().
+ */
+function lunamoon_woo_page_content() {
+	if ( ! lunamoon_has_woo() ) {
+		return false;
+	}
+
+	$post = get_post();
+	if ( ! $post ) {
+		return false;
+	}
+
+	$shortcodes = array(
+		(int) get_option( 'woocommerce_checkout_page_id' )  => 'woocommerce_checkout',
+		(int) get_option( 'woocommerce_myaccount_page_id' ) => 'woocommerce_my_account',
+	);
+
+	$id = (int) $post->ID;
+	if ( empty( $shortcodes[ $id ] ) ) {
+		return false;
+	}
+
+	/**
+	 * Filter whether to bypass a page builder's layout on this page.
+	 *
+	 * Set false to render the page's real content instead, for a site that has
+	 * deliberately put something on its checkout page.
+	 *
+	 * @param bool    $bypass Whether to render the shortcode on its own.
+	 * @param WP_Post $post   The page.
+	 */
+	if ( ! apply_filters( 'lunamoon_bypass_builder_content', lunamoon_is_builder_page( $post ), $post ) ) {
+		return false;
+	}
+
+	echo do_shortcode( '[' . $shortcodes[ $id ] . ']' );
+	return true;
+}
+
+/**
+ * Was this page built with a page builder rather than the editor?
+ *
+ * Each builder marks its posts with a meta key; these are the three that turn
+ * up on a WordPress site of this vintage.
+ *
+ * @param WP_Post $post The page.
+ * @return bool
+ */
+function lunamoon_is_builder_page( $post ) {
+	if ( 'builder' === get_post_meta( $post->ID, '_elementor_edit_mode', true ) ) {
+		return true;
+	}
+	if ( 'on' === get_post_meta( $post->ID, '_et_pb_use_builder', true ) ) {
+		return true;
+	}
+	if ( 'true' === get_post_meta( $post->ID, '_wpb_vc_js_status', true ) ) {
+		return true;
+	}
+	return false;
 }
 
 /**

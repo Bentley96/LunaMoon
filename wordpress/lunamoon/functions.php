@@ -124,13 +124,115 @@ function lunamoon_footer_menus() {
 }
 
 /**
+ * The site's links, rendered as real anchors into the app's mount point.
+ *
+ * The app is JavaScript: React Router builds the navigation after the bundle
+ * has loaded and run, so the HTML WordPress actually serves for every route is
+ * an empty <div id="root">. A browser fills it in. A crawler that doesn't run
+ * JavaScript does not, and there is nothing in the document to tell it the
+ * treatment pages exist. Point a crawler at the homepage and the homepage is
+ * all it finds, which is what a Screaming Frog run showed.
+ *
+ * So the links are printed server-side, inside #root. React replaces
+ * everything in that element when it mounts, so this is what is on screen for
+ * the moment before the bundle runs and nothing after it: the same links, in
+ * the same order, as the navigation that takes its place. It doubles as
+ * something to look at while the app loads.
+ *
+ * Every route serves this, so a crawler can walk the whole site from any page.
+ */
+function lunamoon_shell_links() {
+	$links = array();
+
+	foreach ( lunamoon_menu() as $item ) {
+		if ( ! empty( $item['url'] ) && '#' !== $item['url'] ) {
+			$links[ $item['url'] ] = $item['label'];
+		}
+		foreach ( ( isset( $item['children'] ) ? $item['children'] : array() ) as $child ) {
+			$links[ $child['url'] ] = $child['label'];
+		}
+	}
+
+	foreach ( lunamoon_footer_menus() as $column ) {
+		foreach ( $column as $item ) {
+			if ( ! isset( $links[ $item['url'] ] ) ) {
+				$links[ $item['url'] ] = $item['label'];
+			}
+		}
+	}
+
+	$links['/privacy-policy'] = __( 'Privacy Policy', 'lunamoon' );
+
+	?>
+	<div class="lm-shell">
+		<h1 class="lm-shell-name"><?php echo esc_html( lunamoon_shell_heading() ); ?></h1>
+		<p class="lm-shell-strap"><?php echo esc_html( get_bloginfo( 'description' ) ); ?></p>
+		<nav class="lm-shell-nav" aria-label="<?php esc_attr_e( 'Site', 'lunamoon' ); ?>">
+			<ul>
+				<?php foreach ( $links as $lunamoon_path => $lunamoon_label ) : ?>
+					<li><a href="<?php echo lunamoon_url( $lunamoon_path ); ?>"><?php echo esc_html( $lunamoon_label ); ?></a></li>
+				<?php endforeach; ?>
+			</ul>
+		</nav>
+	</div>
+	<?php
+}
+
+/**
+ * The heading for the served HTML, matching the one the app renders.
+ *
+ * Without it a crawler that doesn't run JavaScript finds no h1 anywhere on the
+ * site, since the app's headings are all built in the browser. React replaces
+ * this one with its own when it mounts, so there is never more than one on the
+ * page: this is the same heading, arriving earlier.
+ *
+ * The homepage's wording is kept in step with src/content/home.ts by hand, as
+ * lunamoon_menu() is with src/config/site.ts. Every other page uses its
+ * WordPress title, which is what its page heading says.
+ *
+ * @return string
+ */
+function lunamoon_shell_heading() {
+	if ( is_front_page() || is_home() ) {
+		return apply_filters( 'lunamoon_shell_heading', __( 'Luna Moon Aesthetics Clinic in Preston', 'lunamoon' ) );
+	}
+
+	$title = wp_strip_all_tags( (string) get_the_title( get_queried_object_id() ) );
+	if ( '' === trim( $title ) ) {
+		$title = get_bloginfo( 'name' );
+	}
+
+	return apply_filters( 'lunamoon_shell_heading', $title );
+}
+
+/**
  * A site URL for one of the app's routes.
  *
- * @param string $path Route path, e.g. "/book-online".
+ * Built to match whatever trailing-slash convention the site's permalinks use,
+ * because WordPress redirects anything that doesn't: with a structure of
+ * /%postname% it sends /products/ to /products, and with /%postname%/ it does
+ * the reverse. Either is fine, but a link written the other way round costs a
+ * redirect on every click, and a crawler counts those.
+ *
+ * @param string $path Route path, e.g. "/book-online" or "/book-online#anchor".
  * @return string
  */
 function lunamoon_url( $path ) {
-	return esc_url( home_url( $path ) );
+	$path = '/' . ltrim( (string) $path, '/' );
+
+	// A fragment isn't part of the path and must stay on the end.
+	$fragment = '';
+	if ( false !== strpos( $path, '#' ) ) {
+		list( $path, $fragment ) = explode( '#', $path, 2 );
+		$fragment                = '#' . $fragment;
+		$path                    = '' === $path ? '/' : $path;
+	}
+
+	if ( '/' !== $path && function_exists( 'user_trailingslashit' ) ) {
+		$path = user_trailingslashit( untrailingslashit( $path ) );
+	}
+
+	return esc_url( home_url( $path ) . $fragment );
 }
 
 /**

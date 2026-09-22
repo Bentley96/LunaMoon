@@ -10,6 +10,11 @@
  *
  * WooCommerce keeps its own templates for /checkout and /my-account.
  *
+ * #root is not empty in the served HTML: it carries the site's links as real
+ * anchors, so a crawler that doesn't run JavaScript can still find every page
+ * from any page. React clears the element when it mounts, so a browser sees it
+ * only while the bundle loads. See lunamoon_shell_links().
+ *
  * @package LunaMoon
  */
 
@@ -26,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
-	<div id="root"></div>
+	<div id="root"><?php lunamoon_shell_links(); ?></div>
 <?php wp_footer(); ?>
 </body>
 </html>

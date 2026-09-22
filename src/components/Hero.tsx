@@ -30,20 +30,21 @@ export default function Hero() {
 
       <div className="container-xl relative px-4 py-24 sm:px-6 lg:px-8 lg:py-36">
         <div className="max-w-2xl animate-fade-up">
-          {/* The lockup is artwork, so it's hidden from assistive tech and the
-              heading's actual text is the business name — otherwise the h1
-              would read as the logo's strapline rather than "Luna Moon
-              Aesthetics", which is what the business is called in copy. */}
-          <h1>
-            <span aria-hidden="true">
-              <Logo tone="light" className="h-40 sm:h-52 lg:h-60" />
-            </span>
-            <span className="sr-only">Luna Moon Aesthetics</span>
-          </h1>
+          {/* The lockup is artwork, not a heading: it carries no text a crawler
+              or a screen reader can read, and an h1 wrapped round it reports as
+              the logo rather than as what this page is. So it is marked
+              decorative, and the h1 below says it in words. */}
+          <div aria-hidden="true">
+            <Logo tone="light" className="h-40 sm:h-52 lg:h-60" />
+          </div>
 
           <p className="mt-6 font-display text-xl uppercase tracking-[0.2em] text-gold-400 sm:text-2xl">
             {hero.eyebrow}
           </p>
+
+          <h1 className="mt-4 font-display text-3xl leading-tight text-white sm:text-4xl lg:text-5xl">
+            {hero.heading}
+          </h1>
 
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-100">{hero.blurb}</p>
           <p className="mt-4 max-w-xl leading-relaxed text-ink-200">{hero.detail}</p>

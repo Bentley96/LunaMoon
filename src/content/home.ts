@@ -10,6 +10,11 @@ export const hero = {
   titleBottom: 'Moon Aesthetics',
   /** The three areas the clinic wants to be known for, under the lockup. */
   eyebrow: 'Body • Skin • Laser',
+  /**
+   * The page's h1. The lockup above it is artwork, so the heading has to be
+   * the one piece of text on the page that says what this is and where it is.
+   */
+  heading: 'Luna Moon Aesthetics Clinic in Preston',
   blurb:
     'Advanced treatments designed to help you sculpt, firm, refresh and feel confident in your skin.',
   detail:
